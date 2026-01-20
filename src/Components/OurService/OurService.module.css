@@ -1,0 +1,536 @@
+.servicesSection {
+  position: relative;
+  padding: 3rem 0;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  /* Performance: don't render offscreen content until needed */
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* filter is expensive; use overlay instead */
+}
+
+.bgImg.flipped {
+  transform: scaleX(-1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 29, 39, 0.95) 0%,
+    rgba(24, 29, 39, 0.92) 50%,
+    rgba(24, 29, 39, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.header.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #E7B742 0%, #FFD700 50%, #E7B742 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.subtitle {
+  font-size: 1.75rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.description {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.serviceCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.serviceCard {
+  background: rgba(255, 255, 255, 0.03);
+  /* backdrop-filter is expensive on large grids; keep it light */
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(231, 183, 66, 0.15);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceCard.slideUp {
+  animation: slideUpFade 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--service-color), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 3;
+}
+
+.serviceCard:hover::before {
+  opacity: 1;
+}
+
+.serviceCard:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(231, 183, 66, 0.5);
+  box-shadow: 
+    0 20px 60px rgba(231, 183, 66, 0.25),
+    0 0 40px rgba(231, 183, 66, 0.15),
+    inset 0 0 30px rgba(231, 183, 66, 0.05);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.serviceImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.imageSkeleton {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 50%),
+    radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.4), transparent 55%),
+    linear-gradient(135deg, rgba(35, 42, 58, 0.95), rgba(18, 23, 32, 0.98));
+  overflow: hidden;
+  z-index: 0;
+}
+
+.imageSkeletonShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 20%,
+    rgba(255, 255, 255, 0.18) 35%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: imageSkeletonShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes imageSkeletonShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.serviceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
+  position: relative;
+  z-index: 1;
+}
+
+.serviceImageHidden {
+  opacity: 0;
+}
+
+.serviceImage:not(.serviceImageHidden) {
+  transition:
+    opacity 0.4s ease,
+    transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 1;
+}
+
+.serviceCard:hover .serviceImage {
+  transform: scale(1.15) rotate(2deg);
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(24, 29, 39, 0.3) 50%,
+    rgba(24, 29, 39, 0.8) 100%
+  );
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.serviceCard:hover .imageOverlay {
+  opacity: 0.6;
+}
+
+.iconBadge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 70px;
+  height: 70px;
+  background: rgba(24, 29, 39, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--service-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.serviceCard:hover .iconBadge {
+  transform: scale(1.15) rotate(10deg);
+  background: rgba(24, 29, 39, 0.95);
+  border-color: #E7B742;
+  box-shadow: 
+    0 0 30px var(--service-color),
+    0 5px 25px rgba(0, 0, 0, 0.6);
+}
+
+.serviceIcon {
+  font-size: 2rem;
+  color: var(--service-color);
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 0 10px var(--service-color));
+}
+
+.serviceCard:hover .serviceIcon {
+  color: #E7B742;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px #E7B742);
+}
+
+.serviceContent {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.serviceNumber {
+  position: absolute;
+  top: -1rem;
+  right: 1.5rem;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(231, 183, 66, 0.15);
+  line-height: 1;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+[dir="rtl"] .serviceNumber {
+  right: auto;
+  left: 1.5rem;
+}
+
+.serviceCard:hover .serviceNumber {
+  color: rgba(231, 183, 66, 0.25);
+  transform: scale(1.1);
+}
+
+.serviceTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.serviceCard:hover .serviceTitle {
+  color: #E7B742;
+  transform: translateX(5px);
+}
+
+[dir="rtl"] .serviceCard:hover .serviceTitle {
+  transform: translateX(-5px);
+}
+
+.serviceDescription {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1.5rem;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.serviceCard:hover .serviceDescription {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.serviceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--service-color);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  width: fit-content;
+}
+
+.serviceLink:hover {
+  color: #E7B742;
+  gap: 1rem;
+}
+
+.arrowIcon {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.serviceLink:hover .arrowIcon {
+  transform: translateX(5px);
+}
+
+[dir="rtl"] .serviceLink:hover .arrowIcon {
+  transform: translateX(-5px);
+}
+
+.cardBorder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--service-color), #E7B742);
+  transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.serviceCard:hover .cardBorder {
+  width: 100%;
+}
+
+/* RTL Support */
+[dir="rtl"] .serviceCard {
+  direction: rtl;
+}
+
+[dir="rtl"] .iconBadge {
+  right: auto;
+  left: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .servicesSection {
+    padding: 4rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .serviceImageWrapper {
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesSection {
+    padding: 3rem 0;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .serviceImageWrapper {
+    height: 220px;
+  }
+
+  .serviceContent {
+    padding: 1.5rem;
+  }
+
+  .serviceTitle {
+    font-size: 1.5rem;
+  }
+
+  .serviceDescription {
+    font-size: 0.95rem;
+  }
+
+  .serviceNumber {
+    font-size: 4rem;
+  }
+
+  .iconBadge {
+    width: 60px;
+    height: 60px;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .serviceIcon {
+    font-size: 1.5rem;
+  }
+
+  .serviceCard:hover .serviceTitle {
+    transform: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .serviceCard {
+    border-radius: 20px;
+  }
+
+  .serviceImageWrapper {
+    height: 200px;
+  }
+
+  .serviceContent {
+    padding: 1.25rem;
+  }
+
+  .serviceTitle {
+    font-size: 1.3rem;
+  }
+
+  .serviceDescription {
+    font-size: 0.9rem;
+  }
+
+  .serviceNumber {
+    font-size: 3.5rem;
+    top: -0.5rem;
+    right: 1rem;
+  }
+
+  .iconBadge {
+    width: 55px;
+    height: 55px;
+  }
+
+  .serviceIcon {
+    font-size: 1.3rem;
+  }
+}

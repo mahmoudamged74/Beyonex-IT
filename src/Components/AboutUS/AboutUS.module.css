@@ -1,0 +1,269 @@
+.aboutSection {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bgImg.flipped {
+  transform: scaleX(-1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 29, 39, 0.9) 0%,
+    rgba(24, 29, 39, 0.85) 50%,
+    rgba(24, 29, 39, 0.9) 100%
+  );
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.logoWrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(231, 183, 66, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.logoWrapper:hover {
+  transform: translateY(-5px);
+  border-color: rgba(231, 183, 66, 0.5);
+  box-shadow: 0 15px 50px rgba(231, 183, 66, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(231, 183, 66, 0.3));
+}
+
+.textSection {
+  color: #ffffff;
+}
+
+.textContent {
+  padding: 2rem 0;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #E7B742;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.description {
+  font-size: 1.3rem;
+  line-height: 1.9;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.missionVision {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.missionCard,
+.visionCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(231, 183, 66, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s ease;
+}
+
+.missionCard:hover,
+.visionCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(231, 183, 66, 0.5);
+  box-shadow: 0 10px 30px rgba(231, 183, 66, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #E7B742;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cardText {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* RTL Support */
+[dir="rtl"] .logoSection {
+  order: 2;
+}
+
+[dir="rtl"] .textSection {
+  order: 1;
+}
+
+[dir="rtl"] .textContent {
+  text-align: right;
+}
+
+[dir="ltr"] .textContent {
+  text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .aboutSection {
+    padding: 4rem 0;
+    min-height: auto;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .logoWrapper {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 3rem 0;
+  }
+
+  .content {
+    padding: 2rem 0;
+  }
+
+  .logoSection {
+    margin-bottom: 3rem;
+  }
+
+  .logoWrapper {
+    max-width: 300px;
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .missionVision {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .missionCard,
+  .visionCard {
+    padding: 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+
+  .cardText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .logoWrapper {
+    max-width: 250px;
+    padding: 1rem;
+  }
+}

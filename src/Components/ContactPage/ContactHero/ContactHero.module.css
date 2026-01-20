@@ -1,0 +1,242 @@
+.heroSection {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 29, 39, 0.95) 0%,
+    rgba(24, 29, 39, 0.85) 50%,
+    rgba(24, 29, 39, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+/* Particles Animation */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(231, 183, 66, 0.4);
+  border-radius: 50%;
+  left: var(--x);
+  animation: floatUp var(--duration) linear infinite;
+  animation-delay: var(--delay);
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+}
+
+.heroContent {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.heroContent.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #E7B742, #d4a63a);
+  color: #181D27;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+/* Quick Contact Cards */
+.quickContact {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(231, 183, 66, 0.2);
+  border-radius: 16px;
+  padding: 1.25rem 1.75rem;
+  transition: all 0.3s ease;
+  min-width: 250px;
+}
+
+.contactCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(231, 183, 66, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(231, 183, 66, 0.15);
+}
+
+.cardIcon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #E7B742, #d4a63a);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #181D27;
+  flex-shrink: 0;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+.cardLabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.cardValue {
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .title {
+    font-size: 2.75rem;
+  }
+  
+  .quickContact {
+    gap: 1rem;
+  }
+  
+  .contactCard {
+    min-width: 220px;
+    padding: 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: auto;
+    padding: 100px 0 60px;
+  }
+  
+  .title {
+    font-size: 2.25rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .quickContact {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contactCard {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 1.85rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .badge {
+    font-size: 0.8rem;
+    padding: 6px 18px;
+  }
+}

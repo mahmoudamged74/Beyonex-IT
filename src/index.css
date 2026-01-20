@@ -1,0 +1,75 @@
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Arabic font (RTL) */
+[dir="rtl"],
+[dir="rtl"] * {
+  font-family: 'Cairo', sans-serif !important;
+}
+
+/* English font (LTR) */
+[dir="ltr"],
+[dir="ltr"] * {
+  font-family: 'Nunito', sans-serif !important;
+}
+
+/* Ensure all text elements use the correct font */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] a,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select,
+[dir="rtl"] label {
+  font-family: 'Cairo', sans-serif !important;
+}
+
+[dir="ltr"] h1,
+[dir="ltr"] h2,
+[dir="ltr"] h3,
+[dir="ltr"] h4,
+[dir="ltr"] h5,
+[dir="ltr"] h6,
+[dir="ltr"] p,
+[dir="ltr"] span,
+[dir="ltr"] a,
+[dir="ltr"] button,
+[dir="ltr"] input,
+[dir="ltr"] textarea,
+[dir="ltr"] select,
+[dir="ltr"] label {
+  font-family: 'Nunito', sans-serif !important;
+}
+
+/* Navbar Links Styles - Override Bootstrap */
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #E7B742 !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: #E7B742 !important;
+  font-weight: 800 !important;
+}

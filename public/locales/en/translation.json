@@ -1,0 +1,227 @@
+{
+  "welcome": "Welcome",
+  "home": "Home",
+  "about": "About Us",
+  "services": "Services",
+  "contact": "Contact Us",
+  "language": "Language",
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "bookAppointment": "Book Appointment"
+  },
+  "hero": {
+    "title": "BEYONEX IT",
+    "subtitlePrefix": "",
+    "subtitle": "Elevating Your Tech",
+    "description": "We deliver comprehensive software and technology solutions that transform your ideas into exceptional digital experiences. Your trusted partner in digital transformation.",
+    "startProject": "Start Your Project",
+    "contactUs": "Contact Us"
+  },
+  "advantages": {
+    "title": "Why Choose Us",
+    "subtitle": "Transforming your ideas into cutting-edge tech solutions that drive your business forward",
+    "items": {
+      "innovation": {
+        "title": "Continuous Innovation",
+        "description": "We stay ahead with the latest technologies and trends in programming and development"
+      },
+      "quality": {
+        "title": "High Quality",
+        "description": "We adhere to the highest quality standards in every project we deliver"
+      },
+      "support": {
+        "title": "24/7 Technical Support",
+        "description": "A dedicated technical support team available around the clock to solve any issue"
+      },
+      "experience": {
+        "title": "Extensive Experience",
+        "description": "Years of experience in developing successful software solutions"
+      },
+      "customization": {
+        "title": "Custom Solutions",
+        "description": "We design custom solutions tailored to your specific needs"
+      },
+      "security": {
+        "title": "Security & Protection",
+        "description": "We ensure the highest levels of security and protection for your data"
+      }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Your Partner in Digital Transformation",
+    "description": "BEYONEX IT is a leading company in software and technology solutions. We believe that technology should serve businesses, which is why we develop innovative solutions that help companies grow and thrive in the digital age.",
+    "mission": "Our Mission",
+    "missionText": "We aim to empower businesses to maximize the benefits of technology by delivering advanced software solutions that meet their unique needs and help them achieve their strategic goals.",
+    "vision": "Our Vision",
+    "visionText": "To be the preferred technology partner for companies in the region, by delivering innovative solutions and exceptional services that create real value for our clients."
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive tech solutions covering all your digital needs",
+    "description": "We offer a complete range of technical and software services covering all aspects of your technological needs. From website and app development to enterprise solutions and cybersecurity, we are your trusted partner in your digital journey.",
+    "items": {
+      "web": {
+        "title": "Web Development",
+        "description": "We design and develop professional, fast-responsive websites that meet your business needs and attract your customers"
+      },
+      "mobile": {
+        "title": "Mobile Applications",
+        "description": "Innovative mobile applications for iOS and Android systems that put your business at your customers' fingertips wherever they are"
+      },
+      "erp": {
+        "title": "ERP Systems",
+        "description": "Integrated ERP solutions for efficient enterprise resource management and improved operational processes"
+      },
+      "hardware": {
+        "title": "Hardware Solutions",
+        "description": "We provide integrated hardware solutions including devices, servers, and technical infrastructure"
+      },
+      "software": {
+        "title": "Software Development",
+        "description": "Custom software designed specifically for your needs to improve productivity and efficiency"
+      },
+      "cybersecurity": {
+        "title": "Cybersecurity",
+        "description": "Advanced security solutions to protect your data and systems from cyber threats"
+      }
+    },
+    "learnMore": "Learn More"
+  },
+  "aboutPage": {
+    "hero": {
+      "title": "About BEYONEX IT",
+      "subtitle": "Your Trusted Partner in Digital Innovation",
+      "description": "We are a team of passionate technologists dedicated to transforming businesses through innovative software solutions and cutting-edge technology.",
+      "badge1": "Award Winning",
+      "badge2": "Top Rated",
+      "badge3": "Fast Delivery",
+      "scrollDown": "Discover More"
+    },
+    "story": {
+      "title": "Our Journey",
+      "subtitle": "From a small startup to a leading tech company, our journey has been defined by innovation and excellence.",
+      "milestone1Title": "The Beginning",
+      "milestone1Desc": "BEYONEX IT was founded with a vision to revolutionize digital solutions in the region.",
+      "milestone2Title": "Team Expansion",
+      "milestone2Desc": "We grew our team with talented developers, designers, and technology experts.",
+      "milestone3Title": "Global Reach",
+      "milestone3Desc": "Expanded our services internationally, serving clients across multiple countries.",
+      "milestone4Title": "Industry Leader",
+      "milestone4Desc": "Recognized as a leading technology solutions provider with numerous awards."
+    },
+    "stats": {
+      "title": "Our Achievements",
+      "subtitle": "Numbers that reflect our commitment to excellence and client satisfaction.",
+      "projects": "Projects Completed",
+      "clients": "Happy Clients",
+      "years": "Years Experience",
+      "satisfaction": "Client Satisfaction"
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The principles that guide everything we do and define who we are.",
+      "innovation": "Innovation",
+      "innovationDesc": "We constantly explore new technologies and creative solutions to stay ahead.",
+      "trust": "Trust & Integrity",
+      "trustDesc": "We build lasting relationships based on honesty, transparency, and mutual respect.",
+      "quality": "Quality First",
+      "qualityDesc": "We never compromise on quality, ensuring excellence in every project we deliver.",
+      "growth": "Continuous Growth",
+      "growthDesc": "We invest in our team's development and embrace challenges as opportunities.",
+      "passion": "Passion",
+      "passionDesc": "We love what we do, and that passion drives us to exceed expectations.",
+      "excellence": "Excellence",
+      "excellenceDesc": "We strive for perfection in every detail, from code to customer service."
+    },
+    "cta": {
+      "title": "Ready to Start Your Project?",
+      "description": "Let's work together to bring your vision to life. Contact us today and discover how we can help transform your business.",
+      "contactBtn": "Contact Us",
+      "servicesBtn": "View Our Services"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "badge": "Contact Us",
+      "title": "We're Here to Help",
+      "subtitle": "Have a question or a project in mind? We'd love to hear from you. Get in touch and we'll respond as soon as possible.",
+      "callUs": "Call Us",
+      "emailUs": "Email Us",
+      "visitUs": "Visit Us",
+      "location": "Riyadh, Saudi Arabia"
+    },
+    "form": {
+      "badge": "Send Message",
+      "title": "Send Us a Message",
+      "subtitle": "Fill out the form below and we'll get back to you as soon as possible.",
+      "namePlaceholder": "Full Name",
+      "emailPlaceholder": "Email Address",
+      "phonePlaceholder": "Phone Number",
+      "companyPlaceholder": "Company Name (Optional)",
+      "selectSubject": "Select Subject",
+      "messagePlaceholder": "Your message...",
+      "subjects": {
+        "general": "General Inquiry",
+        "web": "Web Development",
+        "mobile": "Mobile Applications",
+        "erp": "ERP Systems",
+        "support": "Technical Support",
+        "other": "Other"
+      },
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "successTitle": "Message Sent!",
+      "successMessage": "Thank you for reaching out. We'll get back to you as soon as possible.",
+      "sendAnother": "Send Another Message",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "badge": "Contact Information",
+      "title": "Get in Touch",
+      "subtitle": "We're available to help you anytime.",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "address": "Address",
+      "addressValue": "Riyadh, Saudi Arabia",
+      "workingHours": "Working Hours",
+      "weekdays": "Sunday - Thursday",
+      "weekend": "Friday - Saturday",
+      "closed": "Closed",
+      "followUs": "Follow Us on Social Media"
+    },
+    "map": {
+      "badge": "Our Location",
+      "title": "Visit Our Office",
+      "subtitle": "We'd be happy to welcome you at our headquarters.",
+      "cardTitle": "BEYONEX IT Headquarters",
+      "address": "Riyadh, Saudi Arabia",
+      "getDirections": "Get Directions"
+    }
+  },
+  "footer": {
+    "companyName": "BEYONEX IT",
+    "tagline": "Your Partner in Digital Transformation",
+    "description": "We deliver innovative software and technology solutions that transform your ideas into exceptional digital experiences.",
+    "quickLinks": "Quick Links",
+    "services": "Our Services",
+    "contactInfo": "Contact Info",
+    "address": "Riyadh, Saudi Arabia",
+    "phone": "+966 555 555 555",
+    "email": "info@beyonexit.com",
+    "workingHours": "Working Hours",
+    "workingDays": "Sun - Thu: 8:00 - 16:00",
+    "weekend": "Fri - Sat: Closed",
+    "followUs": "Follow Us",
+    "copyright": "© 2026 BEYONEX IT. All Rights Reserved.",
+    "links": {
+      "home": "Home",
+      "about": "About Us",
+      "services": "Services",
+      "contact": "Contact Us"
+    }
+  }
+}

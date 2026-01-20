@@ -1,0 +1,357 @@
+.heroSection {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* .bgImg.flipped {
+  transform: scaleX(-1);
+} */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(
+    135deg,
+    rgba(24, 29, 39, 0.85) 0%,
+    rgba(24, 29, 39, 0.75) 50%,
+    rgba(24, 29, 39, 0.85) 100%
+  ); */
+  background-color: #181D27;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+
+.textContent {
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.logoWrapper {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.heroLogo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: zoomInOut 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(231, 183, 66, 0.3));
+}
+
+@keyframes zoomInOut {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #E7B742;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.prefix {
+  display: inline-block;
+  padding-right: .5rem;
+}
+
+[dir="rtl"] .prefix {
+  padding-right: 0;
+  padding-left: .5rem;
+}
+
+.typingText {
+  display: inline-block;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 0.2rem;
+  animation: blink 1s infinite;
+  color: #E7B742;
+  font-weight: 400;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.description {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.primaryBtn {
+  background-color: #E7B742 !important;
+  border-color: #E7B742 !important;
+  color: #181D27 !important;
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(231, 183, 66, 0.3);
+}
+
+.primaryBtn:hover {
+  background-color: #d4a63a !important;
+  border-color: #d4a63a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 183, 66, 0.4);
+  color: #181D27 !important;
+}
+
+.secondaryBtn {
+  background-color: transparent !important;
+  border: 2px solid #E7B742 !important;
+  color: #E7B742 !important;
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.secondaryBtn:hover {
+  background-color: #E7B742 !important;
+  color: #181D27 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 183, 66, 0.4);
+}
+
+/* RTL Support */
+[dir="rtl"] .textContent {
+  text-align: center;
+}
+
+[dir="ltr"] .textContent {
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .title {
+    font-size: 4.5rem;
+  }
+
+  .subtitle {
+    font-size: 2.25rem;
+  }
+
+  .description {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    max-width: 700px;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 0.9rem 2.5rem;
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: 85vh;
+  }
+
+  .content {
+    min-height: 85vh;
+    padding: 2rem 0;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    min-height: 3rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroSection {
+    min-height: 80vh;
+  }
+
+  .content {
+    min-height: 80vh;
+    padding: 1.5rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    min-height: 2.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    padding: 0 0.5rem;
+  }
+
+  .buttons {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+}

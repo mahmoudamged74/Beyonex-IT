@@ -1,0 +1,464 @@
+.advantagesSection {
+  background-color: #0d1f2f;
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.advantagesSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(231, 183, 66, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(231, 183, 66, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(231, 183, 66, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.advantagesSection::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(231, 183, 66, 0.03) 2px,
+      rgba(231, 183, 66, 0.03) 4px
+    );
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.header.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #E7B742 0%, #FFD700 50%, #E7B742 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  animation: shimmer 3s linear infinite;
+  text-shadow: 0 0 30px rgba(231, 183, 66, 0.5);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(231, 183, 66, 0.15);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(231, 183, 66, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(231, 183, 66, 0.15),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.card:hover::after {
+  left: 100%;
+}
+
+.card.slideUp {
+  animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card:hover {
+  transform: translateY(-15px) scale(1.03);
+  border-color: rgba(231, 183, 66, 0.6);
+  box-shadow: 
+    0 20px 60px rgba(231, 183, 66, 0.3),
+    0 0 40px rgba(231, 183, 66, 0.2),
+    inset 0 0 30px rgba(231, 183, 66, 0.05);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.iconContainer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper {
+  width: 100px;
+  height: 100px;
+  background: rgba(231, 183, 66, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 2;
+  border: 2px solid rgba(231, 183, 66, 0.2);
+}
+
+.iconWrapper::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.iconGlow {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--gradient);
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity 0.5s ease;
+  z-index: 1;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card:hover .iconWrapper {
+  transform: scale(1.15) rotate(5deg);
+  border-color: rgba(231, 183, 66, 0.6);
+  box-shadow: 
+    0 0 30px rgba(231, 183, 66, 0.4),
+    inset 0 0 20px rgba(231, 183, 66, 0.1);
+}
+
+.card:hover .iconWrapper::before {
+  opacity: 0.2;
+}
+
+.card:hover .iconGlow {
+  opacity: 0.6;
+}
+
+.icon {
+  font-size: 3rem;
+  color: var(--icon-color);
+  position: relative;
+  z-index: 3;
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 0 10px var(--icon-color));
+}
+
+.card:hover .icon {
+  color: #E7B742;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px #E7B742);
+}
+
+.techIconWrapper {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background: rgba(24, 29, 39, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(231, 183, 66, 0.3);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 4;
+}
+
+.card:hover .techIconWrapper {
+  opacity: 1;
+  transform: scale(1);
+  border-color: rgba(231, 183, 66, 0.6);
+  box-shadow: 0 0 15px rgba(231, 183, 66, 0.4);
+}
+
+.techIcon {
+  font-size: 1.5rem;
+  color: #E7B742;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .techIcon {
+  transform: rotate(360deg);
+}
+
+.cardTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.card:hover .cardTitle {
+  color: #E7B742;
+  transform: translateY(-2px);
+  text-shadow: 0 0 20px rgba(231, 183, 66, 0.5);
+}
+
+.cardDescription {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.card:hover .cardDescription {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.cardBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  padding: 2px;
+  background: var(--gradient);
+  opacity: 0;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.card:hover .cardBorder {
+  opacity: 1;
+}
+
+/* RTL Support */
+[dir="rtl"] .header {
+  text-align: center;
+}
+
+[dir="rtl"] .card {
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .advantagesSection {
+    padding: 4rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .advantagesSection {
+    padding: 3rem 0;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .iconContainer {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .iconWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .icon {
+    font-size: 2.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.4rem;
+  }
+
+  .cardDescription {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .iconContainer {
+    width: 90px;
+    height: 90px;
+  }
+
+  .iconWrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+}

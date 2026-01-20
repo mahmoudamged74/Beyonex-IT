@@ -1,0 +1,219 @@
+.mapSection {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.mapWrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mapWrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(231, 183, 66, 0.15), rgba(231, 183, 66, 0.1));
+  color: #d4a63a;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #181D27;
+  margin-bottom: 0.75rem;
+}
+
+.sectionSubtitle {
+  font-size: 1.1rem;
+  color: #6c757d;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Map Container */
+.mapContainer {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.mapFrame {
+  width: 100%;
+  height: 450px;
+  background: #e9ecef;
+}
+
+.mapFrame iframe {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(20%) contrast(1.1);
+  transition: filter 0.3s ease;
+}
+
+.mapContainer:hover .mapFrame iframe {
+  filter: grayscale(0%) contrast(1);
+}
+
+/* Location Card Overlay */
+.locationCard {
+  position: absolute;
+  bottom: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  max-width: 350px;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+[dir="ltr"] .locationCard {
+  left: 24px;
+}
+
+[dir="rtl"] .locationCard {
+  right: 24px;
+}
+
+.locationCard:hover {
+  transform: translateY(-5px);
+}
+
+.cardIcon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #E7B742, #d4a63a);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #181D27;
+  flex-shrink: 0;
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #181D27;
+  margin-bottom: 0.5rem;
+}
+
+.cardAddress {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.directionsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #E7B742, #d4a63a);
+  color: #181D27;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.directionsBtn:hover {
+  background: linear-gradient(135deg, #d4a63a, #c49a35);
+  color: #181D27;
+  transform: translateX(3px);
+}
+
+[dir="rtl"] .directionsBtn:hover {
+  transform: translateX(-3px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .mapFrame {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mapSection {
+    padding: 60px 0;
+  }
+  
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+  
+  .mapFrame {
+    height: 350px;
+  }
+  
+  .locationCard {
+    position: relative;
+    bottom: auto;
+    left: auto !important;
+    right: auto !important;
+    max-width: 100%;
+    margin-top: -40px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+  
+  .mapFrame {
+    height: 300px;
+  }
+  
+  .locationCard {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 1.25rem;
+  }
+  
+  .cardTitle {
+    font-size: 1rem;
+  }
+  
+  .cardAddress {
+    font-size: 0.9rem;
+  }
+}
