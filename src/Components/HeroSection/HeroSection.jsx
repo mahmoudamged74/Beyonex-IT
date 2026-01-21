@@ -57,6 +57,20 @@ export default function HeroSection() {
     return () => clearTimeout(resetTimeout)
   }, [i18n.language])
 
+  // تأكيد تحميل خلفية الهيرو بأولوية عالية قدر الإمكان
+  useEffect(() => {
+    const preloadLink = document.createElement('link')
+    preloadLink.rel = 'preload'
+    preloadLink.as = 'image'
+    preloadLink.href = '/assets/bg.jpg'
+    preloadLink.fetchPriority = 'high'
+    document.head.appendChild(preloadLink)
+
+    return () => {
+      document.head.removeChild(preloadLink)
+    }
+  }, [])
+
   return (
     <section className={styles.heroSection}>
       <div className={styles.backgroundImage}>
@@ -64,6 +78,10 @@ export default function HeroSection() {
           src="/assets/bg.jpg" 
           alt="Background" 
           className={`${styles.bgImg} ${isRTL ? styles.flipped : ''}`}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          sizes="100vw"
         />
         <div className={styles.overlay}></div>
       </div>

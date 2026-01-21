@@ -96,35 +96,22 @@
   gap: 1.5rem;
 }
 
-/* Logo Section */
-.logoSection {
-  margin-bottom: 1rem;
-}
 
 .logoWrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   margin-bottom: 0.5rem;
 }
 
-.logoIcon {
-  font-size: 2.5rem;
-  color: #E7B742;
-  filter: drop-shadow(0 0 10px rgba(231, 183, 66, 0.5));
-  animation: pulse 2s ease-in-out infinite;
+  .logofooter {
+  width: 100%;
+  height: 70px;
+  object-fit: contain;
+  /* filter: drop-shadow(0 0 20px rgba(231, 183, 66, 0.8)); */
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 10px rgba(231, 183, 66, 0.5));
-  }
-  50% {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 20px rgba(231, 183, 66, 0.8));
-  }
-}
 
 .companyName {
   font-size: 1.75rem;
@@ -148,17 +135,21 @@
   color: rgba(231, 183, 66, 0.8);
   font-weight: 500;
   letter-spacing: 0.5px;
+  text-align: center;
+  margin-bottom: 0rem;
 }
 
 .description {
   font-size: 0.95rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 0rem;
 }
 
 /* Social Section */
 .socialSection {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 
 .socialTitle {
@@ -166,10 +157,12 @@
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .socialLinks {
   display: flex;
+  justify-content: center;
   gap: 0.75rem;
 }
 
@@ -443,7 +436,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .footerContent {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
@@ -456,7 +449,7 @@
   .socialLinks {
     justify-content: flex-start;
   }
-}
+} */
 
 @media (max-width: 992px) {
   .footerContent {

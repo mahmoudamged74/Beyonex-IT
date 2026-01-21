@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getServiceByKey } from '../../data/servicesCatalog'
@@ -15,6 +15,10 @@ export default function ServiceDetails() {
     if (!service) return null
     return isRTL ? service.ar : service.en
   }, [service, isRTL])
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [serviceKey])
 
   if (!service || !copy) {
     return (

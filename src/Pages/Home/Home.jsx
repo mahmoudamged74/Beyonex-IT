@@ -21,9 +21,15 @@ export default function Home() {
 
   return <>
     <HeroSection />
-    <OurService />
-    <AboutUS />
+    <Fade>
+      <OurService />
+    </Fade>
+    <Fade>
+      <AboutUS />
+    </Fade>
+    <Fade>
     <Advantages />
+    </Fade>
   </>
 
 }

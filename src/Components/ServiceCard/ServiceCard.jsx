@@ -1,0 +1,75 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { FaArrowRight } from 'react-icons/fa'
+import { useCachedImage } from '../../hooks/useImageCache'
+import styles from '../OurService/OurService.module.css'
+
+const ServiceCard = React.memo(function ServiceCard({
+  service,
+  index,
+  isVisible,
+  t
+}) {
+  const { isCached, onLoad } = useCachedImage(service.image)
+  const Icon = service.icon
+
+  return (
+    <Link
+      to={`/services/${service.key}`}
+      className={styles.serviceCardLink}
+      style={{ '--service-color': service.color }}
+    >
+      <div
+        className={`${styles.serviceCard} ${isVisible ? styles.slideUp : ''}`}
+        style={{ animationDelay: `${index * 0.1}s` }}
+      >
+        <div className={styles.serviceImageWrapper}>
+          {!isCached && (
+            <div className={styles.imageSkeleton}>
+              <div className={styles.imageSkeletonShimmer} />
+            </div>
+          )}
+
+          <img
+            src={service.image}
+            alt={t(`services.items.${service.key}.title`)}
+            loading="lazy"
+            decoding="async"
+            className={`${styles.serviceImage} ${
+              isCached ? '' : styles.serviceImageHidden
+            }`}
+            onLoad={onLoad}
+          />
+
+          <div className={styles.imageOverlay}></div>
+          <div className={styles.iconBadge}>
+            <Icon className={styles.serviceIcon} />
+          </div>
+        </div>
+
+        <div className={styles.serviceContent}>
+          <div className={styles.serviceNumber}>
+            {String(index + 1).padStart(2, '0')}
+          </div>
+
+          <h3 className={styles.serviceTitle}>
+            {t(`services.items.${service.key}.title`)}
+          </h3>
+
+          <p className={styles.serviceDescription}>
+            {t(`services.items.${service.key}.description`)}
+          </p>
+
+          <span className={styles.serviceLink}>
+            <span>{t('services.learnMore')}</span>
+            <FaArrowRight className={styles.arrowIcon} />
+          </span>
+        </div>
+
+        <div className={styles.cardBorder}></div>
+      </div>
+    </Link>
+  )
+})
+
+export default ServiceCard

@@ -87,14 +87,12 @@ export default function Footer() {
           <div className={styles.footerColumn}>
             <div className={styles.logoSection}>
               <div className={styles.logoWrapper}>
-                <FaCode className={styles.logoIcon} />
-                <h3 className={styles.companyName}>{t('footer.companyName')}</h3>
+                <img src="/assets/4.png" alt="Logo" className={styles.logofooter} />
               </div>
-              <p className={styles.tagline}>{t('footer.tagline')}</p>
             </div>
+            <p className={styles.tagline}>{t('footer.tagline')}</p>
             <p className={styles.description}>{t('footer.description')}</p>
             
-            {/* Social Links - مباشرة تحت الوصف */}
             <div className={styles.socialSection}>
               <h4 className={styles.socialTitle}>{t('footer.followUs')}</h4>
               <div className={styles.socialLinks}>

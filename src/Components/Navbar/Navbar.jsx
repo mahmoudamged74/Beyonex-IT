@@ -43,7 +43,7 @@ function Navbar() {
           to="/"
         >
           <img
-            src="/assets/4.png"
+            src="/assets/3.png"
             alt="Beyonexit Project"
             className={styles.logoImage}
           />
