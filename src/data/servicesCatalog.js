@@ -244,15 +244,27 @@ export const servicesCatalog = {
     Icon: FaDatabase,
     en: {
       title: "ERP & Business Systems",
-      tagline: "Automate operations and unify your data.",
-      overview:
-        "We help you implement or customize ERP workflows to improve visibility, reduce manual work, and enable better decision-making.",
+      tagline: [
+        {
+          id: 1,
+          title: "ERP & Business Systems",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     ar: {
       title: "أنظمة ERP وإدارة الأعمال",
-      tagline: "أتمتة العمليات وتوحيد البيانات.",
-      overview:
-        "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+      tagline: [
+        {
+          id: 1,
+          title: "أنظمة ERP وإدارة الأعمال",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     stacks: [
       "Requirements & process mapping",
@@ -282,15 +294,27 @@ export const servicesCatalog = {
     Icon: FaServer,
     en: {
       title: "Hardware & Infrastructure",
-      tagline: "Reliable infrastructure, ready for scale.",
-      overview:
-        "From networking and servers to setup and maintenance — we ensure your infrastructure is stable, secure, and monitored.",
+      tagline: [
+        {
+          id: 1,
+          title: "Hardware & Infrastructure",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     ar: {
       title: "الهاردوير والبنية التحتية",
-      tagline: "بنية تحتية موثوقة وجاهزة للتوسع.",
-      overview:
-        "من الشبكات والسيرفرات للتجهيز والصيانة—بنضمن استقرار وأمان البنية التحتية والمتابعة المستمرة.",
+      tagline: [
+        {
+          id: 1,
+          title: "الهاردوير والبنية التحتية",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     stacks: [
       "Network design",
@@ -323,15 +347,27 @@ export const servicesCatalog = {
     Icon: FaCode,
     en: {
       title: "Custom Software",
-      tagline: "Tailor-made systems that fit your workflow.",
-      overview:
-        "We build custom software solutions that match your business logic, integrate with existing tools, and scale with your needs.",
+      tagline: [
+        {
+          id: 1,
+          title: "Custom Software",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     ar: {
       title: "برمجيات مخصصة",
-      tagline: "حلول معمولة مخصوص على احتياجك.",
-      overview:
-        "بنطوّر أنظمة مخصصة تناسب منطق شغلك، وتتوافق مع الأدوات الموجودة، وتكبر مع توسعك.",
+      tagline: [
+        {
+          id: 1,
+          title: "برمجيات مخصصة",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     stacks: [
       "System design",
@@ -358,15 +394,27 @@ export const servicesCatalog = {
     Icon: FaShieldAlt,
     en: {
       title: "Cybersecurity",
-      tagline: "Protect systems, data, and users.",
-      overview:
-        "We assess risks, harden systems, and implement security best practices to reduce vulnerabilities and improve compliance.",
+      tagline: [
+        {
+          id: 1,
+          title: "Cybersecurity",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     ar: {
       title: "الأمن السيبراني",
-      tagline: "حماية الأنظمة والبيانات والمستخدمين.",
-      overview:
-        "بنقيّم المخاطر، ونقوّي الأنظمة، ونطبق أفضل ممارسات الأمان لتقليل الثغرات وتحسين الالتزام.",
+      tagline: [
+        {
+          id: 1,
+          title: "الأمن السيبراني",
+          description: [
+            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+          ],
+        },
+      ],
     },
     stacks: [
       "Risk assessment",
