@@ -23,7 +23,7 @@ export default function AboutUS() {
           <div className={`col-lg-4 col-md-5 ${styles.logoSection}`}>
             <div className={styles.logoWrapper}>
               <img 
-                src="/assets/logo.png" 
+                src="/assets/3.png" 
                 alt="BEYONEX IT Logo" 
                 className={styles.logo}
               />
