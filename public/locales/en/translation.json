@@ -63,6 +63,10 @@
     "subtitle": "Comprehensive tech solutions covering all your digital needs",
     "description": "We offer a complete range of technical and software services covering all aspects of your technological needs. From website and app development to enterprise solutions and cybersecurity, we are your trusted partner in your digital journey.",
     "items": {
+      "ui": {
+        "title": "UI/UX Enhancement",
+        "description": "We enhance user interfaces and user experience for your websites and apps to ensure a smooth and engaging experience for your customers"
+      },
       "web": {
         "title": "Web Development",
         "description": "We design and develop professional, fast-responsive websites that meet your business needs and attract your customers"

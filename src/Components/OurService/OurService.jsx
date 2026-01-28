@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
+  FaPalette,
   FaLaptopCode,
   FaMobileAlt,
   FaDatabase,
@@ -37,6 +38,7 @@ export default function OurService() {
 
   const services = useMemo(
     () => [
+      { key: 'ui', icon: FaPalette, color: '#E7B742', image: '/assets/UI.jpg' },
       { key: 'web', icon: FaLaptopCode, color: '#E7B742', image: '/assets/web.webp' },
       { key: 'mobile', icon: FaMobileAlt, color: '#2196F3', image: '/assets/mobile.webp' },
       { key: 'erp', icon: FaDatabase, color: '#4CAF50', image: '/assets/erp.webp' },

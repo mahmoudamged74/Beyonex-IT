@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 import { useCachedImage } from '../../hooks/useImageCache'
 import styles from '../OurService/OurService.module.css'
+
+// Helper function to convert hex to RGB
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      }
+    : { r: 231, g: 183, b: 66 } // Default gold color
+}
 
 const ServiceCard = React.memo(function ServiceCard({
   service,
@@ -13,11 +25,20 @@ const ServiceCard = React.memo(function ServiceCard({
   const { isCached, onLoad } = useCachedImage(service.image)
   const Icon = service.icon
 
+  // Extract RGB values from color for dynamic styling
+  const rgbValues = useMemo(() => {
+    const rgb = hexToRgb(service.color)
+    return `${rgb.r}, ${rgb.g}, ${rgb.b}`
+  }, [service.color])
+
   return (
     <Link
       to={`/services/${service.key}`}
       className={styles.serviceCardLink}
-      style={{ '--service-color': service.color }}
+      style={{
+        '--service-color': service.color,
+        '--service-rgb': rgbValues
+      }}
     >
       <div
         className={`${styles.serviceCard} ${isVisible ? styles.slideUp : ''}`}
