@@ -67,7 +67,11 @@ export default function ServiceDetails() {
               <h1 className={styles.title}>{copy.title}</h1>
               <ul>
                 {copy.tagline.map((item) => (
-                  <li key={item.id} className={styles.tagline}>
+                  <li
+                    key={item.id}
+                    className={styles.tagline}
+                    style={{ margin: "0" }}
+                  >
                     {item.title}
 
                     {item.description.map((desc, index) => (
@@ -75,7 +79,7 @@ export default function ServiceDetails() {
                         key={index}
                         style={{
                           display: "block",
-                          margin: "0 0 8px 0",
+                          margin: "4px 0",
                           width: "100%",
                         }}
                       >
