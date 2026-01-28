@@ -203,12 +203,10 @@ export const servicesCatalog = {
           id: 2,
           title: "حلول تطوير شاملة… من الفكرة إلى الإطلاق",
           description: [
-            [
-              "خبرة عميقة في تصميم وتطوير التطبيقات - ",
-              "تواصل فعال يضمن وضوح كل مرحلة - ",
-              "فريق محترف يلتزم بالجودة - ",
-              "معايير عالية تضمن تطبيقاً موثوقاً وقابلاً للنمو",
-            ],
+            "خبرة عميقة في تصميم وتطوير التطبيقات",
+            "تواصل فعال يضمن وضوح كل مرحلة",
+            "فريق محترف يلتزم بالجودة",
+            "معايير عالية تضمن تطبيقاً موثوقاً وقابلاً للنمو",
           ],
         },
       ],
@@ -298,9 +296,35 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "Hardware & Infrastructure",
+          title: "Understanding Needs and Analyzing the Technical Environment",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "Comprehensive assessment of the current infrastructure",
+            "Identifying technical gaps and proposing solutions aligned with client objectives",
+          ],
+        },
+        {
+          id: 2,
+          title: "Systems and Network Operations Management",
+          description: [
+            "Monitoring systems to ensure readiness and continuity",
+            "Managing incidents and changes based on ITSM best practices",
+            "Enhancing operational stability and minimizing disruptions",
+          ],
+        },
+        {
+          id: 3,
+          title: "Performance Monitoring and Continuous Improvement",
+          description: [
+            "Utilizing advanced tools for performance analysis",
+            "Predicting failures and enhancing system efficiency",
+            "Continuously improving operational procedures",
+          ],
+        },
+        {
+          id: 4,
+          title: "Decision Support and Technical Performance Improvement",
+          description: [
+            "An integrated IT service based on efficiency, reliability, and continuous improvement, ensuring a stable and secure operational environment that supports business growth",
           ],
         },
       ],
@@ -310,9 +334,35 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "الهاردوير والبنية التحتية",
+          title: "فهم الاحتياجات وتحليل البيئة التقنية",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "تقييم شامل للبنية التحتية الحالية",
+            "تحديد الفجوات التقنية ووضع حلول متوافقة مع أهداف العميل",
+          ],
+        },
+        {
+          id: 2,
+          title: "إدارة وتشغيل الأنظمة والشبكات",
+          description: [
+            "مراقبة الأنظمة لضمان الجاهزية والاستمرارية",
+            "إدارة الحوادث والتغييرات وفق أفضل ممارسات ITSM ",
+            "تعزيز استقرار البيئة التشغيلية وتقليل الأعطال",
+          ],
+        },
+        {
+          id: 3,
+          title: "مراقبة الأداء والتحسين المستمر",
+          description: [
+            "استخدام أدوات متقدمة لتحليل الأداء",
+            "التنبؤ بالأعطال ورفع كفاءة الأنظمة ",
+            "تطوير الإجراءات التشغيلية بشكل مستمر",
+          ],
+        },
+        {
+          id: 4,
+          title: "دعم اتخاذ القرار وتحسين الأداء التقني",
+          description: [
+            "خدمة تقنية متكاملة تعتمد على الكفاءة، الموثوقية، والتحسين المستمر، بما يضمن للعميل بيئة تشغيلية مستقرة وآمنة تدعم نمو أعماله",
           ],
         },
       ],
