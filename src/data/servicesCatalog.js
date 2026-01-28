@@ -291,7 +291,7 @@ export const servicesCatalog = {
     heroImage: "/assets/hardware.webp",
     Icon: FaServer,
     en: {
-      title: "Hardware & Infrastructure",
+      title: "IT Operation",
       tagline: [
         {
           id: 1,
@@ -329,7 +329,7 @@ export const servicesCatalog = {
       ],
     },
     ar: {
-      title: "الهاردوير والبنية التحتية",
+      title: "إدارة العمليات التقنية",
       tagline: [
         {
           id: 1,
