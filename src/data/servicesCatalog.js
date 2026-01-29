@@ -257,12 +257,27 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "ERP & Business Systems",
+          title: "ERP Systems & Business Management",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "We help you implement or customize ERP systems and configure workflows to improve monitoring, reduce manual work, and enhance decision-making efficiency.",
           ],
         },
-      ],
+        {
+          id: 2,
+          title: "Streamlined Operations & Department Integration",
+          description: [
+            "We connect sales, inventory, accounting, and all other departments into a single integrated system, ensuring real-time data updates while eliminating manual files and duplicate work.",
+          ],
+        },
+        {
+          id: 3,
+          title: "Clearer Performance Insights & Faster Decisions",
+          description: [
+            "We provide real-time reports and dashboards that give you a clear view of your financial and operational performance, enabling you to track KPIs and make data-driven decisions with confidence.",
+          ],
+        },
+      ]
+      
     },
     ar: {
       title: "أنظمة ERP وإدارة الأعمال",
@@ -434,12 +449,27 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "Custom Software",
+          title: "Custom Software That Fits Your Workflow",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "We carefully analyze your requirements and build software solutions tailored specifically to your business needs, instead of relying on off-the-shelf systems that force you to change how you work.",
           ],
         },
-      ],
+        {
+          id: 2,
+          title: "Elevating Your Interface & Enhancing User Experience",
+          description: [
+            "At Beyonex Technology, we enhance user interfaces and user experience across your existing website or application by improving design, simplifying interactions, and optimizing user journeys to deliver better performance and higher satisfaction.",
+          ],
+        },
+        {
+          id: 3,
+          title: "Scalable & Integratable Solutions",
+          description: [
+            "We design systems to be scalable and future-ready, with the ability to expand and integrate seamlessly with other systems such as ERP platforms, websites, and applications.",
+          ],
+        },
+      ]
+      
     },
     ar: {
       title: "برمجيات مخصصة",
@@ -452,12 +482,12 @@ export const servicesCatalog = {
           ],
         },
         {
-          id: 2,
-          title: "أتمتة الإجراءات وتقليل العمل اليدوي",
-          description: [
-            "نحوّل العمليات المتكررة إلى خطوات مؤتمتة تقلل الأخطاء، تسرّع الإنجاز، وتوفر وقت الفريق للتركيز على المهام الأهم.",
-          ],
-        },
+                  id: 2,
+                  title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
+                  description: [
+                    "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
+                  ],
+                },
         {
           id: 3,
           title: "حلول قابلة للتطوير والتكامل",
