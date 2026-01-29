@@ -12,7 +12,9 @@ import {
   FaClock,
   FaArrowRight,
   FaCode,
-  FaHeart
+  FaHeart,
+  FaSnapchat 
+  
 } from 'react-icons/fa'
 import styles from './Footer.module.css'
 
