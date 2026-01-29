@@ -179,19 +179,11 @@
 
 .serviceCard:hover {
   transform: translateY(-12px) scale(1.02);
-<<<<<<< HEAD
-  border-color: rgba(231, 183, 66, 0.5);
-  box-shadow:
-    0 20px 60px rgba(231, 183, 66, 0.25),
-    0 0 40px rgba(231, 183, 66, 0.15),
-    inset 0 0 30px rgba(231, 183, 66, 0.05);
-=======
   border-color: var(--service-color);
   box-shadow: 
     0 20px 60px rgba(var(--service-rgb, 231, 183, 66), 0.25),
     0 0 40px rgba(var(--service-rgb, 231, 183, 66), 0.15),
     inset 0 0 30px rgba(var(--service-rgb, 231, 183, 66), 0.05);
->>>>>>> c8132f921a99ccf52697238b446565be6cae1058
   background: rgba(255, 255, 255, 0.06);
 }
 
