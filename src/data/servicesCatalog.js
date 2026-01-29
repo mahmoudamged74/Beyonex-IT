@@ -14,83 +14,83 @@ import {
  * - Copy changes here only; page reads from this catalog.
  */
 export const servicesCatalog = {
-  ui: {
-    key: "ui",
-    accent: "#E7B742",
-    heroImage: "/assets/UI.jpg",
-    Icon: FaPalette,
-    en: {
-      title: "UI/UX Enhancement",
-      tagline: [
-        {
-          id: 1,
-          title: "Elevate your interface... Enhance your user experience",
-          description: [
-            "At Beyonex IT, we work on improving user interfaces and user experience within your current website or application, through design development, interaction simplification, and journey flow optimization to ensure better performance and higher satisfaction.",
-          ],
-        },
-        {
-          id: 2,
-          title: "A more beautiful interface... An easier experience... Stronger results",
-          description: [
-            "We analyze the current interface, identify complexity points, then implement thoughtful improvements that make the design clearer, faster, and more attractive without the need to completely rebuild the product.",
-          ],
-        },
-        {
-          id: 3,
-          title: "Continuous data-driven improvements",
-          description: [
-            "We monitor user behavior after modifications and provide periodic development recommendations to ensure your interface remains modern and aligned with your audience's expectations.",
-          ],
-        },
-      ],
-    },
-    ar: {
-      title: "تحسين واجهات وتجربة المستخدم",
-      tagline: [
-        {
-          id: 1,
-          title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
-          description: [
-            "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
-          ],
-        },
-        {
-          id: 2,
-          title: "واجهة أجمل… تجربة أسهل… نتائج أقوى",
-          description: [
-            "نقوم بتحليل الواجهة الحالية، تحديد نقاط التعقيد، ثم تنفيذ تحسينات مدروسة تجعل التصميم أوضح، أسرع، وأكثر جاذبية دون الحاجة لإعادة بناء المنتج بالكامل.",
-          ],
-        },
-        {
-          id: 3,
-          title: "تحسينات مستمرة تعتمد على البيانات",
-          description: [
-            "نراقب سلوك المستخدم بعد التعديلات، ونقدّم توصيات تطوير دورية تضمن بقاء واجهتك حديثة ومتوافقة مع توقعات جمهورك.",
-          ],
-        },
-      ],
-    },
-    stacks: [
-      "Figma / Adobe XD",
-      "Design systems & UI kits",
-      "Wireframes & user flows",
-      "Design tokens",
-      "Responsive & adaptive layouts",
-      "Animation & micro‑interactions",
-      "Accessibility (WCAG)",
-      "Design handoff for developers",
-    ],
-    deliverables: [
-      {
-        en: "Landing pages & corporate websites",
-        ar: "Landing pages ومواقع شركات",
-      },
-      { en: "Dashboards & admin panels", ar: "Dashboards ولوحات تحكم" },
-      { en: "E-commerce storefronts", ar: "متاجر إلكترونية" },
-      { en: "Forms, integrations, analytics", ar: "نماذج، تكاملات، وتحليلات" },
-    ],
-  },
+  // ui: {
+  //   key: "ui",
+  //   accent: "#E7B742",
+  //   heroImage: "/assets/UI.jpg",
+  //   Icon: FaPalette,
+  //   en: {
+  //     title: "UI/UX Enhancement",
+  //     tagline: [
+  //       {
+  //         id: 1,
+  //         title: "Elevate your interface... Enhance your user experience",
+  //         description: [
+  //           "At Beyonex IT, we work on improving user interfaces and user experience within your current website or application, through design development, interaction simplification, and journey flow optimization to ensure better performance and higher satisfaction.",
+  //         ],
+  //       },
+  //       {
+  //         id: 2,
+  //         title: "A more beautiful interface... An easier experience... Stronger results",
+  //         description: [
+  //           "We analyze the current interface, identify complexity points, then implement thoughtful improvements that make the design clearer, faster, and more attractive without the need to completely rebuild the product.",
+  //         ],
+  //       },
+  //       {
+  //         id: 3,
+  //         title: "Continuous data-driven improvements",
+  //         description: [
+  //           "We monitor user behavior after modifications and provide periodic development recommendations to ensure your interface remains modern and aligned with your audience's expectations.",
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   ar: {
+  //     title: "تحسين واجهات وتجربة المستخدم",
+  //     tagline: [
+  //       {
+  //         id: 1,
+  //         title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
+  //         description: [
+  //           "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
+  //         ],
+  //       },
+  //       {
+  //         id: 2,
+  //         title: "واجهة أجمل… تجربة أسهل… نتائج أقوى",
+  //         description: [
+  //           "نقوم بتحليل الواجهة الحالية، تحديد نقاط التعقيد، ثم تنفيذ تحسينات مدروسة تجعل التصميم أوضح، أسرع، وأكثر جاذبية دون الحاجة لإعادة بناء المنتج بالكامل.",
+  //         ],
+  //       },
+  //       {
+  //         id: 3,
+  //         title: "تحسينات مستمرة تعتمد على البيانات",
+  //         description: [
+  //           "نراقب سلوك المستخدم بعد التعديلات، ونقدّم توصيات تطوير دورية تضمن بقاء واجهتك حديثة ومتوافقة مع توقعات جمهورك.",
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   stacks: [
+  //     "Figma / Adobe XD",
+  //     "Design systems & UI kits",
+  //     "Wireframes & user flows",
+  //     "Design tokens",
+  //     "Responsive & adaptive layouts",
+  //     "Animation & micro‑interactions",
+  //     "Accessibility (WCAG)",
+  //     "Design handoff for developers",
+  //   ],
+  //   deliverables: [
+  //     {
+  //       en: "Landing pages & corporate websites",
+  //       ar: "Landing pages ومواقع شركات",
+  //     },
+  //     { en: "Dashboards & admin panels", ar: "Dashboards ولوحات تحكم" },
+  //     { en: "E-commerce storefronts", ar: "متاجر إلكترونية" },
+  //     { en: "Forms, integrations, analytics", ar: "نماذج، تكاملات، وتحليلات" },
+  //   ],
+  // },
   web: {
     key: "web",
     accent: "#E7B742",
