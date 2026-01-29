@@ -5,6 +5,7 @@ import {
   FaServer,
   FaCode,
   FaShieldAlt,
+  FaPalette,
 } from "react-icons/fa";
 
 /**
@@ -13,83 +14,83 @@ import {
  * - Copy changes here only; page reads from this catalog.
  */
 export const servicesCatalog = {
-  ui: {
-    key: "ui",
-    accent: "#E7B742",
-    heroImage: "/assets/web.webp",
-    Icon: FaLaptopCode,
-    en: {
-      title: "UI/UX Enhancement",
-      tagline: [
-        {
-          id: 1,
-          title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
-          description: [
-            "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
-          ],
-        },
-        {
-          id: 2,
-          title: "واجهة أجمل… تجربة أسهل… نتائج أقوى",
-          description: [
-            "نقوم بتحليل الواجهة الحالية، تحديد نقاط التعقيد، ثم تنفيذ تحسينات مدروسة تجعل التصميم أوضح، أسرع، وأكثر جاذبية دون الحاجة لإعادة بناء المنتج بالكامل.",
-          ],
-        },
-        {
-          id: 3,
-          title: "تحسينات مستمرة تعتمد على البيانات",
-          description: [
-            "نراقب سلوك المستخدم بعد التعديلات، ونقدّم توصيات تطوير دورية تضمن بقاء واجهتك حديثة ومتوافقة مع توقعات جمهورك.",
-          ],
-        },
-      ],
-    },
-    ar: {
-      title: "تحسين واجهات وتجربة المستخدم",
-      tagline: [
-        {
-          id: 1,
-          title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
-          description: [
-            "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
-          ],
-        },
-        {
-          id: 2,
-          title: "واجهة أجمل… تجربة أسهل… نتائج أقوى",
-          description: [
-            "نقوم بتحليل الواجهة الحالية، تحديد نقاط التعقيد، ثم تنفيذ تحسينات مدروسة تجعل التصميم أوضح، أسرع، وأكثر جاذبية دون الحاجة لإعادة بناء المنتج بالكامل.",
-          ],
-        },
-        {
-          id: 3,
-          title: "تحسينات مستمرة تعتمد على البيانات",
-          description: [
-            "نراقب سلوك المستخدم بعد التعديلات، ونقدّم توصيات تطوير دورية تضمن بقاء واجهتك حديثة ومتوافقة مع توقعات جمهورك.",
-          ],
-        },
-      ],
-    },
-    stacks: [
-      "HTML5",
-      "CSS3",
-      "Bootstrap",
-      "JavaScript",
-      "React",
-      "REST APIs",
-      "SEO",
-      "Performance",
-    ],
-    deliverables: [
-      {
-        en: "Landing pages & corporate websites",
-        ar: "Landing pages ومواقع شركات",
-      },
-      { en: "Dashboards & admin panels", ar: "Dashboards ولوحات تحكم" },
-      { en: "E-commerce storefronts", ar: "متاجر إلكترونية" },
-      { en: "Forms, integrations, analytics", ar: "نماذج، تكاملات، وتحليلات" },
-    ],
-  },
+  // ui: {
+  //   key: "ui",
+  //   accent: "#E7B742",
+  //   heroImage: "/assets/UI.jpg",
+  //   Icon: FaPalette,
+  //   en: {
+  //     title: "UI/UX Enhancement",
+  //     tagline: [
+  //       {
+  //         id: 1,
+  //         title: "Elevate your interface... Enhance your user experience",
+  //         description: [
+  //           "At Beyonex IT, we work on improving user interfaces and user experience within your current website or application, through design development, interaction simplification, and journey flow optimization to ensure better performance and higher satisfaction.",
+  //         ],
+  //       },
+  //       {
+  //         id: 2,
+  //         title: "A more beautiful interface... An easier experience... Stronger results",
+  //         description: [
+  //           "We analyze the current interface, identify complexity points, then implement thoughtful improvements that make the design clearer, faster, and more attractive without the need to completely rebuild the product.",
+  //         ],
+  //       },
+  //       {
+  //         id: 3,
+  //         title: "Continuous data-driven improvements",
+  //         description: [
+  //           "We monitor user behavior after modifications and provide periodic development recommendations to ensure your interface remains modern and aligned with your audience's expectations.",
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   ar: {
+  //     title: "تحسين واجهات وتجربة المستخدم",
+  //     tagline: [
+  //       {
+  //         id: 1,
+  //         title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
+  //         description: [
+  //           "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
+  //         ],
+  //       },
+  //       {
+  //         id: 2,
+  //         title: "واجهة أجمل… تجربة أسهل… نتائج أقوى",
+  //         description: [
+  //           "نقوم بتحليل الواجهة الحالية، تحديد نقاط التعقيد، ثم تنفيذ تحسينات مدروسة تجعل التصميم أوضح، أسرع، وأكثر جاذبية دون الحاجة لإعادة بناء المنتج بالكامل.",
+  //         ],
+  //       },
+  //       {
+  //         id: 3,
+  //         title: "تحسينات مستمرة تعتمد على البيانات",
+  //         description: [
+  //           "نراقب سلوك المستخدم بعد التعديلات، ونقدّم توصيات تطوير دورية تضمن بقاء واجهتك حديثة ومتوافقة مع توقعات جمهورك.",
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   stacks: [
+  //     "Figma / Adobe XD",
+  //     "Design systems & UI kits",
+  //     "Wireframes & user flows",
+  //     "Design tokens",
+  //     "Responsive & adaptive layouts",
+  //     "Animation & micro‑interactions",
+  //     "Accessibility (WCAG)",
+  //     "Design handoff for developers",
+  //   ],
+  //   deliverables: [
+  //     {
+  //       en: "Landing pages & corporate websites",
+  //       ar: "Landing pages ومواقع شركات",
+  //     },
+  //     { en: "Dashboards & admin panels", ar: "Dashboards ولوحات تحكم" },
+  //     { en: "E-commerce storefronts", ar: "متاجر إلكترونية" },
+  //     { en: "Forms, integrations, analytics", ar: "نماذج، تكاملات، وتحليلات" },
+  //   ],
+  // },
   web: {
     key: "web",
     accent: "#E7B742",
@@ -134,14 +135,21 @@ export const servicesCatalog = {
       ],
     },
     stacks: [
-      "HTML5",
-      "CSS3",
-      "Bootstrap",
-      "JavaScript",
-      "React",
-      "REST APIs",
-      "SEO",
-      "Performance",
+      "HTML5 / CSS3",
+      "SASS / Styled Components",
+      "Bootstrap / Tailwind CSS",
+      "JavaScript / TypeScript",
+      "React / Next.js",
+      "PHP / Laravel",
+      "Node.js / Express",
+      "REST APIs / GraphQL",
+      "MongoDB / PostgreSQL / MySQL / PhPMyAdmin",
+      "Redis caching",
+      "Nginx / Reverse proxy",
+      "Docker & containerization",
+      "CI/CD pipelines",
+      "SEO & Web Vitals optimization",
+      "Performance & security hardening",
     ],
     deliverables: [
       {
@@ -213,11 +221,15 @@ export const servicesCatalog = {
     stacks: [
       "Flutter",
       "Dart",
-      "State Management (Bloc/Riverpod)",
-      "Firebase",
-      "REST APIs",
-      "Push Notifications",
-      "CI/CD",
+      "State Management (Bloc / Riverpod)",
+      "Clean architecture",
+      "Firebase (Auth, Firestore, Storage)",
+      "REST APIs / GraphQL",
+      "Push notifications (FCM / APNs)",
+      "Maps & geolocation",
+      "In‑app purchases & payments",
+      "App performance & analytics",
+      "CI/CD for mobile apps",
     ],
     deliverables: [
       {
@@ -245,12 +257,27 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "ERP & Business Systems",
+          title: "ERP Systems & Business Management",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "We help you implement or customize ERP systems and configure workflows to improve monitoring, reduce manual work, and enhance decision-making efficiency.",
           ],
         },
-      ],
+        {
+          id: 2,
+          title: "Streamlined Operations & Department Integration",
+          description: [
+            "We connect sales, inventory, accounting, and all other departments into a single integrated system, ensuring real-time data updates while eliminating manual files and duplicate work.",
+          ],
+        },
+        {
+          id: 3,
+          title: "Clearer Performance Insights & Faster Decisions",
+          description: [
+            "We provide real-time reports and dashboards that give you a clear view of your financial and operational performance, enabling you to track KPIs and make data-driven decisions with confidence.",
+          ],
+        },
+      ]
+      
     },
     ar: {
       title: "أنظمة ERP وإدارة الأعمال",
@@ -262,15 +289,32 @@ export const servicesCatalog = {
             "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
           ],
         },
+        {
+          id: 2,
+          title: "تبسيط العمليات وربط الأقسام",
+          description: [
+            "نربط المبيعات، المخزون، الحسابات وباقي الإدارات في نظام واحد متكامل بحيث تكون البيانات محدثة لحظيًا وتختفي الملفات اليدوية والتكرار.",
+          ],
+        },
+        {
+          id: 3,
+          title: "رؤية أوضح للأداء واتخاذ قرار أسرع",
+          description: [
+            "نوفر تقارير ولوحات معلومات توضح وضع المنشأة المالي والتشغيلي لحظيًا، فتقدر تتابع مؤشرات الأداء وتتخذ قرارات مبنية على بيانات موثوقة.",
+          ],
+        },
       ],
     },
     stacks: [
       "Requirements & process mapping",
-      "ERP customization",
-      "Integrations",
-      "Data migration",
-      "Reporting",
-      "Role-based access",
+      "Business process re‑engineering (BPR)",
+      "ERP customization & configuration",
+      "Odoo / SAP Business One / Dynamics 365",
+      "Integrations (APIs, ESB, middleware)",
+      "Data migration & data cleansing",
+      "Reporting & business intelligence (BI)",
+      "Role‑based access & approvals",
+      "Training & change management",
     ],
     deliverables: [
       {
@@ -367,12 +411,17 @@ export const servicesCatalog = {
       ],
     },
     stacks: [
-      "Network design",
-      "Servers & storage",
-      "Cabling & racks",
-      "Backup & monitoring",
+      "Network design (LAN / WAN / Wi‑Fi)",
+      "Cisco / Mikrotik / Ubiquiti",
+      "Servers & storage (NAS / SAN)",
+      "Virtualization (VMware / Hyper‑V)",
+      "Windows Server / Linux",
+      "Cabling, racks & structured wiring",
+      "Firewalls & VPN",
+      "Backup & disaster recovery",
+      "Monitoring & logging tools",
       "CCTV & access control",
-      "Maintenance",
+      "Preventive & corrective maintenance",
     ],
     deliverables: [
       {
@@ -400,32 +449,65 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "Custom Software",
+          title: "Custom Software That Fits Your Workflow",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "We carefully analyze your requirements and build software solutions tailored specifically to your business needs, instead of relying on off-the-shelf systems that force you to change how you work.",
           ],
         },
-      ],
+        {
+          id: 2,
+          title: "Elevating Your Interface & Enhancing User Experience",
+          description: [
+            "At Beyonex Technology, we enhance user interfaces and user experience across your existing website or application by improving design, simplifying interactions, and optimizing user journeys to deliver better performance and higher satisfaction.",
+          ],
+        },
+        {
+          id: 3,
+          title: "Scalable & Integratable Solutions",
+          description: [
+            "We design systems to be scalable and future-ready, with the ability to expand and integrate seamlessly with other systems such as ERP platforms, websites, and applications.",
+          ],
+        },
+      ]
+      
     },
     ar: {
       title: "برمجيات مخصصة",
       tagline: [
         {
           id: 1,
-          title: "برمجيات مخصصة",
+          title: "برمجيات مخصصة تخدم أسلوب شغلك",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "نحلل احتياجك بدقة ونبني حلول برمجية مصممة خصيصًا لطبيعة عملك بدلاً من الاعتماد على أنظمة جاهزة تجبرك تغيّر أسلوب شغلك.",
+          ],
+        },
+        {
+                  id: 2,
+                  title: "نرفع مستوى واجهتك… ونطوّر تجربة مستخدمك",
+                  description: [
+                    "في بيونكس للتقنية، نعمل على تحسين واجهات المستخدم وتجربة الاستخدام داخل موقعك أو تطبيقك الحالي، من خلال تطوير التصميم، تبسيط التفاعل، وتحسين تدفّق الرحلة بما يضمن أداء أفضل ورضا أعلى.",
+                  ],
+                },
+        {
+          id: 3,
+          title: "حلول قابلة للتطوير والتكامل",
+          description: [
+            "نصمّم الأنظمة بحيث تكون قابلة للإضافة والتطوير مستقبلاً، مع إمكانية ربطها بأنظمة أخرى مثل ERP والمواقع والتطبيقات.",
           ],
         },
       ],
     },
     stacks: [
-      "System design",
-      "APIs & integrations",
-      "Database modeling",
-      "Authentication",
-      "Testing",
-      "Documentation",
+      "System architecture & solution design",
+      "Node.js / .NET / Python",
+      "RESTful & GraphQL APIs",
+      "Database modeling (SQL / NoSQL)",
+      "Microservices & modular monoliths",
+      "Message queues (RabbitMQ / Kafka)",
+      "Authentication & authorization (JWT / OAuth2)",
+      "Automated testing (unit / integration / E2E)",
+      "CI/CD & DevOps pipelines",
+      "Technical documentation & handover",
     ],
     deliverables: [
       { en: "Internal tools & automation", ar: "أدوات داخلية وأتمتة" },
@@ -467,12 +549,15 @@ export const servicesCatalog = {
       ],
     },
     stacks: [
-      "Risk assessment",
-      "Hardening",
-      "Penetration testing",
-      "Policies & access control",
-      "Monitoring",
-      "Awareness training",
+      "Risk assessment & gap analysis",
+      "Security hardening (servers / network)",
+      "Vulnerability assessment & penetration testing",
+      "SIEM & log management",
+      "IDS / IPS & endpoint protection",
+      "Policies, procedures & access control",
+      "Backup & disaster recovery strategy",
+      "Security monitoring & incident response",
+      "Security awareness training",
     ],
     deliverables: [
       { en: "Security audit & recommendations", ar: "تدقيق أمني وتوصيات" },

@@ -48,7 +48,7 @@ export default function AboutHero() {
           <div className={styles.logoContainer}>
             <div className={styles.logoGlow}></div>
             <img 
-              src="/assets/logo.png" 
+              src="/assets/3.png" 
               alt="BEYONEX IT Logo" 
               className={styles.logo}
             />
