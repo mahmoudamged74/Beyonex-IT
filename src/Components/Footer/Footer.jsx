@@ -11,8 +11,7 @@ import {
   FaEnvelope,
   FaClock,
   FaArrowRight,
-  FaCode,
-  FaHeart
+  FaSnapchat
 } from 'react-icons/fa'
 import styles from './Footer.module.css'
 
@@ -45,12 +44,28 @@ export default function Footer() {
   ]
 
   const socialLinks = [
-    { icon: FaFacebookF, href: '#', label: 'Facebook', color: '#1877F2' },
-    { icon: FaTwitter, href: '#', label: 'Twitter', color: '#1DA1F2' },
-    { icon: FaLinkedinIn, href: '#', label: 'LinkedIn', color: '#0A66C2' },
-    { icon: FaInstagram, href: '#', label: 'Instagram', color: '#E4405F' },
-    { icon: FaWhatsapp, href: '#', label: 'WhatsApp', color: '#25D366' }
-  ]
+    { icon: FaFacebookF, href: "#", label: "Facebook", color: "#1877F2" },
+    {
+      icon: FaLinkedinIn,
+      href: "https://www.linkedin.com/in/beyonex-it-53a5713a9/",
+      label: "LinkedIn",
+      color: "#0A66C2",
+    },
+    {
+      icon: FaSnapchat,
+      href: "https://www.snapchat.com/add/beyonex.it",
+      label: "SnapChat",
+      color: "#d1d414",
+    },
+    {
+      icon: FaInstagram,
+      href: "https://www.instagram.com/beyonex.it/?hl=ar",
+      label: "Instagram",
+      color: "#E4405F",
+    },
+    { icon: FaTwitter, href: "#", label: "Twitter", color: "#1DA1F2" },
+    { icon: FaWhatsapp, href: "#", label: "WhatsApp", color: "#25D366" },
+  ];
 
   return (
     <footer className={styles.footer}>
