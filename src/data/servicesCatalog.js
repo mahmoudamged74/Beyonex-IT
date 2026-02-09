@@ -525,13 +525,27 @@ export const servicesCatalog = {
     heroImage: "/assets/security.webp",
     Icon: FaShieldAlt,
     en: {
-      title: "Cybersecurity",
+      title: "Cybersecurity Solutions",
       tagline: [
         {
           id: 1,
-          title: "Cybersecurity",
+          title: "Secure Your Digital Future",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "In an era of evolving digital threats, protecting your assets is not just an option—it's a necessity. We provide comprehensive cybersecurity strategies that shield your business from attacks, ensuring business continuity and trust.",
+          ],
+        },
+        {
+          id: 2,
+          title: "Proactive Defense & Threat Neutralization",
+          description: [
+            "Don't wait for a breach to react. Our proactive approach involves rigorous vulnerability assessments, penetration testing, and 24/7 monitoring to identify and neutralize threats before they impact your operations.",
+          ],
+        },
+        {
+          id: 3,
+          title: "Compliance & Data Integrity",
+          description: [
+            "We help you navigate the complex landscape of cybersecurity regulations (NCA, ISO, GDPR). Our solutions ensure your data remains confidential, integral, and available, safeguarding your reputation and your clients' trust.",
           ],
         },
       ],
@@ -541,35 +555,56 @@ export const servicesCatalog = {
       tagline: [
         {
           id: 1,
-          title: "الأمن السيبراني",
+          title: "حماية أصولك الرقمية.. استثمار في المستقبل",
           description: [
-            "بنساعدك في تطبيق أو تخصيص أنظمة ERP وتهيئة الـ workflows لتحسين المتابعة وتقليل الشغل اليدوي ورفع كفاءة القرار.",
+            "في عالم تتطور فيه التهديدات الرقمية يومياً، لم تعد الحماية خياراً بل ضرورة قصوى. نقدم استراتيجيات أمن سيبراني شاملة تحصن أعمالك ضد الهجمات، وتضمن استمرارية عملك وحماية سمعتك.",
+          ],
+        },
+        {
+          id: 2,
+          title: "دفاع استباقي.. وكشف للتهديدات قبل وقوعها",
+          description: [
+            "لا تنتظر وقوع الاختراق لتتحرك. نهجنا الاستباقي يشمل فحص الثغرات، واختبارات الاختراق، والمراقبة المستمرة لكشف ونزع فتيل التهديدات قبل أن تؤثر على عملياتك التشغيلية.",
+          ],
+        },
+        {
+          id: 3,
+          title: "امتثال كامل.. وبيانات آمنة",
+          description: [
+            "نساعدك على تحقيق الامتثال لأعلى معايير ولوائح الأمن السيبراني (NCA, ISO, GDPR). تضمن حلولنا سرية وسلامة وتوفر بياناتك، مما يمنحك ويمنح عملاءك الثقة والاطمئنان.",
           ],
         },
       ],
     },
     stacks: [
-      "Risk assessment & gap analysis",
-      "Security hardening (servers / network)",
-      "Vulnerability assessment & penetration testing",
-      "SIEM & log management",
-      "IDS / IPS & endpoint protection",
-      "Policies, procedures & access control",
-      "Backup & disaster recovery strategy",
-      "Security monitoring & incident response",
-      "Security awareness training",
+      "Vulnerability Assessment & Penetration Testing (VAPT)",
+      "Security Operations Center (SOC) Services",
+      "Governance, Risk, and Compliance (GRC)",
+      "Network Security & Firewalls (NGFW)",
+      "Web Application Firewalls (WAF)",
+      "Endpoint Detection and Response (EDR)",
+      "Data Loss Prevention (DLP)",
+      "SIEM & Log Management",
+      "Cloud Security Posture Management",
+      "Security Awareness Training",
     ],
     deliverables: [
-      { en: "Security audit & recommendations", ar: "تدقيق أمني وتوصيات" },
       {
-        en: "Vulnerability assessment / pentest",
-        ar: "فحص ثغرات / اختبار اختراق",
+        en: "Comprehensive Security Audit Reports",
+        ar: "تقارير تدقيق أمني شاملة",
       },
       {
-        en: "Access control & backups strategy",
-        ar: "إدارة صلاحيات وخطة نسخ احتياطي",
+        en: "Penetration Testing & Remediation Plan",
+        ar: "اختبار اختراق وخطة معالجة",
       },
-      { en: "Security awareness sessions", ar: "جلسات توعية أمنية" },
+      {
+        en: "Compliance Certification Support (ISO/NCA)",
+        ar: "دعم شهادات الامتثال (ISO/NCA)",
+      },
+      {
+        en: "Incident Response Playbooks",
+        ar: "أدلة الاستجابة للحوادث السيبرانية",
+      },
     ],
   },
 };

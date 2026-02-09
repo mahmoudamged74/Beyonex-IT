@@ -1,0 +1,210 @@
+.teamSection {
+    position: relative;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #1a1f2e 0%, #181d27 100%);
+    overflow: hidden;
+}
+
+.backgroundPattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(rgba(231, 183, 66, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.header.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #E7B742 0%, #FFD700 50%, #E7B742 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Swiper Styling */
+.swiperContainer {
+    padding: 2rem 1rem 4rem !important;
+    perspective: 1000px;
+}
+
+.teamCard {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(231, 183, 66, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    height: 100%;
+    user-select: none;
+}
+
+.teamCard:hover {
+    transform: translateY(-10px);
+    border-color: rgba(231, 183, 66, 0.4);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(231, 183, 66, 0.1);
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    /* Square aspect ratio */
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.memberImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(20%);
+}
+
+.teamCard:hover .memberImage {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.teamCard:hover .overlay {
+    opacity: 0.8;
+}
+
+.memberInfo {
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.memberName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #fff, #ddd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.memberRole {
+    font-size: 1rem;
+    color: #E7B742;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.socialLinks {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.teamCard:hover .socialLinks {
+    opacity: 1;
+}
+
+.socialIcon {
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.socialIcon:hover {
+    color: #E7B742;
+    transform: translateY(-2px);
+}
+
+/* Swiper Pagination Customization */
+:global(.swiper-pagination-bullet) {
+    background: rgba(255, 255, 255, 0.3) !important;
+    width: 10px !important;
+    height: 10px !important;
+    transition: all 0.3s ease;
+}
+
+:global(.swiper-pagination-bullet-active) {
+    background: #E7B742 !important;
+    width: 30px !important;
+    border-radius: 5px !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .teamSection {
+        padding: 4rem 0;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .memberName {
+        font-size: 1.25rem;
+    }
+}

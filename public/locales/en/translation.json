@@ -89,7 +89,7 @@
       },
       "cybersecurity": {
         "title": "Cybersecurity",
-        "description": "Advanced security solutions to protect your data and systems from cyber threats"
+        "description": "Comprehensive protection for your digital assets with advanced threat detection and compliance solutions."
       }
     },
     "learnMore": "Learn More"
@@ -139,6 +139,10 @@
       "passionDesc": "We love what we do, and that passion drives us to exceed expectations.",
       "excellence": "Excellence",
       "excellenceDesc": "We strive for perfection in every detail, from code to customer service."
+    },
+    "team": {
+      "title": "Our Expert Team",
+      "subtitle": "Meet the passionate individuals driving our innovation and success."
     },
     "cta": {
       "title": "Ready to Start Your Project?",
