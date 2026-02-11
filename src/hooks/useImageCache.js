@@ -1,11 +1,13 @@
-const imageCache = new Set()
+import { useState, useEffect } from "react";
 
 export function useCachedImage(src) {
-  const isCached = imageCache.has(src)
+  const [isCached, setIsCached] = useState(false)
 
-  const onLoad = () => {
-    imageCache.add(src)
-  }
+  useEffect(() => {
+    const img = new Image()
+    img.src = src
+    img.onload = () => setIsCached(true)
+  }, [src])
 
-  return { isCached, onLoad }
+  return { isCached, onLoad: () => {} }
 }

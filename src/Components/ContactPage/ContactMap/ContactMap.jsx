@@ -66,7 +66,7 @@ export default function ContactMap() {
                     <h4 className={styles.cardTitle}>{t('contactPage.map.cardTitle')}</h4>
                     <p className={styles.cardAddress}>{t('contactPage.map.address')}</p>
                     <a 
-                      href="https://goo.gl/maps/riyadh" 
+                      href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className={styles.directionsBtn}

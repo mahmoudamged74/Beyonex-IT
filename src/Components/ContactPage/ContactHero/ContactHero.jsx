@@ -50,7 +50,7 @@ export default function ContactHero() {
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
-                    <span className={styles.cardValue} dir="ltr">+966 555 555 555</span>
+                    <a href="tel:+966559544554" className={styles.cardValue} dir="ltr">+966 559 544 554</a>
                   </div>
                 </div>
                 
@@ -60,7 +60,7 @@ export default function ContactHero() {
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.emailUs')}</span>
-                    <span className={styles.cardValue}>info@beyonexit.com</span>
+                    <a href="mailto:info@beyonexit.com" className={styles.cardValue}>info@beyonexit.com</a>
                   </div>
                 </div>
                 
@@ -70,7 +70,9 @@ export default function ContactHero() {
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.visitUs')}</span>
-                    <span className={styles.cardValue}>{t('contactPage.hero.location')}</span>
+                    <a href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" target="_blank" rel="noopener noreferrer" className={styles.cardValue}>
+                      {t('contactPage.hero.location')}
+                    </a>
                   </div>
                 </div>
               </div>

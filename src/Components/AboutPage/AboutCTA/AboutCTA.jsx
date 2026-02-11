@@ -43,9 +43,9 @@ export default function AboutCTA() {
           <p className={styles.description}>{t('aboutPage.cta.description')}</p>
           
           <div className={styles.contactInfo}>
-            <a href="tel:+966555555555" className={styles.contactItem}>
+            <a href="tel:+966559544554" style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
               <FaPhone className={styles.contactIcon} />
-              <span>+966 555 555 555</span>
+              <span>+966 559 544 554</span>
             </a>
             <a href="mailto:info@beyonexit.com" className={styles.contactItem}>
               <FaEnvelope className={styles.contactIcon} />
@@ -54,11 +54,19 @@ export default function AboutCTA() {
           </div>
 
           <div className={styles.buttons}>
-            <Link to="/contact" className={styles.primaryBtn}>
+            <Link 
+              to="/contact" 
+              className={styles.primaryBtn}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               <span>{t('aboutPage.cta.contactBtn')}</span>
               <FaArrowRight className={styles.btnIcon} />
             </Link>
-            <Link to="/" className={styles.secondaryBtn}>
+            <Link 
+              to="/" 
+              className={styles.secondaryBtn}
+              onClick={() => window.scrollTo(0, 0)}
+            >
               <span>{t('aboutPage.cta.servicesBtn')}</span>
             </Link>
           </div>

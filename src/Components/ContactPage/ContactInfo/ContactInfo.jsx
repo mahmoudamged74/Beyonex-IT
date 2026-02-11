@@ -9,7 +9,8 @@ import {
   FaLinkedinIn,
   FaTwitter,
   FaInstagram,
-  FaFacebookF
+  FaFacebookF,
+  FaSnapchat
 } from 'react-icons/fa'
 import styles from './ContactInfo.module.css'
 
@@ -40,15 +41,15 @@ export default function ContactInfo() {
     {
       icon: <FaPhone />,
       title: t('contactPage.info.phone'),
-      value: '+966 555 555 555',
-      link: 'tel:+966555555555',
+      value: '+966 559 544 554',
+      link: 'tel:+966559544554',
       isLTR: true
     },
     {
       icon: <FaWhatsapp />,
       title: t('contactPage.info.whatsapp'),
-      value: '+966 555 555 555',
-      link: 'https://wa.me/966555555555',
+      value: '+966 559 544 554',
+      link: 'https://wa.me/966559544554',
       isLTR: true
     },
     {
@@ -62,16 +63,17 @@ export default function ContactInfo() {
       icon: <FaMapMarkerAlt />,
       title: t('contactPage.info.address'),
       value: t('contactPage.info.addressValue'),
-      link: null,
+      link: 'https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw',
       isLTR: false
     }
   ]
 
   const socialLinks = [
     { icon: <FaFacebookF />, link: '#', label: 'Facebook' },
-    { icon: <FaTwitter />, link: '#', label: 'Twitter' },
-    { icon: <FaInstagram />, link: '#', label: 'Instagram' },
-    { icon: <FaLinkedinIn />, link: '#', label: 'LinkedIn' }
+    { icon: <FaLinkedinIn />, link: 'https://www.linkedin.com/in/beyonex-it-53a5713a9/', label: 'LinkedIn' },
+    { icon: <FaSnapchat />, link: 'https://www.snapchat.com/add/beyonex.it', label: 'SnapChat' },
+    { icon: <FaInstagram />, link: 'https://www.instagram.com/beyonex.it/?hl=ar', label: 'Instagram' },
+    { icon: <FaTwitter />, link: '#', label: 'Twitter' }
   ]
 
   return (
@@ -128,10 +130,10 @@ export default function ContactInfo() {
                       <span className={styles.hoursDay}>{t('contactPage.info.weekdays')}</span>
                       <span className={styles.hoursTime}>8:00 - 16:00</span>
                     </div>
-                    <div className={styles.hoursItem}>
+                    {/* <div className={styles.hoursItem}>
                       <span className={styles.hoursDay}>{t('contactPage.info.weekend')}</span>
                       <span className={styles.hoursClosed}>{t('contactPage.info.closed')}</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

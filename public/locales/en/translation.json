@@ -120,9 +120,9 @@
       "title": "Our Achievements",
       "subtitle": "Numbers that reflect our commitment to excellence and client satisfaction.",
       "projects": "Projects Completed",
-      "clients": "Happy Clients",
+      "clients": "Success Partners",
       "years": "Years Experience",
-      "satisfaction": "Client Satisfaction"
+      "satisfaction": "Excellence Rate"
     },
     "values": {
       "title": "Our Core Values",
@@ -218,11 +218,10 @@
     "services": "Our Services",
     "contactInfo": "Contact Info",
     "address": "Riyadh, Saudi Arabia",
-    "phone": "+966 555 555 555",
+    "phone": "+966 559544554",
     "email": "info@beyonexit.com",
     "workingHours": "Working Hours",
     "workingDays": "Sun - Thu: 8:00 - 16:00",
-    "weekend": "Fri - Sat: Closed",
     "followUs": "Follow Us",
     "copyright": "© 2026 BEYONEX IT. All Rights Reserved.",
     "links": {

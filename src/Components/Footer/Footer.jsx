@@ -48,6 +48,12 @@ export default function Footer() {
     { key: "cybersecurity", title: t("services.items.cybersecurity.title") },
   ];
 
+  const whatsappNumber = '966559544554'
+  const whatsappMessage = isRTL 
+    ? 'مرحباً، أريد الاستفسار عن خدماتكم'
+    : 'Hello, I would like to inquire about your services'
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+
   const socialLinks = [
     { icon: FaFacebookF, href: "#", label: "Facebook", color: "#1877F2" },
     {
@@ -69,7 +75,7 @@ export default function Footer() {
       color: "#E4405F",
     },
     { icon: FaTwitter, href: "#", label: "Twitter", color: "#1DA1F2" },
-    { icon: FaWhatsapp, href: "#", label: "WhatsApp", color: "#25D366" },
+    { icon: FaWhatsapp, href: whatsappUrl, label: "WhatsApp", color: "#25D366" },
   ];
 
   return (
@@ -187,7 +193,9 @@ export default function Footer() {
                   <FaMapMarkerAlt />
                 </div>
                 <div className={styles.contactText}>
-                  <span>{t("footer.address")}</span>
+                  <a href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" target="_blank" rel="noreferrer">
+                    <span>{t("footer.address")}</span>
+                  </a>
                 </div>
               </div>
 
@@ -196,7 +204,7 @@ export default function Footer() {
                   <FaPhone />
                 </div>
                 <div className={styles.contactText}>
-                  <a href="tel:+966555555555">{t("footer.phone")}</a>
+                  <a href="tel:+966559544554" style={{ direction: 'ltr', unicodeBidi: 'embed' }}>{t("footer.phone")}</a>
                 </div>
               </div>
 
@@ -215,7 +223,6 @@ export default function Footer() {
                 </div>
                 <div className={styles.contactText}>
                   <span>{t("footer.workingDays")}</span>
-                  <span className={styles.subText}>{t("footer.weekend")}</span>
                 </div>
               </div>
             </div>

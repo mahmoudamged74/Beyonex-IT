@@ -15,49 +15,56 @@ const teamMembers = [
     name: 'Sarah Johnson',
     role: 'CEO & Founder',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=688&auto=format&fit=crop',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 2,
-    name: 'Mahmoud Amged',
-    role: 'Frontend Team Leader',
-    image: '../../public/assets/mahmoudamged.jpg',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    name: 'Mostafa Salem',
+    role: 'IT Manager',
+    image: '../../public/assets/mostafa.jpg',
+    social: { email: 'mailto:admin@beyonexit.com' }
   },
   {
     id: 3,
-    name: 'Omar ElBorhamy',
-    role: 'Creative & Development Lead',
-    image: '../../public/assets/Omar ID.jpg.jpeg',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    name: 'Mahmoud Amged',
+    role: 'Frontend Team Leader',
+    image: '../../public/assets/mahmoudamged.jpg',
+    social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 4,
-    name: 'Oamr Shokry',
-    role: 'Frontend Team Leader',
-    image: '../../public/assets/omarshokry.jpg',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    name: 'Omar ElBorhamy',
+    role: 'Creative & Development Lead',
+    image: '../../public/assets/Omar ID.jpg.jpeg',
+    social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 5,
-    name: 'Mohammed AlQadri',
-    role: 'Backend Team Leader',
-    image: '../../public/assets/mohamed.jpg',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    name: 'Oamr Shokry',
+    role: 'Frontend Team Leader',
+    image: '../../public/assets/omarshokry.jpg',
+    social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 6,
-    name: 'Ahmed Jameel',
-    role: 'Operation Manager',
-    image: '../../public/assets/ahmed.jpg',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    name: 'Mohammed AlQadri',
+    role: 'Backend Team Leader',
+    image: '../../public/assets/mohamed.jpg',
+    social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 7,
+    name: 'Ahmed Jameel',
+    role: 'Operation Manager',
+    image: '../../public/assets/ahmed.jpg',
+    social: { email: 'mailto:developers@beyonexit.com' }
+  },
+  {
+    id: 8,
     name: 'Mohamed Ibrahim',
     role: 'Technical Engineer',
     image: '../../public/assets/ibra.jpg',
-    social: { linkedin: '#', twitter: '#', email: '#' }
+    social: { email: 'mailto:developers@beyonexit.com' }
   }
 ]
 
@@ -147,12 +154,6 @@ export default function Team() {
                   <p className={styles.memberRole}>{member.role}</p>
                   
                   <div className={styles.socialLinks}>
-                    <a href={member.social.linkedin} className={styles.socialIcon} aria-label="LinkedIn">
-                      <FaLinkedinIn />
-                    </a>
-                    <a href={member.social.twitter} className={styles.socialIcon} aria-label="Twitter">
-                      <FaTwitter />
-                    </a>
                     <a href={member.social.email} className={styles.socialIcon} aria-label="Email">
                       <FaEnvelope />
                     </a>

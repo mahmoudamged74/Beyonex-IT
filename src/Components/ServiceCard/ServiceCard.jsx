@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
-import { useCachedImage } from '../../hooks/useImageCache'
 import styles from '../OurService/OurService.module.css'
 
 // Helper function to convert hex to RGB
@@ -22,7 +21,7 @@ const ServiceCard = React.memo(function ServiceCard({
   isVisible,
   t
 }) {
-  const { isCached, onLoad } = useCachedImage(service.image)
+  const [isLoaded, setIsLoaded] = useState(false)
   const Icon = service.icon
 
   // Extract RGB values from color for dynamic styling
@@ -45,7 +44,7 @@ const ServiceCard = React.memo(function ServiceCard({
         style={{ animationDelay: `${index * 0.1}s` }}
       >
         <div className={styles.serviceImageWrapper}>
-          {!isCached && (
+          {!isLoaded && (
             <div className={styles.imageSkeleton}>
               <div className={styles.imageSkeletonShimmer} />
             </div>
@@ -57,9 +56,9 @@ const ServiceCard = React.memo(function ServiceCard({
             loading="lazy"
             decoding="async"
             className={`${styles.serviceImage} ${
-              isCached ? '' : styles.serviceImageHidden
+              isLoaded ? '' : styles.serviceImageHidden
             }`}
-            onLoad={onLoad}
+            onLoad={() => setIsLoaded(true)}
           />
 
           <div className={styles.imageOverlay}></div>

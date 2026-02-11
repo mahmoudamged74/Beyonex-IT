@@ -31,7 +31,7 @@ export default function FloatingButtons() {
   }
 
   // WhatsApp link - replace with your actual WhatsApp number
-  const whatsappNumber = '966555555555' // Replace with your actual number
+  const whatsappNumber = '966559544554'
   const whatsappMessage = isRTL 
     ? 'مرحباً، أريد الاستفسار عن خدماتكم'
     : 'Hello, I would like to inquire about your services'
