@@ -12,10 +12,10 @@ import styles from './Team.module.css'
 const teamMembers = [
   {
     id: 1,
-    name: 'Sarah Johnson',
-    role: 'CEO & Founder',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=688&auto=format&fit=crop',
-    social: { email: 'mailto:developers@beyonexit.com' }
+    name: 'Meshal Almejlad',
+    role: 'CEO',
+    image: '../../public/assets/mo.jpg',
+    social: { email: 'mailto:admin@beyonexit.com' }
   },
   {
     id: 2,
