@@ -14,56 +14,56 @@ const teamMembers = [
     id: 1,
     name: 'Meshal Almejlad',
     role: 'CEO',
-    image: '../../public/assets/mo.jpg',
+    image: '/public/assets/mo.jpg',
     social: { email: 'mailto:admin@beyonexit.com' }
   },
   {
     id: 2,
     name: 'Mostafa Salem',
     role: 'IT Manager',
-    image: '../../public/assets/mostafa.jpg',
+    image: '/public/assets/mostafa.jpg',
     social: { email: 'mailto:admin@beyonexit.com' }
   },
   {
     id: 3,
     name: 'Mahmoud Amged',
     role: 'Frontend Team Leader',
-    image: '../../public/assets/mahmoudamged.jpg',
+    image: '/public/assets/mahmoudamged.jpg',
     social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 4,
     name: 'Omar ElBorhamy',
     role: 'Creative & Development Lead',
-    image: '../../public/assets/Omar ID.jpg.jpeg',
+    image: '/public/assets/Omar ID.jpg.jpeg',
     social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 5,
     name: 'Oamr Shokry',
     role: 'Frontend Team Leader',
-    image: '../../public/assets/omarshokry.jpg',
+    image: '/public/assets/omarshokry.jpg',
     social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 6,
     name: 'Mohammed AlQadri',
     role: 'Backend Team Leader',
-    image: '../../public/assets/mohamed.jpg',
+    image: '/public/assets/mohamed.jpg',
     social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 7,
     name: 'Ahmed Jameel',
     role: 'Operation Manager',
-    image: '../../public/assets/ahmed.jpg',
+    image: '/public/assets/ahmed.jpg',
     social: { email: 'mailto:developers@beyonexit.com' }
   },
   {
     id: 8,
     name: 'Mohamed Ibrahim',
     role: 'Technical Engineer',
-    image: '../../public/assets/ibra.jpg',
+    image: '/public/assets/ibra.jpg',
     social: { email: 'mailto:developers@beyonexit.com' }
   }
 ]
