@@ -41,15 +41,15 @@ export default function ContactInfo() {
     {
       icon: <FaPhone />,
       title: t('contactPage.info.phone'),
-      value: '+966 559 544 554',
-      link: 'tel:+966559544554',
+      value: '+966 11 466 1367',
+      link: 'tel:+966 11 466 1367',
       isLTR: true
     },
     {
       icon: <FaWhatsapp />,
       title: t('contactPage.info.whatsapp'),
-      value: '+966 559 544 554',
-      link: 'https://wa.me/966559544554',
+      value: '+966 11 466 1367',
+      link: 'https://wa.me/966114661367',
       isLTR: true
     },
     {

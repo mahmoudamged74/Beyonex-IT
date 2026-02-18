@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
 import {
   FaFacebookF,
   FaTwitter,
@@ -34,12 +36,13 @@ export default function Footer() {
     [],
   );
 
-  const quickLinks = [
-    { key: "home", href: "#home" },
-    { key: "about", href: "#about" },
-    { key: "services", href: "#services" },
-    { key: "contact", href: "#contact" },
-  ];
+const quickLinks = [
+  { key: "home", path: "/" },
+  { key: "about", path: "/about" },
+  { key: "services", path: "/#services" }, 
+  { key: "contact", path: "/contact" },
+];
+
 
   const services = [
     { key: "web", title: t("services.items.web.title") },
@@ -48,7 +51,7 @@ export default function Footer() {
     { key: "cybersecurity", title: t("services.items.cybersecurity.title") },
   ];
 
-  const whatsappNumber = '966559544554'
+  const whatsappNumber = '96611'
   const whatsappMessage = isRTL 
     ? 'مرحباً، أريد الاستفسار عن خدماتكم'
     : 'Hello, I would like to inquire about your services'
@@ -107,9 +110,7 @@ export default function Footer() {
       </div>
 
       <div className="container">
-        {/* Main Footer Content */}
         <div className={styles.footerContent}>
-          {/* Column 1: Company Info + Social */}
           <div className={styles.footerColumn}>
             <div className={styles.logoSection}>
               <div className={styles.logoWrapper}>
@@ -150,19 +151,18 @@ export default function Footer() {
               <span className={styles.titleIcon}></span>
               {t("footer.quickLinks")}
             </h4>
-            <ul className={styles.linksList}>
-              {quickLinks.map((link, index) => (
-                <li key={index} className={styles.linkItem}>
-                  <a href={link.href} className={styles.link}>
-                    <FaArrowRight className={styles.linkArrow} />
-                    <span>{t(`footer.links.${link.key}`)}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+      <ul className={styles.linksList}>
+  {quickLinks.map((link, index) => (
+    <li key={index} className={styles.linkItem}>
+      <Link to={link.path} className={styles.link}>
+        <FaArrowRight className={styles.linkArrow} />
+        <span>{t(`footer.links.${link.key}`)}</span>
+      </Link>
+    </li>
+  ))}
+</ul>
           </div>
 
-          {/* Column 3: Services */}
           <div className={styles.footerColumn}>
             <h4 className={styles.columnTitle}>
               <span className={styles.titleIcon}></span>
@@ -180,7 +180,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Contact Info */}
           <div className={styles.footerColumn}>
             <h4 className={styles.columnTitle}>
               <span className={styles.titleIcon}></span>
@@ -204,7 +203,7 @@ export default function Footer() {
                   <FaPhone />
                 </div>
                 <div className={styles.contactText}>
-                  <a href="tel:+966559544554" style={{ direction: 'ltr', unicodeBidi: 'embed' }}>{t("footer.phone")}</a>
+                  <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }}>{t("footer.phone")}</a>
                 </div>
               </div>
 

@@ -47,9 +47,9 @@ const teamMembers = [
   },
   {
     id: 6,
-    name: 'Mohammed AlQadri',
+    name: 'Mohamed Elshafey',
     role: 'Backend Team Leader',
-    image: '/assets/mohamed.jpg',
+    image: '/assets/mohamed.jpeg',
     social: { email: 'mailto:developers@beyonexit.com' }
   },
   {

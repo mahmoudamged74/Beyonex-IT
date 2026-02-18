@@ -50,7 +50,7 @@ export default function ContactHero() {
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
-                    <a href="tel:+966559544554" className={styles.cardValue} dir="ltr">+966 559 544 554</a>
+                    <a href="tel:+966 11 466 1367" className={styles.cardValue} dir="ltr">+966 11 466 1367</a>
                   </div>
                 </div>
                 

@@ -43,7 +43,7 @@ export default function AboutCTA() {
           <p className={styles.description}>{t('aboutPage.cta.description')}</p>
           
           <div className={styles.contactInfo}>
-            <a href="tel:+966559544554" style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
+            <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
               <FaPhone className={styles.contactIcon} />
               <span>+966 559 544 554</span>
             </a>

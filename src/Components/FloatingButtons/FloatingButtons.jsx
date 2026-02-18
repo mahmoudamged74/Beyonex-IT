@@ -31,11 +31,11 @@ export default function FloatingButtons() {
   }
 
   // WhatsApp link - replace with your actual WhatsApp number
-  const whatsappNumber = '966559544554'
+  const whatsappNumber = '+966 11 466 1367'
   const whatsappMessage = isRTL 
     ? 'مرحباً، أريد الاستفسار عن خدماتكم'
     : 'Hello, I would like to inquire about your services'
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+  const whatsappUrl = `https://wa.me/+966114661367?text=${encodeURIComponent(whatsappMessage)}`
 
   return (
     <>
