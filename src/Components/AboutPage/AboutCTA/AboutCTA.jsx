@@ -45,7 +45,7 @@ export default function AboutCTA() {
           <div className={styles.contactInfo}>
             <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
               <FaPhone className={styles.contactIcon} />
-              <span>+966 559 544 554</span>
+              <span>+966 11 466 1367</span>
             </a>
             <a href="mailto:info@beyonexit.com" className={styles.contactItem}>
               <FaEnvelope className={styles.contactIcon} />
