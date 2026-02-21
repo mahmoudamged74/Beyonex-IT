@@ -54,7 +54,6 @@
     width: 90%;
     max-width: 1100px;
     height: 80vh;
-    display: flex;
     background: #0d2c33;
     /* Dark teal matched with Founding Day theme */
     border-radius: 24px;
@@ -64,20 +63,21 @@
 }
 
 .promo-image-wrapper {
-    flex: 1.2;
     height: 100%;
     background: #fff;
     position: relative;
+    overflow: hidden;
 }
 
 .founding-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
+    display: block;
 }
 
 .promo-info-card {
-    flex: 1;
+    height: 100%;
     padding: 60px 40px;
     display: flex;
     flex-direction: column;
@@ -173,20 +173,22 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .promo-content {
-        flex-direction: column;
         height: auto;
         max-height: 90vh;
         overflow-y: auto;
+        width: 95%;
     }
 
     .promo-image-wrapper {
-        min-height: 300px;
+        height: 350px;
+        /* Specific height for mobile image section */
     }
 
     .promo-info-card {
         padding: 40px 20px;
+        height: auto;
     }
 
     .promo-title {
@@ -220,5 +222,9 @@
 
     .offer-text {
         font-size: 1rem;
+    }
+
+    .promo-image-wrapper {
+        height: 250px;
     }
 }
