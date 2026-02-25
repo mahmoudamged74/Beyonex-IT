@@ -1,13 +1,3 @@
-import {
-  FaLaptopCode,
-  FaMobileAlt,
-  FaDatabase,
-  FaServer,
-  FaCode,
-  FaShieldAlt,
-  FaPalette,
-} from "react-icons/fa";
-
 /**
  * Real-ish marketing content for each service.
  * - Keep keys aligned with `OurService.jsx` keys: web, mobile, erp, hardware, software, cybersecurity
@@ -18,7 +8,7 @@ export const servicesCatalog = {
   //   key: "ui",
   //   accent: "#E7B742",
   //   heroImage: "/assets/UI.jpg",
-  //   Icon: FaPalette,
+  //   Icon: "palette",
   //   en: {
   //     title: "UI/UX Enhancement",
   //     tagline: [
@@ -95,7 +85,7 @@ export const servicesCatalog = {
     key: "web",
     accent: "#E7B742",
     heroImage: "/assets/web.webp",
-    Icon: FaLaptopCode,
+    Icon: "laptopCode",
     en: {
       title: "Web Development / Web Design",
       tagline: [
@@ -165,7 +155,7 @@ export const servicesCatalog = {
     key: "mobile",
     accent: "#2196F3",
     heroImage: "/assets/mobile.webp",
-    Icon: FaMobileAlt,
+    Icon: "mobileAlt",
     en: {
       title: "Mobile Development",
       tagline: [
@@ -251,7 +241,7 @@ export const servicesCatalog = {
     key: "erp",
     accent: "#4CAF50",
     heroImage: "/assets/erp.webp",
-    Icon: FaDatabase,
+    Icon: "database",
     en: {
       title: "ERP & Business Systems",
       tagline: [
@@ -333,7 +323,7 @@ export const servicesCatalog = {
     key: "hardware",
     accent: "#FF9800",
     heroImage: "/assets/hardware.webp",
-    Icon: FaServer,
+    Icon: "server",
     en: {
       title: "IT Operation",
       tagline: [
@@ -443,7 +433,7 @@ export const servicesCatalog = {
     key: "software",
     accent: "#9C27B0",
     heroImage: "/assets/software.webp",
-    Icon: FaCode,
+    Icon: "code",
     en: {
       title: "Custom Software",
       tagline: [
@@ -523,7 +513,7 @@ export const servicesCatalog = {
     key: "cybersecurity",
     accent: "#F44336",
     heroImage: "/assets/security.webp",
-    Icon: FaShieldAlt,
+    Icon: "shieldAlt",
     en: {
       title: "Cybersecurity Solutions",
       tagline: [

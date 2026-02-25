@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules'
-import { FaLinkedinIn, FaTwitter, FaEnvelope } from 'react-icons/fa'
+import { iconMap } from '../../utils/iconMap'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-coverflow'
@@ -155,7 +155,7 @@ export default function Team() {
                   
                   <div className={styles.socialLinks}>
                     <a href={member.social.email} className={styles.socialIcon} aria-label="Email">
-                      <FaEnvelope />
+                      {iconMap.envelope && React.createElement(iconMap.envelope)}
                     </a>
                   </div>
                 </div>

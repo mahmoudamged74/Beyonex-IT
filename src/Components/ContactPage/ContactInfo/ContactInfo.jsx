@@ -1,17 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { 
-  FaPhone, 
-  FaEnvelope, 
-  FaMapMarkerAlt, 
-  FaClock,
-  FaWhatsapp,
-  FaLinkedinIn,
-  FaTwitter,
-  FaInstagram,
-  FaFacebookF,
-  FaSnapchat
-} from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactInfo.module.css'
 
 export default function ContactInfo() {
@@ -39,28 +28,28 @@ export default function ContactInfo() {
 
   const contactItems = [
     {
-      icon: <FaPhone />,
+      icon: "phone",
       title: t('contactPage.info.phone'),
       value: '+966 11 466 1367',
       link: 'tel:+966 11 466 1367',
       isLTR: true
     },
     {
-      icon: <FaWhatsapp />,
+      icon: "whatsapp",
       title: t('contactPage.info.whatsapp'),
       value: '+966 11 466 1367',
       link: 'https://wa.me/966114661367',
       isLTR: true
     },
     {
-      icon: <FaEnvelope />,
+      icon: "envelope",
       title: t('contactPage.info.email'),
       value: 'info@beyonexit.com',
       link: 'mailto:info@beyonexit.com',
       isLTR: false
     },
     {
-      icon: <FaMapMarkerAlt />,
+      icon: "mapMarker",
       title: t('contactPage.info.address'),
       value: t('contactPage.info.addressValue'),
       link: 'https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw',
@@ -69,11 +58,11 @@ export default function ContactInfo() {
   ]
 
   const socialLinks = [
-    { icon: <FaFacebookF />, link: '#', label: 'Facebook' },
-    { icon: <FaLinkedinIn />, link: 'https://www.linkedin.com/in/beyonex-it-53a5713a9/', label: 'LinkedIn' },
-    { icon: <FaSnapchat />, link: 'https://www.snapchat.com/add/beyonex.it', label: 'SnapChat' },
-    { icon: <FaInstagram />, link: 'https://www.instagram.com/beyonex.it/?hl=ar', label: 'Instagram' },
-    { icon: <FaTwitter />, link: '#', label: 'Twitter' }
+    { icon: "facebook", link: '#', label: 'Facebook' },
+    { icon: "linkedin", link: 'https://www.linkedin.com/in/beyonex-it-53a5713a9/', label: 'LinkedIn' },
+    { icon: "snapchat", link: 'https://www.snapchat.com/add/beyonex.it', label: 'SnapChat' },
+    { icon: "instagram", link: 'https://www.instagram.com/beyonex.it/?hl=ar', label: 'Instagram' },
+    { icon: "twitter", link: '#', label: 'Twitter' }
   ]
 
   return (
@@ -95,7 +84,7 @@ export default function ContactInfo() {
                   <div className="col-md-6" key={index}>
                     <div className={styles.contactItem} style={{ '--delay': `${index * 0.1}s` }}>
                       <div className={styles.itemIcon}>
-                        {item.icon}
+                        {iconMap[item.icon] && React.createElement(iconMap[item.icon])}
                       </div>
                       <div className={styles.itemContent}>
                         <span className={styles.itemTitle}>{item.title}</span>
@@ -121,7 +110,7 @@ export default function ContactInfo() {
               {/* Working Hours */}
               <div className={styles.workingHours}>
                 <div className={styles.hoursIcon}>
-                  <FaClock />
+                  {iconMap.clock && React.createElement(iconMap.clock)}
                 </div>
                 <div className={styles.hoursContent}>
                   <h4 className={styles.hoursTitle}>{t('contactPage.info.workingHours')}</h4>
@@ -151,7 +140,7 @@ export default function ContactInfo() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {social.icon}
+                      {iconMap[social.icon] && React.createElement(iconMap[social.icon])}
                     </a>
                   ))}
                 </div>

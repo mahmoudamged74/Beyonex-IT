@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaRocket, FaUsers, FaGlobe, FaTrophy } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './AboutStory.module.css'
 
 export default function AboutStory() {
@@ -27,25 +27,25 @@ export default function AboutStory() {
 
   const milestones = [
     {
-      icon: FaRocket,
+      icon: 'rocket',
       year: '2020',
       titleKey: 'milestone1Title',
       descKey: 'milestone1Desc'
     },
     {
-      icon: FaUsers,
+      icon: 'users',
       year: '2021',
       titleKey: 'milestone2Title',
       descKey: 'milestone2Desc'
     },
     {
-      icon: FaGlobe,
+      icon: 'globe',
       year: '2023',
       titleKey: 'milestone3Title',
       descKey: 'milestone3Desc'
     },
     {
-      icon: FaTrophy,
+      icon: 'trophy',
       year: '2025',
       titleKey: 'milestone4Title',
       descKey: 'milestone4Desc'
@@ -96,7 +96,7 @@ export default function AboutStory() {
                 >
                   <div className={styles.timelineYear}>{milestone.year}</div>
                   <div className={styles.timelineNode}>
-                    <Icon className={styles.nodeIcon} />
+                    {iconMap[milestone.icon] && React.createElement(iconMap[milestone.icon], { className: styles.nodeIcon })}
                   </div>
                   <div className={styles.timelineContent}>
                     <h4 className={styles.timelineTitle}>

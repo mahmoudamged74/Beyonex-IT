@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaArrowRight } from 'react-icons/fa'
+import { iconMap } from '../../utils/iconMap'
 import styles from '../OurService/OurService.module.css'
 
 // Helper function to convert hex to RGB
@@ -22,7 +22,9 @@ const ServiceCard = React.memo(function ServiceCard({
   t
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const Icon = service.icon
+  
+  // Use iconMap to get the icon component or default to a safe icon
+  const Icon = iconMap[service.icon] || iconMap.code
 
   // Extract RGB values from color for dynamic styling
   const rgbValues = useMemo(() => {
@@ -82,7 +84,7 @@ const ServiceCard = React.memo(function ServiceCard({
 
           <span className={styles.serviceLink}>
             <span>{t('services.learnMore')}</span>
-            <FaArrowRight className={styles.arrowIcon} />
+            {iconMap.arrowRight && React.createElement(iconMap.arrowRight, { className: styles.arrowIcon })}
           </span>
         </div>
 

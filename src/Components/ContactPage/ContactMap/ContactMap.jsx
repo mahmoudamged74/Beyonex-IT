@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaMapMarkerAlt, FaDirections } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactMap.module.css'
 
 export default function ContactMap() {
@@ -60,7 +60,7 @@ export default function ContactMap() {
                 {/* Location Card Overlay */}
                 <div className={styles.locationCard}>
                   <div className={styles.cardIcon}>
-                    <FaMapMarkerAlt />
+                    {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
                   </div>
                   <div className={styles.cardContent}>
                     <h4 className={styles.cardTitle}>{t('contactPage.map.cardTitle')}</h4>
@@ -71,7 +71,7 @@ export default function ContactMap() {
                       rel="noopener noreferrer"
                       className={styles.directionsBtn}
                     >
-                      <FaDirections />
+                      {iconMap.directions && React.createElement(iconMap.directions)}
                       {t('contactPage.map.getDirections')}
                     </a>
                   </div>

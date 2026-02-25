@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaWhatsapp, FaArrowUp } from 'react-icons/fa'
+import { iconMap } from '../../utils/iconMap'
 import styles from './FloatingButtons.module.css'
 
 export default function FloatingButtons() {
@@ -47,7 +47,7 @@ export default function FloatingButtons() {
         className={`${styles.whatsappButton} ${isRTL ? styles.whatsappLeft : styles.whatsappRight}`}
         aria-label={isRTL ? 'تواصل معنا على واتساب' : 'Contact us on WhatsApp'}
       >
-        <FaWhatsapp />
+        {iconMap.whatsapp && React.createElement(iconMap.whatsapp)}
       </a>
 
       {/* Scroll to Top Button - Left in English, Right in Arabic */}
@@ -57,7 +57,7 @@ export default function FloatingButtons() {
           className={`${styles.scrollTopButton} ${isRTL ? styles.scrollTopRight : styles.scrollTopLeft}`}
           aria-label={isRTL ? 'العودة لأعلى الصفحة' : 'Scroll to top'}
         >
-          <FaArrowUp />
+          {iconMap.arrowUp && React.createElement(iconMap.arrowUp)}
         </button>
       )}
     </>

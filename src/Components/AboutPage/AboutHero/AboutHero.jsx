@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaChevronDown } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './AboutHero.module.css'
 
 export default function AboutHero() {
@@ -85,7 +85,7 @@ export default function AboutHero() {
         {/* Scroll indicator */}
         <button className={styles.scrollIndicator} onClick={scrollToNext}>
           <span>{t('aboutPage.hero.scrollDown')}</span>
-          <FaChevronDown className={styles.scrollIcon} />
+          {iconMap.chevronDown && React.createElement(iconMap.chevronDown, { className: styles.scrollIcon })}
         </button>
       </div>
     </section>

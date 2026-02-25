@@ -1,15 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import {
-  FaPalette,
-  FaLaptopCode,
-  FaMobileAlt,
-  FaDatabase,
-  FaServer,
-  FaCode,
-  FaShieldAlt,
-} from "react-icons/fa";
+import { iconMap } from "../../utils/iconMap";
 
 import ServiceCard from "../ServiceCard/ServiceCard";
 import styles from "./OurService.module.css";
@@ -40,38 +31,38 @@ export default function OurService() {
     () => [
       {
         key: "software",
-        icon: FaCode,
+        icon: "code",
         color: "#9C27B0",
         image: "/assets/software.webp",
       },
-      // { key: "ui", icon: FaPalette, color: "#E7B742", image: "/assets/UI.jpg" },
+      // { key: "ui", icon: "palette", color: "#E7B742", image: "/assets/UI.jpg" },
       {
         key: "hardware",
-        icon: FaServer,
+        icon: "server",
         color: "#FF9800",
         image: "/assets/hardware.webp",
       },
       {
         key: "web",
-        icon: FaLaptopCode,
+        icon: "laptopCode",
         color: "#E7B742",
         image: "/assets/web.webp",
       },
       {
         key: "mobile",
-        icon: FaMobileAlt,
+        icon: "mobileAlt",
         color: "#2196F3",
         image: "/assets/mobile.webp",
       },
       {
         key: "erp",
-        icon: FaDatabase,
+        icon: "database",
         color: "#4CAF50",
         image: "/assets/erp.webp",
       },
       {
         key: "cybersecurity",
-        icon: FaShieldAlt,
+        icon: "shieldAlt",
         color: "#F44336",
         image: "/assets/security.webp",
       },

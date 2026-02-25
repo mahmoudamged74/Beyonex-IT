@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaArrowRight, FaPhone, FaEnvelope } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import { Link } from 'react-router-dom'
 import styles from './AboutCTA.module.css'
 
@@ -44,11 +44,11 @@ export default function AboutCTA() {
           
           <div className={styles.contactInfo}>
             <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
-              <FaPhone className={styles.contactIcon} />
+              {iconMap.phone && React.createElement(iconMap.phone, { className: styles.contactIcon })}
               <span>+966 11 466 1367</span>
             </a>
             <a href="mailto:info@beyonexit.com" className={styles.contactItem}>
-              <FaEnvelope className={styles.contactIcon} />
+              {iconMap.envelope && React.createElement(iconMap.envelope, { className: styles.contactIcon })}
               <span>info@beyonexit.com</span>
             </a>
           </div>
@@ -60,7 +60,7 @@ export default function AboutCTA() {
               onClick={() => window.scrollTo(0, 0)}
             >
               <span>{t('aboutPage.cta.contactBtn')}</span>
-              <FaArrowRight className={styles.btnIcon} />
+              {iconMap.arrowRight && React.createElement(iconMap.arrowRight, { className: styles.btnIcon })}
             </Link>
             <Link 
               to="/" 

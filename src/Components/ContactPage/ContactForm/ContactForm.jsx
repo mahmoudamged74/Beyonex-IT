@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaPaperPlane, FaUser, FaEnvelope, FaPhone, FaBuilding, FaCommentAlt, FaCheckCircle } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactForm.module.css'
 
 export default function ContactForm() {
@@ -79,7 +79,7 @@ export default function ContactForm() {
               {isSubmitted ? (
                 <div className={styles.successMessage}>
                   <div className={styles.successIcon}>
-                    <FaCheckCircle />
+                    {iconMap.checkCircle && React.createElement(iconMap.checkCircle)}
                   </div>
                   <h3>{t('contactPage.form.successTitle')}</h3>
                   <p>{t('contactPage.form.successMessage')}</p>
@@ -103,7 +103,7 @@ export default function ContactForm() {
                     <div className="col-md-6">
                       <div className={styles.formGroup}>
                         <div className={styles.inputWrapper}>
-                          <span className={styles.inputIcon}><FaUser /></span>
+                          <span className={styles.inputIcon}>{iconMap.user && React.createElement(iconMap.user)}</span>
                           <input
                             type="text"
                             name="name"
@@ -121,7 +121,7 @@ export default function ContactForm() {
                     <div className="col-md-6">
                       <div className={styles.formGroup}>
                         <div className={styles.inputWrapper}>
-                          <span className={styles.inputIcon}><FaEnvelope /></span>
+                          <span className={styles.inputIcon}>{iconMap.envelope && React.createElement(iconMap.envelope)}</span>
                           <input
                             type="email"
                             name="email"
@@ -139,7 +139,7 @@ export default function ContactForm() {
                     <div className="col-md-6">
                       <div className={styles.formGroup}>
                         <div className={styles.inputWrapper}>
-                          <span className={styles.inputIcon}><FaPhone /></span>
+                          <span className={styles.inputIcon}>{iconMap.phone && React.createElement(iconMap.phone)}</span>
                           <input
                             type="tel"
                             name="phone"
@@ -157,7 +157,7 @@ export default function ContactForm() {
                     <div className="col-md-6">
                       <div className={styles.formGroup}>
                         <div className={styles.inputWrapper}>
-                          <span className={styles.inputIcon}><FaBuilding /></span>
+                          <span className={styles.inputIcon}>{iconMap.building && React.createElement(iconMap.building)}</span>
                           <input
                             type="text"
                             name="company"
@@ -174,7 +174,7 @@ export default function ContactForm() {
                     <div className="col-md-12">
                       <div className={styles.formGroup}>
                         <div className={styles.inputWrapper}>
-                          <span className={styles.inputIcon}><FaCommentAlt /></span>
+                          <span className={styles.inputIcon}>{iconMap.commentAlt && React.createElement(iconMap.commentAlt)}</span>
                           <select
                             name="subject"
                             value={formData.subject}
@@ -223,7 +223,7 @@ export default function ContactForm() {
                           </>
                         ) : (
                           <>
-                            <FaPaperPlane className={styles.btnIcon} />
+                            {iconMap.paperPlane && React.createElement(iconMap.paperPlane, { className: styles.btnIcon })}
                             {t('contactPage.form.submit')}
                           </>
                         )}

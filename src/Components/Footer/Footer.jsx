@@ -1,23 +1,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaWhatsapp,
-  FaMapMarkerAlt,
-  FaPhone,
-  FaEnvelope,
-  FaClock,
-  FaArrowRight,
-  FaCode,
-  FaHeart,
-  FaSnapchat 
-  
-} from 'react-icons/fa'
+import { iconMap } from "../../utils/iconMap";
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -58,27 +42,27 @@ const quickLinks = [
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
 
   const socialLinks = [
-    { icon: FaFacebookF, href: "#", label: "Facebook", color: "#1877F2" },
+    { icon: "facebook", href: "#", label: "Facebook", color: "#1877F2" },
     {
-      icon: FaLinkedinIn,
+      icon: "linkedin",
       href: "https://www.linkedin.com/in/beyonex-it-53a5713a9/",
       label: "LinkedIn",
       color: "#0A66C2",
     },
     {
-      icon: FaSnapchat,
+      icon: "snapchat",
       href: "https://www.snapchat.com/add/beyonex.it",
       label: "SnapChat",
       color: "#d1d414",
     },
     {
-      icon: FaInstagram,
+      icon: "instagram",
       href: "https://www.instagram.com/beyonex.it/?hl=ar",
       label: "Instagram",
       color: "#E4405F",
     },
-    { icon: FaTwitter, href: "#", label: "Twitter", color: "#1DA1F2" },
-    { icon: FaWhatsapp, href: whatsappUrl, label: "WhatsApp", color: "#25D366" },
+    { icon: "twitter", href: "#", label: "Twitter", color: "#1DA1F2" },
+    { icon: "whatsapp", href: whatsappUrl, label: "WhatsApp", color: "#25D366" },
   ];
 
   return (
@@ -137,7 +121,7 @@ const quickLinks = [
                       aria-label={social.label}
                       style={{ "--social-color": social.color }}
                     >
-                      <Icon />
+                      {iconMap[social.icon] && React.createElement(iconMap[social.icon])}
                     </a>
                   );
                 })}
@@ -155,7 +139,7 @@ const quickLinks = [
   {quickLinks.map((link, index) => (
     <li key={index} className={styles.linkItem}>
       <Link to={link.path} className={styles.link}>
-        <FaArrowRight className={styles.linkArrow} />
+        {iconMap.arrowRight && React.createElement(iconMap.arrowRight, { className: styles.linkArrow })}
         <span>{t(`footer.links.${link.key}`)}</span>
       </Link>
     </li>
@@ -172,7 +156,7 @@ const quickLinks = [
               {services.map((service, index) => (
                 <li key={index} className={styles.linkItem}>
                   <a href="#services" className={styles.link}>
-                    <FaArrowRight className={styles.linkArrow} />
+                    {iconMap.arrowRight && React.createElement(iconMap.arrowRight, { className: styles.linkArrow })}
                     <span>{service.title}</span>
                   </a>
                 </li>
@@ -189,7 +173,7 @@ const quickLinks = [
             <div className={styles.contactList}>
               <div className={styles.contactItem}>
                 <div className={styles.contactIcon}>
-                  <FaMapMarkerAlt />
+                  {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
                 </div>
                 <div className={styles.contactText}>
                   <a href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" target="_blank" rel="noreferrer">
@@ -200,7 +184,7 @@ const quickLinks = [
 
               <div className={styles.contactItem}>
                 <div className={styles.contactIcon}>
-                  <FaPhone />
+                  {iconMap.phone && React.createElement(iconMap.phone)}
                 </div>
                 <div className={styles.contactText}>
                   <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }}>{t("footer.phone")}</a>
@@ -209,7 +193,7 @@ const quickLinks = [
 
               <div className={styles.contactItem}>
                 <div className={styles.contactIcon}>
-                  <FaEnvelope />
+                  {iconMap.envelope && React.createElement(iconMap.envelope)}
                 </div>
                 <div className={styles.contactText}>
                   <a href="mailto:info@beyonexit.com">{t("footer.email")}</a>
@@ -218,7 +202,7 @@ const quickLinks = [
 
               <div className={styles.contactItem}>
                 <div className={styles.contactIcon}>
-                  <FaClock />
+                  {iconMap.clock && React.createElement(iconMap.clock)}
                 </div>
                 <div className={styles.contactText}>
                   <span>{t("footer.workingDays")}</span>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IoCloseCircleOutline } from 'react-icons/io5';
+import { iconMap } from '../../utils/iconMap';
 import { Fade, Zoom } from 'react-awesome-reveal';
 import './FoundingDayOverlay.css';
 
@@ -32,7 +32,7 @@ const FoundingDayOverlay = () => {
             <div className="overlay-backdrop" onClick={hideOverlay}></div>
             
             <button className="close-btn" onClick={hideOverlay} aria-label="Close">
-                <IoCloseCircleOutline />
+                {iconMap.closeCircle && React.createElement(iconMap.closeCircle)}
             </button>
 
             <div className="promo-content container p-0">

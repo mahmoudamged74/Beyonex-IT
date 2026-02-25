@@ -1,13 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { 
-  FaLightbulb, 
-  FaHandshake, 
-  FaShieldAlt, 
-  FaRocket,
-  FaHeart,
-  FaGem
-} from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './AboutValues.module.css'
 
 export default function AboutValues() {
@@ -34,37 +27,37 @@ export default function AboutValues() {
 
   const values = [
     {
-      icon: FaLightbulb,
+      icon: 'lightbulb',
       titleKey: 'innovation',
       descKey: 'innovationDesc',
       color: '#E7B742'
     },
     {
-      icon: FaHandshake,
+      icon: 'handshake',
       titleKey: 'trust',
       descKey: 'trustDesc',
       color: '#4CAF50'
     },
     {
-      icon: FaShieldAlt,
+      icon: 'shieldAlt',
       titleKey: 'quality',
       descKey: 'qualityDesc',
       color: '#2196F3'
     },
     {
-      icon: FaRocket,
+      icon: 'rocket',
       titleKey: 'growth',
       descKey: 'growthDesc',
       color: '#FF9800'
     },
     {
-      icon: FaHeart,
+      icon: 'heart',
       titleKey: 'passion',
       descKey: 'passionDesc',
       color: '#F44336'
     },
     {
-      icon: FaGem,
+      icon: 'gem',
       titleKey: 'excellence',
       descKey: 'excellenceDesc',
       color: '#9C27B0'
@@ -83,7 +76,7 @@ export default function AboutValues() {
 
         <div className={styles.valuesGrid}>
           {values.map((value, index) => {
-            const Icon = value.icon
+            const Icon = iconMap[value.icon]
             return (
               <div 
                 key={index}
@@ -94,7 +87,7 @@ export default function AboutValues() {
                 }}
               >
                 <div className={styles.iconContainer}>
-                  <Icon className={styles.icon} />
+                  {Icon && React.createElement(Icon, { className: styles.icon })}
                 </div>
                 <h3 className={styles.valueTitle}>
                   {t(`aboutPage.values.${value.titleKey}`)}

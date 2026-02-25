@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactHero.module.css'
 
 export default function ContactHero() {
@@ -46,7 +46,7 @@ export default function ContactHero() {
               <div className={styles.quickContact}>
                 <div className={styles.contactCard}>
                   <div className={styles.cardIcon}>
-                    <FaPhone />
+                    {iconMap.phone && React.createElement(iconMap.phone)}
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
@@ -56,7 +56,7 @@ export default function ContactHero() {
                 
                 <div className={styles.contactCard}>
                   <div className={styles.cardIcon}>
-                    <FaEnvelope />
+                    {iconMap.envelope && React.createElement(iconMap.envelope)}
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.emailUs')}</span>
@@ -66,7 +66,7 @@ export default function ContactHero() {
                 
                 <div className={styles.contactCard}>
                   <div className={styles.cardIcon}>
-                    <FaMapMarkerAlt />
+                    {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.visitUs')}</span>

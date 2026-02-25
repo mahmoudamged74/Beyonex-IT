@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FaProjectDiagram, FaUsers, FaClock, FaSmile } from 'react-icons/fa'
+import { iconMap } from '../../../utils/iconMap'
 import styles from './AboutStats.module.css'
 
 // Counter animation hook
@@ -37,7 +37,7 @@ function StatItem({ icon: Icon, value, suffix, labelKey, delay, isVisible }) {
       style={{ animationDelay: `${delay}s` }}
     >
       <div className={styles.iconWrapper}>
-        <Icon className={styles.icon} />
+        {Icon && React.createElement(Icon, { className: styles.icon })}
       </div>
       <div className={styles.value}>
         {count}{suffix}
@@ -72,10 +72,10 @@ export default function AboutStats() {
   }, [])
 
   const stats = [
-    { icon: FaProjectDiagram, value: 150, suffix: '+', labelKey: 'projects' },
-    { icon: FaUsers, value: 50, suffix: '+', labelKey: 'clients' },
-    { icon: FaClock, value: 5, suffix: '+', labelKey: 'years' },
-    { icon: FaSmile, value: 99, suffix: '%', labelKey: 'satisfaction' }
+    { icon: 'projectDiagram', value: 150, suffix: '+', labelKey: 'projects' },
+    { icon: 'users', value: 50, suffix: '+', labelKey: 'clients' },
+    { icon: 'clock', value: 5, suffix: '+', labelKey: 'years' },
+    { icon: 'smile', value: 99, suffix: '%', labelKey: 'satisfaction' }
   ]
 
   return (
@@ -92,7 +92,7 @@ export default function AboutStats() {
           {stats.map((stat, index) => (
             <StatItem
               key={index}
-              icon={stat.icon}
+              icon={iconMap[stat.icon]}
               value={stat.value}
               suffix={stat.suffix}
               labelKey={stat.labelKey}
