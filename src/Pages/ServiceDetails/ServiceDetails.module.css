@@ -79,9 +79,44 @@
 }
 
 .overview {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   color: rgba(232, 238, 252, 0.82);
-  max-width: 56ch;
+  max-width: 65ch;
+  line-height: 1.6;
+}
+
+.richDescription {
+  margin-bottom: 24px;
+  color: rgba(232, 238, 252, 0.9);
+  line-height: 1.7;
+  max-width: 75ch;
+}
+
+.richDescription p {
+  margin-bottom: 12px;
+}
+
+.richDescription ul,
+.richDescription ol {
+  padding-inline-start: 1.5rem;
+  margin-bottom: 16px;
+  list-style-type: disc;
+}
+
+.richDescription li {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.richDescription li::marker {
+  color: #E7B742;
+}
+
+.richDescription h1,
+.richDescription h2,
+.richDescription h3 {
+  color: #E7B742;
+  margin: 20px 0 10px;
 }
 
 .heroActions {
@@ -310,11 +345,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.03)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.03));
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -348,4 +381,3 @@
   background: #fff;
   padding: 18px;
 }
-

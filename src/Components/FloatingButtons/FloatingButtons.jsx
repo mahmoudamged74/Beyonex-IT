@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { iconMap } from '../../utils/iconMap'
 import styles from './FloatingButtons.module.css'
+import { useGetSettingsQuery } from '../../redux/api/settingsApi'
 
 export default function FloatingButtons() {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ar'
   const [showScrollTop, setShowScrollTop] = useState(false)
+
+  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
+  const settings = settingsResponse?.data
 
   // Show/hide scroll to top button based on scroll position
   useEffect(() => {
@@ -30,12 +34,23 @@ export default function FloatingButtons() {
     })
   }
 
-  // WhatsApp link - replace with your actual WhatsApp number
-  const whatsappNumber = '+966 11 466 1367'
-  const whatsappMessage = isRTL 
-    ? 'مرحباً، أريد الاستفسار عن خدماتكم'
-    : 'Hello, I would like to inquire about your services'
-  const whatsappUrl = `https://wa.me/+966114661367?text=${encodeURIComponent(whatsappMessage)}`
+  const whatsappUrl = useMemo(() => {
+    const whatsappMessage = isRTL 
+      ? 'مرحباً، أريد الاستفسار عن خدماتكم'
+      : 'Hello, I would like to inquire about your services'
+    
+    if (settings?.whatsapp) {
+      if (settings.whatsapp.includes('?text=')) return settings.whatsapp
+      return `${settings.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`
+    }
+
+    // Fallback if settings.whatsapp is missing but site_phone exists
+    if (settings?.site_phone) {
+      return `https://wa.me/${settings.site_phone.replace(/\+/g, '').replace(/\s/g, '')}?text=${encodeURIComponent(whatsappMessage)}`
+    }
+
+    return `https://wa.me/+966559544554?text=${encodeURIComponent(whatsappMessage)}`
+  }, [settings, isRTL])
 
   return (
     <>

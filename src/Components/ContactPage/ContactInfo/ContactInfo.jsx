@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactInfo.module.css'
+import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
 
 export default function ContactInfo() {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ar'
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
+
+  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
+  const settings = settingsResponse?.data
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,44 +30,82 @@ export default function ContactInfo() {
     return () => observer.disconnect()
   }, [])
 
-  const contactItems = [
-    {
-      icon: "phone",
-      title: t('contactPage.info.phone'),
-      value: '+966 11 466 1367',
-      link: 'tel:+966 11 466 1367',
-      isLTR: true
-    },
-    {
-      icon: "whatsapp",
-      title: t('contactPage.info.whatsapp'),
-      value: '+966 11 466 1367',
-      link: 'https://wa.me/966114661367',
-      isLTR: true
-    },
-    {
-      icon: "envelope",
-      title: t('contactPage.info.email'),
-      value: 'info@beyonexit.com',
-      link: 'mailto:info@beyonexit.com',
-      isLTR: false
-    },
-    {
-      icon: "mapMarker",
-      title: t('contactPage.info.address'),
-      value: t('contactPage.info.addressValue'),
-      link: 'https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw',
-      isLTR: false
+  const contactItems = useMemo(() => {
+    const items = []
+    
+    if (settings?.site_phone) {
+      items.push({
+        icon: "phone",
+        title: t('contactPage.info.phone'),
+        value: settings.site_phone,
+        link: `tel:${settings.site_phone}`,
+        isLTR: true
+      })
     }
-  ]
 
-  const socialLinks = [
-    { icon: "facebook", link: '#', label: 'Facebook' },
-    { icon: "linkedin", link: 'https://www.linkedin.com/in/beyonex-it-53a5713a9/', label: 'LinkedIn' },
-    { icon: "snapchat", link: 'https://www.snapchat.com/add/beyonex.it', label: 'SnapChat' },
-    { icon: "instagram", link: 'https://www.instagram.com/beyonex.it/?hl=ar', label: 'Instagram' },
-    { icon: "twitter", link: '#', label: 'Twitter' }
-  ]
+    if (settings?.whatsapp) {
+      // Extract number if it's a URL or just use it as is if it's already a link
+      const whatsappVal = settings.site_phone || settings.whatsapp.split('/').pop()
+      items.push({
+        icon: "whatsapp",
+        title: t('contactPage.info.whatsapp'),
+        value: whatsappVal,
+        link: settings.whatsapp.startsWith('http') ? settings.whatsapp : `https://wa.me/${settings.whatsapp.replace(/\+/g, '')}`,
+        isLTR: true
+      })
+    } else if (settings?.site_phone) {
+      items.push({
+        icon: "whatsapp",
+        title: t('contactPage.info.whatsapp'),
+        value: settings.site_phone,
+        link: `https://wa.me/${settings.site_phone.replace(/\+/g, '')}`,
+        isLTR: true
+      })
+    }
+
+    if (settings?.site_email) {
+      items.push({
+        icon: "envelope",
+        title: t('contactPage.info.email'),
+        value: settings.site_email,
+        link: `mailto:${settings.site_email}`,
+        isLTR: false
+      })
+    }
+
+    if (settings?.site_address?.[i18n.language]) {
+      items.push({
+        icon: "mapMarker",
+        title: t('contactPage.info.address'),
+        value: settings.site_address[i18n.language],
+        link: settings.location_url || '#',
+        isLTR: false
+      })
+    }
+
+    return items
+  }, [settings, t, i18n.language])
+
+  const socialLinks = useMemo(() => {
+    if (!settings) return []
+    
+    const platforms = [
+      { key: "facebook", icon: "facebook", label: "Facebook" },
+      { key: "linkedin", icon: "linkedin", label: "LinkedIn" },
+      { key: "snapchat", icon: "snapchat", label: "SnapChat" },
+      { key: "instagram", icon: "instagram", label: "Instagram" },
+      { key: "twitter", icon: "twitter", label: "X" },
+      { key: "telegram", icon: "paperPlane", label: "Telegram" },
+      { key: "tiktok", icon: "tiktok", label: "TikTok" }
+    ]
+
+    return platforms
+      .filter(p => settings[p.key])
+      .map(p => ({
+        ...p,
+        link: settings[p.key]
+      }))
+  }, [settings])
 
   return (
     <section ref={sectionRef} className={styles.infoSection}>
@@ -81,7 +123,7 @@ export default function ContactInfo() {
               {/* Contact Cards */}
               <div className={`row ${styles.contactGrid}`}>
                 {contactItems.map((item, index) => (
-                  <div className="col-md-6" key={index}>
+                   <div className="col-md-6" key={index}>
                     <div className={styles.contactItem} style={{ '--delay': `${index * 0.1}s` }}>
                       <div className={styles.itemIcon}>
                         {iconMap[item.icon] && React.createElement(iconMap[item.icon])}
@@ -117,12 +159,10 @@ export default function ContactInfo() {
                   <div className={styles.hoursGrid}>
                     <div className={styles.hoursItem}>
                       <span className={styles.hoursDay}>{t('contactPage.info.weekdays')}</span>
-                      <span className={styles.hoursTime}>8:00 - 16:00</span>
+                      <span className={styles.hoursTime}>
+                        {settings?.working_hours?.[i18n.language] || '8:00 - 16:00'}
+                      </span>
                     </div>
-                    {/* <div className={styles.hoursItem}>
-                      <span className={styles.hoursDay}>{t('contactPage.info.weekend')}</span>
-                      <span className={styles.hoursClosed}>{t('contactPage.info.closed')}</span>
-                    </div> */}
                   </div>
                 </div>
               </div>

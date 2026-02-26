@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next'
 import { iconMap } from '../../../utils/iconMap'
 import { Link } from 'react-router-dom'
 import styles from './AboutCTA.module.css'
+import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
 
 export default function AboutCTA() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
+
+  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
+  const settings = settingsResponse?.data
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,14 +47,18 @@ export default function AboutCTA() {
           <p className={styles.description}>{t('aboutPage.cta.description')}</p>
           
           <div className={styles.contactInfo}>
-            <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
-              {iconMap.phone && React.createElement(iconMap.phone, { className: styles.contactIcon })}
-              <span>+966 11 466 1367</span>
-            </a>
-            <a href="mailto:info@beyonexit.com" className={styles.contactItem}>
-              {iconMap.envelope && React.createElement(iconMap.envelope, { className: styles.contactIcon })}
-              <span>info@beyonexit.com</span>
-            </a>
+            {settings?.site_phone && (
+              <a href={`tel:${settings.site_phone}`} style={{ direction: 'ltr', unicodeBidi: 'embed' }} className={styles.contactItem}>
+                {iconMap.phone && React.createElement(iconMap.phone, { className: styles.contactIcon })}
+                <span>{settings.site_phone}</span>
+              </a>
+            )}
+            {settings?.site_email && (
+              <a href={`mailto:${settings.site_email}`} className={styles.contactItem}>
+                {iconMap.envelope && React.createElement(iconMap.envelope, { className: styles.contactIcon })}
+                <span>{settings.site_email}</span>
+              </a>
+            )}
           </div>
 
           <div className={styles.buttons}>

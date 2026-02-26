@@ -3,10 +3,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { iconMap } from "../../utils/iconMap";
 import styles from './Footer.module.css'
+import { useGetSettingsQuery } from "../../redux/api/settingsApi";
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  
+  const { data: settingsResponse, isLoading } = useGetSettingsQuery(i18n.language);
+  const settings = settingsResponse?.data;
 
   // Pre-generate particle positions to avoid Math.random during render
   const particles = useMemo(
@@ -35,35 +39,31 @@ const quickLinks = [
     { key: "cybersecurity", title: t("services.items.cybersecurity.title") },
   ];
 
-  const whatsappNumber = '96611'
-  const whatsappMessage = isRTL 
-    ? 'مرحباً، أريد الاستفسار عن خدماتكم'
-    : 'Hello, I would like to inquire about your services'
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+  const socialLinks = useMemo(() => {
+    if (!settings) return [];
+    
+    const platforms = [
+      { key: "facebook", icon: "facebook", label: "Facebook", color: "#1877F2" },
+      { key: "linkedin", icon: "linkedin", label: "LinkedIn", color: "#0A66C2" },
+      { key: "snapchat", icon: "snapchat", label: "SnapChat", color: "#d1d414" },
+      { key: "instagram", icon: "instagram", label: "Instagram", color: "#E4405F" },
+      { key: "twitter", icon: "twitter", label: "X (Twitter)", color: "#000000" },
+      { key: "whatsapp", icon: "whatsapp", label: "WhatsApp", color: "#25D366" },
+      { key: "telegram", icon: "paperPlane", label: "Telegram", color: "#0088cc" },
+      { key: "tiktok", icon: "tiktok", label: "TikTok", color: "#000000" },
+    ];
 
-  const socialLinks = [
-    { icon: "facebook", href: "#", label: "Facebook", color: "#1877F2" },
-    {
-      icon: "linkedin",
-      href: "https://www.linkedin.com/in/beyonex-it-53a5713a9/",
-      label: "LinkedIn",
-      color: "#0A66C2",
-    },
-    {
-      icon: "snapchat",
-      href: "https://www.snapchat.com/add/beyonex.it",
-      label: "SnapChat",
-      color: "#d1d414",
-    },
-    {
-      icon: "instagram",
-      href: "https://www.instagram.com/beyonex.it/?hl=ar",
-      label: "Instagram",
-      color: "#E4405F",
-    },
-    { icon: "twitter", href: "#", label: "Twitter", color: "#1DA1F2" },
-    { icon: "whatsapp", href: whatsappUrl, label: "WhatsApp", color: "#25D366" },
-  ];
+    return platforms
+      .filter(p => settings[p.key])
+      .map(p => ({
+        ...p,
+        href: p.key === "whatsapp" && !settings[p.key].startsWith("http")
+          ? `https://wa.me/${settings[p.key].replace(/\+/g, '')}`
+          : settings[p.key]
+      }));
+  }, [settings]);
+
+  if (isLoading) return null; 
 
   return (
     <footer className={styles.footer}>
@@ -99,24 +99,27 @@ const quickLinks = [
             <div className={styles.logoSection}>
               <div className={styles.logoWrapper}>
                 <img
-                  src="/assets/4.png"
-                  alt="Logo"
+                  src={settings?.logo || "/assets/4.png"}
+                  alt={settings?.site_name?.[i18n.language] || "Logo"}
                   className={styles.logofooter}
                 />
               </div>
             </div>
             <p className={styles.tagline}>{t("footer.tagline")}</p>
-            <p className={styles.description}>{t("footer.description")}</p>
+            <p className={styles.description}>
+              {settings?.site_desc?.[i18n.language] || t("footer.description")}
+            </p>
 
             <div className={styles.socialSection}>
               <h4 className={styles.socialTitle}>{t("footer.followUs")}</h4>
               <div className={styles.socialLinks}>
                 {socialLinks.map((social, index) => {
-                  const Icon = social.icon;
                   return (
                     <a
                       key={index}
                       href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
                       className={styles.socialLink}
                       aria-label={social.label}
                       style={{ "--social-color": social.color }}
@@ -171,43 +174,53 @@ const quickLinks = [
             </h4>
 
             <div className={styles.contactList}>
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>
-                  {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
+              {settings?.site_address?.[i18n.language] && (
+                <div className={styles.contactItem}>
+                  <div className={styles.contactIcon}>
+                    {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
+                  </div>
+                  <div className={styles.contactText}>
+                    <a href={settings.location_url || "#"} target="_blank" rel="noreferrer">
+                      <span>{settings.site_address[i18n.language]}</span>
+                    </a>
+                  </div>
                 </div>
-                <div className={styles.contactText}>
-                  <a href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" target="_blank" rel="noreferrer">
-                    <span>{t("footer.address")}</span>
-                  </a>
-                </div>
-              </div>
+              )}
 
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>
-                  {iconMap.phone && React.createElement(iconMap.phone)}
+              {settings?.site_phone && (
+                <div className={styles.contactItem}>
+                  <div className={styles.contactIcon}>
+                    {iconMap.phone && React.createElement(iconMap.phone)}
+                  </div>
+                  <div className={styles.contactText}>
+                    <a href={`tel:${settings.site_phone}`} style={{ direction: 'ltr', unicodeBidi: 'embed' }}>
+                      {settings.site_phone}
+                    </a>
+                  </div>
                 </div>
-                <div className={styles.contactText}>
-                  <a href="tel:+966 11 466 1367" style={{ direction: 'ltr', unicodeBidi: 'embed' }}>{t("footer.phone")}</a>
-                </div>
-              </div>
+              )}
 
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>
-                  {iconMap.envelope && React.createElement(iconMap.envelope)}
+              {settings?.site_email && (
+                <div className={styles.contactItem}>
+                  <div className={styles.contactIcon}>
+                    {iconMap.envelope && React.createElement(iconMap.envelope)}
+                  </div>
+                  <div className={styles.contactText}>
+                    <a href={`mailto:${settings.site_email}`}>{settings.site_email}</a>
+                  </div>
                 </div>
-                <div className={styles.contactText}>
-                  <a href="mailto:info@beyonexit.com">{t("footer.email")}</a>
-                </div>
-              </div>
+              )}
 
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>
-                  {iconMap.clock && React.createElement(iconMap.clock)}
+              {settings?.working_hours?.[i18n.language] && (
+                <div className={styles.contactItem}>
+                  <div className={styles.contactIcon}>
+                    {iconMap.clock && React.createElement(iconMap.clock)}
+                  </div>
+                  <div className={styles.contactText}>
+                    <span>{settings.working_hours[i18n.language]}</span>
+                  </div>
                 </div>
-                <div className={styles.contactText}>
-                  <span>{t("footer.workingDays")}</span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -216,7 +229,9 @@ const quickLinks = [
         <div className={styles.footerBottom}>
           <div className={styles.divider}></div>
           <div className={styles.bottomContent}>
-            <p className={styles.copyright}>{t("footer.copyright")}</p>
+            <p className={styles.copyright}>
+              © {new Date().getFullYear()} {settings?.site_name?.[i18n.language] || "Beyonex IT"}. {t("footer.copyright")}
+            </p>
           </div>
         </div>
       </div>

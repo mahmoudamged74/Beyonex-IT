@@ -172,11 +172,11 @@
       "selectSubject": "Select Subject",
       "messagePlaceholder": "Your message...",
       "subjects": {
-        "general": "General Inquiry",
-        "web": "Web Development",
-        "mobile": "Mobile Applications",
-        "erp": "ERP Systems",
-        "support": "Technical Support",
+        "general_inquiry": "General Inquiry",
+        "web_development": "Web Development",
+        "mobile_applications": "Mobile Applications",
+        "erp_systems": "ERP Systems",
+        "technical_support": "Technical Support",
         "other": "Other"
       },
       "submit": "Send Message",

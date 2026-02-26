@@ -1,10 +1,15 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './AboutUS.module.css'
+import { useGetHomeDataQuery } from '../../redux/api/homeApi'
 
 export default function AboutUS() {
   const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
+  const lang = i18n.language
+  const isRTL = lang === 'ar'
+
+  const { data } = useGetHomeDataQuery(lang)
+  const about = data?.data?.about
 
   return (
     <section className={styles.aboutSection}>
@@ -35,16 +40,22 @@ export default function AboutUS() {
             <div className={styles.textContent}>
               <h2 className={styles.title}>{t('about.title')}</h2>
               <h3 className={styles.subtitle}>{t('about.subtitle')}</h3>
-              <p className={styles.description}>{t('about.description')}</p>
+              <p className={styles.description}>
+                {about?.text || t('about.description')}
+              </p>
               
               <div className={styles.missionVision}>
                 <div className={styles.missionCard}>
                   <h4 className={styles.cardTitle}>{t('about.mission')}</h4>
-                  <p className={styles.cardText}>{t('about.missionText')}</p>
+                  <p className={styles.cardText}>
+                    {about?.mission || t('about.missionText')}
+                  </p>
                 </div>
                 <div className={styles.visionCard}>
                   <h4 className={styles.cardTitle}>{t('about.vision')}</h4>
-                  <p className={styles.cardText}>{t('about.visionText')}</p>
+                  <p className={styles.cardText}>
+                    {about?.vision || t('about.visionText')}
+                  </p>
                 </div>
               </div>
             </div>

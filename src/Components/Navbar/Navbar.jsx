@@ -2,12 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "./Navbar.module.css";
+import { useGetSettingsQuery } from "../../redux/api/settingsApi";
 
 function Navbar() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const { data: settingsResponse } = useGetSettingsQuery(i18n.language);
+  const settings = settingsResponse?.data;
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -43,8 +47,8 @@ function Navbar() {
           to="/"
         >
           <img
-            src="/assets/3.png"
-            alt="Beyonexit Project"
+            src={settings?.logo || "/assets/3.png"}
+            alt={settings?.site_name?.[i18n.language] || "Beyonexit Project"}
             className={styles.logoImage}
           />
         </Link>

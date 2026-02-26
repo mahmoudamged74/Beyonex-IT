@@ -1,6 +1,6 @@
 import { 
   FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaWhatsapp, 
-  FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaArrowRight, 
+  FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaArrowRight, FaArrowUp, 
   FaCode, FaHeart, FaSnapchat, FaPalette, FaLaptopCode, 
   FaMobileAlt, FaDatabase, FaServer, FaShieldAlt, FaRocket, 
   FaHandshake, FaLightbulb, FaGem, FaProjectDiagram, FaUsers, 
@@ -17,8 +17,9 @@ import {
   FaUserFriends, FaUserGraduate, FaUserTie, FaUserSecret, FaBrain, FaRobot, FaFingerprint,
   FaBug, FaCodeBranch, FaTerminal, FaLaptop, FaSitemap, FaMicroscope, FaStethoscope, FaFlask,
   FaLightbulb as FaIdea, FaRocket as FaLaunch, FaSpaceShuttle, FaPlane, FaShip, FaCar, FaTruck,
-  FaBicycle, FaWalking, FaStore, FaHotel, FaUtensils, FaMap, FaGlobeAmericas, FaGlobeEurope, FaGlobeAsia
+  FaBicycle, FaWalking, FaStore, FaHotel, FaUtensils, FaMap, FaGlobeAmericas, FaGlobeEurope, FaGlobeAsia, FaTiktok
 } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 
 import {
   SiReact, SiJavascript, SiNodedotjs, SiPython, SiDocker, 
@@ -51,7 +52,8 @@ import { MdOutlineDeveloperMode, MdOutlineSecurity, MdOutlineAnalytics } from 'r
 export const iconMap = {
   // Font Awesome Icons
   facebook: FaFacebookF,
-  twitter: FaTwitter,
+  twitter: FaXTwitter,
+  x: FaXTwitter,
   linkedin: FaLinkedinIn,
   instagram: FaInstagram,
   whatsapp: FaWhatsapp,
@@ -61,6 +63,7 @@ export const iconMap = {
   envelope: FaEnvelope,
   clock: FaClock,
   arrowRight: FaArrowRight,
+  arrowUp: FaArrowUp,
   code: FaCode,
   heart: FaHeart,
   palette: FaPalette,
@@ -173,6 +176,7 @@ export const iconMap = {
   globeAmericas: FaGlobeAmericas,
   globeEurope: FaGlobeEurope,
   globeAsia: FaGlobeAsia,
+  tiktok: FaTiktok,
 
   // Simple Icons (Tech Stacks)
   react: SiReact,

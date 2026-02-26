@@ -7,73 +7,20 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-coverflow'
 import styles from './Team.module.css'
-
-// Placeholder data - Replace with actual team data or move to a config file
-const teamMembers = [
-  {
-    id: 1,
-    name: 'Meshal Almejlad',
-    role: 'CEO',
-    image: '/assets/mo.jpg',
-    social: { email: 'mailto:admin@beyonexit.com' }
-  },
-  {
-    id: 2,
-    name: 'Mostafa Salem',
-    role: 'IT Manager',
-    image: '/assets/mostafa.jpg',
-    social: { email: 'mailto:admin@beyonexit.com' }
-  },
-  {
-    id: 3,
-    name: 'Mahmoud Amged',
-    role: 'Frontend Team Leader',
-    image: '/assets/mahmoudamged.jpg',
-    social: { email: 'mailto:developers@beyonexit.com' }
-  },
-  {
-    id: 4,
-    name: 'Omar ElBorhamy',
-    role: 'Creative & Development Lead',
-    image: '/assets/Omar ID.jpg.jpeg',
-    social: { email: 'mailto:developers@beyonexit.com' }
-  },
-  {
-    id: 5,
-    name: 'Oamr Shokry',
-    role: 'Frontend Team Leader',
-    image: '/assets/omarshokry.jpg',
-    social: { email: 'mailto:developers@beyonexit.com' }
-  },
-  {
-    id: 6,
-    name: 'Mohamed Elshafey',
-    role: 'Backend Team Leader',
-    image: '/assets/mohamed.jpeg',
-    social: { email: 'mailto:developers@beyonexit.com' }
-  },
-  {
-    id: 7,
-    name: 'Ahmed Jameel',
-    role: 'Operation Manager',
-    image: '/assets/ahmed.jpg',
-    social: { email: 'mailto:developers@beyonexit.com' }
-  },
-  {
-    id: 8,
-    name: 'Mohamed Ibrahim',
-    role: 'Technical Engineer',
-    image: '/assets/ibra.jpg',
-    social: { email: 'mailto:developers@beyonexit.com' }
-  }
-]
+import { useGetAboutQuery } from '../../redux/api/aboutApi'
 
 export default function Team() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
 
+
+  const { data: aboutResponse, isLoading } = useGetAboutQuery(i18n.language)
+  const teamMembers = aboutResponse?.data?.team_members || []
+
   useEffect(() => {
+    // If the component was already rendered while loading, 
+    // we need to make sure the observer is attached.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -88,7 +35,9 @@ export default function Team() {
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [isLoading]) // Depend on isLoading so it runs after data is fetched
+
+  if (isLoading) return null
 
   return (
     <section ref={sectionRef} className={styles.teamSection}>
@@ -137,31 +86,70 @@ export default function Team() {
           }}
           className={styles.swiperContainer}
         >
-          {teamMembers.map((member) => (
-            <SwiperSlide key={member.id}>
-              <div className={styles.teamCard}>
-                <div className={styles.imageWrapper}>
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className={styles.memberImage} 
-                  />
-                  <div className={styles.overlay}></div>
-                </div>
-                
-                <div className={styles.memberInfo}>
-                  <h3 className={styles.memberName}>{member.name}</h3>
-                  <p className={styles.memberRole}>{member.role}</p>
+          {teamMembers.length > 0 ? (
+            teamMembers.map((member) => (
+              <SwiperSlide key={member.id}>
+                <div className={styles.teamCard}>
+                  <div className={styles.imageWrapper}>
+                    <img 
+                      src={member.image_path} 
+                      alt={member.name?.[i18n.language] || member.name} 
+                      className={styles.memberImage} 
+                    />
+                    <div className={styles.overlay}></div>
+                  </div>
                   
-                  <div className={styles.socialLinks}>
-                    <a href={member.social.email} className={styles.socialIcon} aria-label="Email">
-                      {iconMap.envelope && React.createElement(iconMap.envelope)}
-                    </a>
+                  <div className={styles.memberInfo}>
+                    <h3 className={styles.memberName}>
+                      {member.name?.[i18n.language] || member.name}
+                    </h3>
+                    <p className={styles.memberRole}>
+                      {member.title?.[i18n.language] || member.title}
+                    </p>
+                    
+                    <div className={styles.socialLinks}>
+                      {member.email && (
+                        <a href={`mailto:${member.email}`} className={styles.socialIcon} aria-label="Email">
+                          {iconMap.envelope && React.createElement(iconMap.envelope)}
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))
+          ) : (
+            // Fallback
+            [
+              { id: 1, name: 'Meshal Almejlad', role: 'CEO', image: '/assets/mo.jpg', social: { email: 'mailto:admin@beyonexit.com' } },
+              { id: 2, name: 'Mostafa Salem', role: 'IT Manager', image: '/assets/mostafa.jpg', social: { email: 'mailto:admin@beyonexit.com' } },
+              { id: 3, name: 'Mahmoud Amged', role: 'Frontend Team Leader', image: '/assets/mahmoudamged.jpg', social: { email: 'mailto:developers@beyonexit.com' } }
+            ].map((member) => (
+              <SwiperSlide key={member.id}>
+                <div className={styles.teamCard}>
+                  <div className={styles.imageWrapper}>
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className={styles.memberImage} 
+                    />
+                    <div className={styles.overlay}></div>
+                  </div>
+                  
+                  <div className={styles.memberInfo}>
+                    <h3 className={styles.memberName}>{member.name}</h3>
+                    <p className={styles.memberRole}>{member.role}</p>
+                    
+                    <div className={styles.socialLinks}>
+                      <a href={member.social.email} className={styles.socialIcon} aria-label="Email">
+                        {iconMap.envelope && React.createElement(iconMap.envelope)}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))
+          )}
         </Swiper>
       </div>
     </section>

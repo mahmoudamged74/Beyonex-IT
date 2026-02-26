@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactHero.module.css'
+import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
 
 export default function ContactHero() {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ar'
   const [isVisible, setIsVisible] = useState(false)
+
+  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
+  const settings = settingsResponse?.data
 
   useEffect(() => {
     setIsVisible(true)
@@ -44,25 +48,33 @@ export default function ContactHero() {
               
               {/* Quick Contact Cards */}
               <div className={styles.quickContact}>
-                <div className={styles.contactCard}>
-                  <div className={styles.cardIcon}>
-                    {iconMap.phone && React.createElement(iconMap.phone)}
+                {settings?.site_phone && (
+                  <div className={styles.contactCard}>
+                    <div className={styles.cardIcon}>
+                      {iconMap.phone && React.createElement(iconMap.phone)}
+                    </div>
+                    <div className={styles.cardContent}>
+                      <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
+                      <a href={`tel:${settings.site_phone}`} className={styles.cardValue} dir="ltr">
+                        {settings.site_phone}
+                      </a>
+                    </div>
                   </div>
-                  <div className={styles.cardContent}>
-                    <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
-                    <a href="tel:+966 11 466 1367" className={styles.cardValue} dir="ltr">+966 11 466 1367</a>
-                  </div>
-                </div>
+                )}
                 
-                <div className={styles.contactCard}>
-                  <div className={styles.cardIcon}>
-                    {iconMap.envelope && React.createElement(iconMap.envelope)}
+                {settings?.site_email && (
+                  <div className={styles.contactCard}>
+                    <div className={styles.cardIcon}>
+                      {iconMap.envelope && React.createElement(iconMap.envelope)}
+                    </div>
+                    <div className={styles.cardContent}>
+                      <span className={styles.cardLabel}>{t('contactPage.hero.emailUs')}</span>
+                      <a href={`mailto:${settings.site_email}`} className={styles.cardValue}>
+                        {settings.site_email}
+                      </a>
+                    </div>
                   </div>
-                  <div className={styles.cardContent}>
-                    <span className={styles.cardLabel}>{t('contactPage.hero.emailUs')}</span>
-                    <a href="mailto:info@beyonexit.com" className={styles.cardValue}>info@beyonexit.com</a>
-                  </div>
-                </div>
+                )}
                 
                 <div className={styles.contactCard}>
                   <div className={styles.cardIcon}>
@@ -70,8 +82,13 @@ export default function ContactHero() {
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.visitUs')}</span>
-                    <a href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" target="_blank" rel="noopener noreferrer" className={styles.cardValue}>
-                      {t('contactPage.hero.location')}
+                    <a 
+                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={styles.cardValue}
+                    >
+                      {settings?.site_address?.[i18n.language] || t('contactPage.hero.location')}
                     </a>
                   </div>
                 </div>

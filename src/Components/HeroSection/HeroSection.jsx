@@ -2,12 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styles from './HeroSection.module.css'
+import { useGetHomeDataQuery } from '../../redux/api/homeApi'
 
 export default function HeroSection() {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ar'
-  const prefix = t('hero.subtitlePrefix')
-  const fullText = t('hero.subtitle')
+  const lang = i18n.language
+
+  const { data } = useGetHomeDataQuery(lang)
+  const hero = data?.data?.hero_section
+
+  // Extract prefix (first word) and rest from subtitle
+  const subtitle = hero?.subtitle?.[lang] || hero?.subtitle?.['ar'] || ''
+  const words = subtitle.split(' ')
+  const prefix = words[0] || ''
+  const fullText = words.slice(1).join(' ')
+
+  const title = hero?.title?.[lang] || hero?.title?.['ar'] || t('hero.title')
+  const description = hero?.description?.[lang] || hero?.description?.['ar'] || t('hero.description')
+
   const [displayedText, setDisplayedText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [charIndex, setCharIndex] = useState(0)
@@ -84,17 +97,18 @@ export default function HeroSection() {
         <div className="row justify-content-center align-items-center">
           <div className={`col-lg-12 ${styles.textContent}`}>
             <h1 className={styles.title}>
-              {t('hero.title')}
+              {title}
             </h1>
             <h2 className={styles.subtitle}>
               {prefix && <span className={styles.prefix}>{prefix}</span>}
+              {prefix && ' '}
               <span className={styles.typingText}>
                 {displayedText}
                 <span className={styles.cursor}>|</span>
               </span>
             </h2>
             <p className={styles.description}>
-              {t('hero.description')}
+              {description}
             </p>
             <div className={styles.buttons}>
               <Link to="/#services" className={`btn ${styles.primaryBtn}`}>

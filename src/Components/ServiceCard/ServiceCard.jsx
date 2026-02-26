@@ -19,25 +19,46 @@ const ServiceCard = React.memo(function ServiceCard({
   service,
   index,
   isVisible,
+  color,
+  lang,
   t
 }) {
   const [isLoaded, setIsLoaded] = useState(false)
   
+  // Extract icon name from URL or use as is
+  const iconKey = useMemo(() => {
+    if (!service.icon) return 'code'
+    // If it's a URL, get the last segment
+    if (service.icon.includes('/')) {
+      const parts = service.icon.split('/')
+      return parts[parts.length - 1]
+    }
+    return service.icon
+  }, [service.icon])
+
   // Use iconMap to get the icon component or default to a safe icon
-  const Icon = iconMap[service.icon] || iconMap.code
+  const Icon = iconMap[iconKey] || iconMap.code
+
+  // Use the passed color or fallback to service.color or default
+  const activeColor = color || service.color || '#E7B742'
 
   // Extract RGB values from color for dynamic styling
   const rgbValues = useMemo(() => {
-    const rgb = hexToRgb(service.color)
+    const rgb = hexToRgb(activeColor)
     return `${rgb.r}, ${rgb.g}, ${rgb.b}`
-  }, [service.color])
+  }, [activeColor])
+
+  // Get localized content
+  const title = service.title?.[lang] || service.title?.['ar'] || ''
+  const description = service.short_description?.[lang] || service.short_description?.['ar'] || ''
+  const slug = service.slug || service.key
 
   return (
     <Link
-      to={`/services/${service.key}`}
+      to={`/services/${slug}`}
       className={styles.serviceCardLink}
       style={{
-        '--service-color': service.color,
+        '--service-color': activeColor,
         '--service-rgb': rgbValues
       }}
     >
@@ -53,8 +74,8 @@ const ServiceCard = React.memo(function ServiceCard({
           )}
 
           <img
-            src={service.image}
-            alt={t(`services.items.${service.key}.title`)}
+            src={service.image || '/assets/software.webp'}
+            alt={title}
             loading="lazy"
             decoding="async"
             className={`${styles.serviceImage} ${
@@ -75,11 +96,11 @@ const ServiceCard = React.memo(function ServiceCard({
           </div>
 
           <h3 className={styles.serviceTitle}>
-            {t(`services.items.${service.key}.title`)}
+            {title}
           </h3>
 
           <p className={styles.serviceDescription}>
-            {t(`services.items.${service.key}.description`)}
+             {description}
           </p>
 
           <span className={styles.serviceLink}>

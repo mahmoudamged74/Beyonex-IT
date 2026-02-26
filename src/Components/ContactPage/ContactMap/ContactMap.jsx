@@ -2,12 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactMap.module.css'
+import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
 
 export default function ContactMap() {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ar'
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
+
+  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
+  const settings = settingsResponse?.data
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,8 +30,8 @@ export default function ContactMap() {
     return () => observer.disconnect()
   }, [])
 
-  // Riyadh, Saudi Arabia coordinates
-  const mapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463876.9931636556!2d46.5423!3d24.7136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1680000000000!5m2!1sen!2s"
+  // Riyadh, Saudi Arabia coordinates - Default
+  const defaultMapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463876.9931636556!2d46.5423!3d24.7136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1680000000000!5m2!1sen!2s"
 
   return (
     <section ref={sectionRef} className={styles.mapSection}>
@@ -46,7 +50,7 @@ export default function ContactMap() {
               <div className={styles.mapContainer}>
                 <div className={styles.mapFrame}>
                   <iframe
-                    src={mapSrc}
+                    src={defaultMapSrc}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -64,9 +68,11 @@ export default function ContactMap() {
                   </div>
                   <div className={styles.cardContent}>
                     <h4 className={styles.cardTitle}>{t('contactPage.map.cardTitle')}</h4>
-                    <p className={styles.cardAddress}>{t('contactPage.map.address')}</p>
+                    <p className={styles.cardAddress}>
+                      {settings?.site_address?.[i18n.language] || t('contactPage.map.address')}
+                    </p>
                     <a 
-                      href="https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw" 
+                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className={styles.directionsBtn}

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactForm.module.css'
+import { useSubmitContactFormMutation } from '../../../redux/api/contactApi'
 
 export default function ContactForm() {
   const { t, i18n } = useTranslation()
@@ -9,15 +10,15 @@ export default function ContactForm() {
   const formRef = useRef(null)
   
   const [formData, setFormData] = useState({
-    name: '',
+    full_name: '',
     email: '',
     phone: '',
-    company: '',
+    company_name: '',
     subject: '',
     message: ''
   })
   
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitContact, { isLoading: isSubmitting }] = useSubmitContactFormMutation()
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState(null)
 
@@ -31,35 +32,32 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
     setError(null)
     
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      const response = await submitContact(formData).unwrap()
       setIsSubmitted(true)
       setFormData({
-        name: '',
+        full_name: '',
         email: '',
         phone: '',
-        company: '',
+        company_name: '',
         subject: '',
         message: ''
       })
     } catch (err) {
-      setError(t('contactPage.form.error'))
-    } finally {
-      setIsSubmitting(false)
+      console.error('Submission error:', err)
+      setError(err?.data?.message || t('contactPage.form.error'))
     }
   }
 
   const subjects = [
     { value: '', label: t('contactPage.form.selectSubject') },
-    { value: 'general', label: t('contactPage.form.subjects.general') },
-    { value: 'web', label: t('contactPage.form.subjects.web') },
-    { value: 'mobile', label: t('contactPage.form.subjects.mobile') },
-    { value: 'erp', label: t('contactPage.form.subjects.erp') },
-    { value: 'support', label: t('contactPage.form.subjects.support') },
+    { value: 'general_inquiry', label: t('contactPage.form.subjects.general_inquiry') },
+    { value: 'web_development', label: t('contactPage.form.subjects.web_development') },
+    { value: 'mobile_applications', label: t('contactPage.form.subjects.mobile_applications') },
+    { value: 'erp_systems', label: t('contactPage.form.subjects.erp_systems') },
+    { value: 'technical_support', label: t('contactPage.form.subjects.technical_support') },
     { value: 'other', label: t('contactPage.form.subjects.other') }
   ]
 
@@ -106,8 +104,8 @@ export default function ContactForm() {
                           <span className={styles.inputIcon}>{iconMap.user && React.createElement(iconMap.user)}</span>
                           <input
                             type="text"
-                            name="name"
-                            value={formData.name}
+                            name="full_name"
+                            value={formData.full_name}
                             onChange={handleChange}
                             placeholder={t('contactPage.form.namePlaceholder')}
                             required
@@ -160,8 +158,8 @@ export default function ContactForm() {
                           <span className={styles.inputIcon}>{iconMap.building && React.createElement(iconMap.building)}</span>
                           <input
                             type="text"
-                            name="company"
-                            value={formData.company}
+                            name="company_name"
+                            value={formData.company_name}
                             onChange={handleChange}
                             placeholder={t('contactPage.form.companyPlaceholder')}
                             className={styles.formInput}

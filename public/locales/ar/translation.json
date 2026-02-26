@@ -172,11 +172,11 @@
       "selectSubject": "اختر الموضوع",
       "messagePlaceholder": "رسالتك...",
       "subjects": {
-        "general": "استفسار عام",
-        "web": "تطوير المواقع",
-        "mobile": "تطبيقات الموبايل",
-        "erp": "أنظمة ERP",
-        "support": "الدعم الفني",
+        "general_inquiry": "استفسار عام",
+        "web_development": "تطوير المواقع",
+        "mobile_applications": "تطبيقات الموبايل",
+        "erp_systems": "أنظمة ERP",
+        "technical_support": "الدعم الفني",
         "other": "أخرى"
       },
       "submit": "إرسال الرسالة",
