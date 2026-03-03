@@ -11,7 +11,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 20%, rgba(231, 183, 66, 0.05) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(231, 183, 66, 0.05) 0%, transparent 50%);
   z-index: 0;
@@ -99,6 +99,7 @@
   background: rgba(231, 183, 66, 0.1);
   border-radius: 50%;
   font-size: 2.5rem;
+  color: #E7B742;
   transition: all 0.4s ease;
 }
 
@@ -264,11 +265,11 @@
   .storySection {
     padding: 4rem 0;
   }
-  
+
   .title {
     font-size: 2.5rem;
   }
-  
+
   .cardsRow {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -279,23 +280,23 @@
   .title {
     font-size: 2rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
-  
+
   .card {
     padding: 2rem;
   }
-  
+
   .timeline {
     padding-left: 30px;
   }
-  
+
   .timelineLine {
     left: 30px;
   }
-  
+
   .timelineItem,
   .timelineItem:nth-child(odd),
   .timelineItem:nth-child(even) {
@@ -303,7 +304,7 @@
     align-items: flex-start;
     margin-left: 0;
   }
-  
+
   .timelineYear,
   .timelineItem:nth-child(even) .timelineYear {
     text-align: left;
@@ -311,21 +312,21 @@
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
   }
-  
+
   .timelineNode {
     position: absolute;
     left: 0;
     width: 50px;
     height: 50px;
   }
-  
+
   .timelineContent,
   .timelineItem:nth-child(even) .timelineContent {
     padding-left: 40px;
     padding-right: 0;
     text-align: left;
   }
-  
+
   .nodeIcon {
     font-size: 1.2rem;
   }
@@ -337,11 +338,11 @@
     height: 60px;
     font-size: 2rem;
   }
-  
+
   .cardTitle {
     font-size: 1.3rem;
   }
-  
+
   .cardText {
     font-size: 0.95rem;
   }

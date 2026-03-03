@@ -56,6 +56,7 @@ const ServiceCard = React.memo(function ServiceCard({
   return (
     <Link
       to={`/services/${slug}`}
+      state={{ color: activeColor }}
       className={styles.serviceCardLink}
       style={{
         '--service-color': activeColor,

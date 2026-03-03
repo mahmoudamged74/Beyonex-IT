@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import styles from "./OurService.module.css";
-import { useGetHomeDataQuery } from "../../redux/api/homeApi";
-
 import { useGetSettingsQuery } from "../../redux/api/settingsApi";
+import { useGetServicesQuery } from "../../redux/api/servicesApi";
 
 // Fixed color palette - cycles for any number of services
 const COLOR_PALETTE = [
@@ -25,10 +24,10 @@ export default function OurService() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  const { data: homeData, isLoading: homeLoading } = useGetHomeDataQuery(lang);
+  const { data: servicesData, isLoading: servicesLoading } = useGetServicesQuery(lang);
   const { data: settingsData } = useGetSettingsQuery(lang);
   
-  const apiServices = homeData?.data?.services || [];
+  const apiServices = servicesData?.data || [];
   const serviceText = settingsData?.data?.service_text?.[lang] || settingsData?.data?.service_text || "";
   
   // Split service_text into subtitle and description
@@ -73,7 +72,7 @@ export default function OurService() {
         </div>
 
         <div className={styles.servicesGrid}>
-          {homeLoading
+          {servicesLoading
             ? Array.from({ length: 6 }).map((_, i) => (
                 <div key={i} className={styles.serviceCardLink}>
                   <div className={`${styles.serviceCard} ${isVisible ? styles.slideUp : ""}`}

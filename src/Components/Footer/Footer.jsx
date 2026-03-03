@@ -4,13 +4,17 @@ import { Link } from "react-router-dom";
 import { iconMap } from "../../utils/iconMap";
 import styles from './Footer.module.css'
 import { useGetSettingsQuery } from "../../redux/api/settingsApi";
+import { useGetServicesQuery } from "../../redux/api/servicesApi";
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
   
-  const { data: settingsResponse, isLoading } = useGetSettingsQuery(i18n.language);
+  const { data: settingsResponse, isLoading: settingsLoading } = useGetSettingsQuery(i18n.language);
   const settings = settingsResponse?.data;
+
+  const { data: servicesResponse, isLoading: servicesLoading } = useGetServicesQuery(i18n.language);
+  const apiServices = servicesResponse?.data || (Array.isArray(servicesResponse) ? servicesResponse : []);
 
   // Pre-generate particle positions to avoid Math.random during render
   const particles = useMemo(
@@ -32,12 +36,14 @@ const quickLinks = [
 ];
 
 
-  const services = [
-    { key: "web", title: t("services.items.web.title") },
-    { key: "mobile", title: t("services.items.mobile.title") },
-    { key: "erp", title: t("services.items.erp.title") },
-    { key: "cybersecurity", title: t("services.items.cybersecurity.title") },
-  ];
+  const services = apiServices.length > 0 
+    ? apiServices.slice(0, 6) 
+    : [
+        { key: "web", title: t("services.items.web.title"), slug: "web" },
+        { key: "mobile", title: t("services.items.mobile.title"), slug: "mobile" },
+        { key: "erp", title: t("services.items.erp.title"), slug: "erp" },
+        { key: "cybersecurity", title: t("services.items.cybersecurity.title"), slug: "cybersecurity" },
+      ];
 
   const socialLinks = useMemo(() => {
     if (!settings) return [];
@@ -63,7 +69,7 @@ const quickLinks = [
       }));
   }, [settings]);
 
-  if (isLoading) return null; 
+  if (settingsLoading) return null; 
 
   return (
     <footer className={styles.footer}>
@@ -158,10 +164,10 @@ const quickLinks = [
             <ul className={styles.linksList}>
               {services.map((service, index) => (
                 <li key={index} className={styles.linkItem}>
-                  <a href="#services" className={styles.link}>
+                  <Link to={`/services/${service.slug || service.key}`} className={styles.link}>
                     {iconMap.arrowRight && React.createElement(iconMap.arrowRight, { className: styles.linkArrow })}
-                    <span>{service.title}</span>
-                  </a>
+                    <span>{service.title?.[i18n.language] || service.title}</span>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -230,7 +236,7 @@ const quickLinks = [
           <div className={styles.divider}></div>
           <div className={styles.bottomContent}>
             <p className={styles.copyright}>
-              © {new Date().getFullYear()} {settings?.site_name?.[i18n.language] || "Beyonex IT"}. {t("footer.copyright")}
+              © {new Date().getFullYear()} {settings?.site_name?.[i18n.language]}
             </p>
           </div>
         </div>

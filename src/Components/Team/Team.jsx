@@ -35,7 +35,7 @@ export default function Team() {
     }
 
     return () => observer.disconnect()
-  }, [isLoading]) // Depend on isLoading so it runs after data is fetched
+  }, [isLoading]) 
 
   if (isLoading) return null
 

@@ -63,7 +63,9 @@ export default function AboutStory() {
             {/* Mission */}
             <div className={styles.card}>
               <div className={styles.cardIcon}>
-                <span>{aboutPage?.mission_icon || "🎯"}</span>
+                {aboutPage?.mission_icon && iconMap[aboutPage.mission_icon] 
+                  ? React.createElement(iconMap[aboutPage.mission_icon]) 
+                  : <span>🎯</span>}
               </div>
               <h3 className={styles.cardTitle}>
                 {aboutPage?.mission_title?.[i18n.language] || t('about.mission')}
@@ -76,7 +78,9 @@ export default function AboutStory() {
             {/* Vision */}
             <div className={styles.card}>
               <div className={styles.cardIcon}>
-                <span>{aboutPage?.vision_icon || "👁️"}</span>
+                {aboutPage?.vision_icon && iconMap[aboutPage.vision_icon] 
+                  ? React.createElement(iconMap[aboutPage.vision_icon]) 
+                  : <span>👁️</span>}
               </div>
               <h3 className={styles.cardTitle}>
                 {aboutPage?.vision_title?.[i18n.language] || t('about.vision')}

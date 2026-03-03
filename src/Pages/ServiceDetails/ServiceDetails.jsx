@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { iconMap } from "../../utils/iconMap";
 import styles from "./ServiceDetails.module.css";
@@ -8,6 +8,7 @@ import { useGetServiceDetailsQuery } from "../../redux/api/servicesApi";
 export default function ServiceDetails() {
   const { serviceKey } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { i18n, t } = useTranslation();
   const isRTL = i18n.language === "ar";
 
@@ -56,16 +57,17 @@ export default function ServiceDetails() {
   }
 
   const Icon = iconMap[service.icon] || iconMap.code;
-  const accentColor = "#E7B742"; // Default accent
+  const accentColor = location.state?.color || service.color || "#E7B742";
 
   return (
-    <main className={styles.page} dir={isRTL ? "rtl" : "ltr"}>
-      <section
-        className={styles.hero}
-        style={{
-          "--accent": accentColor,
-        }}
-      >
+    <main
+      className={styles.page}
+      dir={isRTL ? "rtl" : "ltr"}
+      style={{
+        "--accent": accentColor,
+      }}
+    >
+      <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroCopy}>
