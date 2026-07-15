@@ -1,0 +1,14 @@
+.homePage {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.pageContent {
+  position: relative;
+  z-index: 1;
+}
+
+.homeAdvantages :global(section) {
+  background-color: transparent;
+}

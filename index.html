@@ -1,19 +1,109 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
     <!-- Primary Meta Tags -->
     <title>Beyonex IT | بيونكس IT</title>
+
+    <script>
+      (function () {
+        var base = '%VITE_API_BASE_URL%' || 'https://backend.beyonexit.com/api/';
+        fetch(base + 'settings', { headers: { Accept: 'application/json' } })
+          .then(function (res) { return res.ok ? res.json() : null; })
+          .then(function (json) {
+            var url = json && json.data && json.data.favicon;
+            if (!url) return;
+            var link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = url.slice(-4) === '.svg' ? 'image/svg+xml' : 'image/png';
+            link.href = url;
+            document.head.appendChild(link);
+          })
+          .catch(function () {});
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://backend.beyonexit.com" crossorigin>
+    <link rel="dns-prefetch" href="https://backend.beyonexit.com">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+
+    <style>
+      #app-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(50, 200, 217, 0.08), transparent 42%),
+          radial-gradient(circle at 80% 80%, rgba(33, 128, 166, 0.1), transparent 40%),
+          linear-gradient(180deg, #0d1a26 0%, #0a141e 100%);
+        color: #eaf3f8;
+        font-family: Montserrat, sans-serif;
+        transition: opacity 0.45s ease, visibility 0.45s ease;
+      }
+      #app-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(50, 200, 217, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(50, 200, 217, 0.04) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: radial-gradient(circle at center, black, transparent 78%);
+        pointer-events: none;
+      }
+      #app-shell .shell-brand {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-align: center;
+        padding: 0 1rem;
+        background: linear-gradient(135deg, #fff 0%, #7dd9e6 45%, #32c8d9 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      #app-shell .shell-spinner {
+        position: relative;
+        z-index: 1;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 2px solid rgba(50, 200, 217, 0.18);
+        border-top-color: #32c8d9;
+        animation: shellSpin 0.8s linear infinite;
+      }
+      #app-shell.fade-out {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      @keyframes shellSpin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
+    <div id="app-shell" aria-hidden="true">
+      <h1 class="shell-brand">Beyonex IT</h1>
+      <div class="shell-spinner" aria-hidden="true"></div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,0 +1,10 @@
+.aboutPage {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.pageContent {
+  position: relative;
+  z-index: 1;
+}

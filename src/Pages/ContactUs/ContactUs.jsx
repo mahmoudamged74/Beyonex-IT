@@ -9,8 +9,14 @@ export default function ContactUs() {
   return (
     <div className={styles.contactPage}>
       <ContactHero />
-      <ContactForm />
-      <ContactInfo />
+      <section className={styles.contactMain}>
+        <div className="container">
+          <div className={styles.contactGrid}>
+            <ContactForm compact />
+            <ContactInfo compact />
+          </div>
+        </div>
+      </section>
       <ContactMap />
     </div>
   )

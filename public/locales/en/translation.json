@@ -8,6 +8,7 @@
   "nav": {
     "home": "Home",
     "about": "About Us",
+    "services": "Services",
     "contact": "Contact Us",
     "bookAppointment": "Book Appointment",
     "startProject": "Start Your Project"
@@ -18,9 +19,13 @@
     "subtitle": "Elevating Your Tech",
     "description": "We deliver comprehensive software and technology solutions that transform your ideas into exceptional digital experiences. Your trusted partner in digital transformation.",
     "startProject": "Start Your Project",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "badge": "Integrated Tech Solutions",
+    "scrollDown": "Discover More",
+    "exploreServices": "Explore our services"
   },
   "advantages": {
+    "label": "Our Edge",
     "title": "Why Choose Us",
     "subtitle": "Transforming your ideas into cutting-edge tech solutions that drive your business forward",
     "items": {
@@ -57,7 +62,8 @@
     "mission": "Our Mission",
     "missionText": "We aim to empower businesses to maximize the benefits of technology by delivering advanced software solutions that meet their unique needs and help them achieve their strategic goals.",
     "vision": "Our Vision",
-    "visionText": "To be the preferred technology partner for companies in the region, by delivering innovative solutions and exceptional services that create real value for our clients."
+    "visionText": "To be the preferred technology partner for companies in the region, by delivering innovative solutions and exceptional services that create real value for our clients.",
+    "readMore": "Learn More About Us"
   },
   "services": {
     "title": "Our Services",
@@ -93,19 +99,28 @@
         "description": "Comprehensive protection for your digital assets with advanced threat detection and compliance solutions."
       }
     },
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "showMore": "View More"
+  },
+  "common": {
+    "showMore": "View More",
+    "loading": "Loading..."
   },
   "aboutPage": {
     "hero": {
+      "eyebrow": "About Us",
       "title": "About BEYONEX IT",
       "subtitle": "Your Trusted Partner in Digital Innovation",
       "description": "We are a team of passionate technologists dedicated to transforming businesses through innovative software solutions and cutting-edge technology.",
       "badge1": "Award Winning",
       "badge2": "Top Rated",
       "badge3": "Fast Delivery",
-      "scrollDown": "Discover More"
+      "scrollDown": "Discover More",
+      "learnMore": "Learn More",
+      "ourServices": "Our Services"
     },
     "story": {
+      "badge": "Our Journey",
       "title": "Our Journey",
       "subtitle": "From a small startup to a leading tech company, our journey has been defined by innovation and excellence.",
       "milestone1Title": "The Beginning",
@@ -118,6 +133,7 @@
       "milestone4Desc": "Recognized as a leading technology solutions provider with numerous awards."
     },
     "stats": {
+      "badge": "Achievements",
       "title": "Our Achievements",
       "subtitle": "Numbers that reflect our commitment to excellence and client satisfaction.",
       "projects": "Projects Completed",
@@ -126,6 +142,7 @@
       "satisfaction": "Excellence Rate"
     },
     "values": {
+      "badge": "Our Values",
       "title": "Our Core Values",
       "subtitle": "The principles that guide everything we do and define who we are.",
       "innovation": "Innovation",
@@ -142,10 +159,12 @@
       "excellenceDesc": "We strive for perfection in every detail, from code to customer service."
     },
     "team": {
+      "badge": "Our Team",
       "title": "Our Expert Team",
       "subtitle": "Meet the passionate individuals driving our innovation and success."
     },
     "cta": {
+      "badge": "Get in Touch",
       "title": "Ready to Start Your Project?",
       "description": "Let's work together to bring your vision to life. Contact us today and discover how we can help transform your business.",
       "contactBtn": "Contact Us",
@@ -219,8 +238,11 @@
     "services": "Our Services",
     "contactInfo": "Contact Info",
     "address": "Riyadh, Saudi Arabia",
+    "addressLabel": "Location",
     "phone": "+966 11 466 1367",
+    "phoneLabel": "Phone",
     "email": "info@beyonexit.com",
+    "emailLabel": "Email",
     "workingHours": "Working Hours",
     "workingDays": "Sun - Thu: 8:00 - 16:00",
     "followUs": "Follow Us",
@@ -229,24 +251,51 @@
       "home": "Home",
       "about": "About Us",
       "services": "Services",
-      "contact": "Contact Us"
+      "contact": "Contact Us",
+      "startProject": "Start Project"
     }
   },
   "startProjectPage": {
     "title": "Start Your Project",
     "subtitle": "Fill out the form below and we'll get back to you to discuss your project and turn your ideas into reality.",
+    "hero": {
+      "badge": "New Project Request"
+    },
+    "trustNote": "Your data is safe and secure. We never share your information with third parties.",
+    "steps": {
+      "title": "How It Works",
+      "step1Title": "Fill the Form",
+      "step1Desc": "Enter your details and project information accurately.",
+      "step2Title": "Request Review",
+      "step2Desc": "Our team reviews your request within 24 hours.",
+      "step3Title": "We Contact You",
+      "step3Desc": "We reach out to discuss details and next steps."
+    },
     "form": {
+      "badge": "Request Form",
+      "title": "Project Details",
+      "subtitle": "Please fill in all required fields accurately so we can serve you better.",
+      "sectionClient": "Client Information",
+      "sectionContact": "Contact Details",
+      "sectionDetails": "Additional Details",
       "company": "Company",
       "branch": "Branch",
+      "selectBranch": "Select Branch",
       "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
       "phone": "Phone Number",
+      "phonePlaceholder": "05xxxxxxxx",
       "email": "Email Address",
+      "emailPlaceholder": "example@email.com",
       "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "05xxxxxxxx",
       "idNumber": "ID Number",
+      "idPlaceholder": "Enter your ID number",
       "clientType": "Client Type",
       "individual": "Individual",
       "corporate": "Corporate",
       "address": "Address",
+      "addressPlaceholder": "Enter your full address",
       "submit": "Submit Request",
       "successTitle": "Request Received!",
       "successMessage": "Thank you for your interest. Our team will review your request and get back to you soon."

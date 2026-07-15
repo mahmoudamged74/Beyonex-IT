@@ -1,0 +1,162 @@
+:root {
+  /* ══════════════════════════════════════════════════════════
+     Beyonex IT — Brand Identity Palette
+     Primary Dark #0D1A26 | Navy #123E59 | Tech #2180A6
+     Accent Cyan #32C8D9 | Light #EAF3F8
+     ══════════════════════════════════════════════════════════ */
+
+  /* ── Brand Scale ── */
+  --brand-900: #0A141E;
+  --brand-800: #0D1A26;
+  --brand-700: #101F2E;
+  --brand-600: #123E59;
+  --brand-500: #1A5572;
+  --brand-400: #2180A6;
+  --brand-300: #2BA3C4;
+  --brand-200: #32C8D9;
+  --brand-100: #7DD9E6;
+  --brand-50:  #EAF3F8;
+
+  /* ── Brand / Primary ── */
+  --color-primary: var(--brand-200);
+  --color-primary-hover: var(--brand-400);
+  --color-primary-dark: var(--brand-600);
+  --color-primary-light: var(--brand-100);
+  --color-primary-lighter: var(--brand-50);
+  --color-gold: var(--brand-100);
+
+  /* ── CTA (legacy: burgundy) ── */
+  --color-burgundy: var(--brand-400);
+  --color-burgundy-hover: var(--brand-200);
+  --color-burgundy-dark: var(--brand-600);
+
+  /* ── Backgrounds ── */
+  --color-bg-body: var(--brand-800);
+  --color-bg-dark: var(--brand-800);
+  --color-bg-darker: var(--brand-900);
+  --color-bg-navy: var(--brand-600);
+  --color-bg-card: #152A3D;
+  --color-bg-card-dark: var(--brand-800);
+  --color-bg-gradient-start: var(--brand-600);
+  --color-bg-gradient-end: var(--brand-400);
+  --color-bg-light: #F4F9FC;
+  --color-bg-white: #ffffff;
+  --color-bg-muted: var(--brand-50);
+  --color-bg-elevated: #1A3347;
+  --color-bg-overlay: rgba(10, 20, 30, 0.72);
+
+  /* ── Text ── */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-text-dark: var(--brand-800);
+  --color-text-muted: #4A6678;
+  --color-text-placeholder: #7A9BB0;
+  --color-text-neutral: var(--brand-700);
+  --color-text-slate: var(--brand-600);
+  --color-text-light: var(--brand-50);
+  --color-text-gray-light: #B8D4E3;
+  --color-text-on-primary: var(--brand-800);
+  --color-text-on-dark: var(--brand-50);
+  --color-text-on-dark-muted: #8BA8BC;
+
+  /* ── Borders ── */
+  --color-border: #D4E8F2;
+  --color-border-light: #E8F2F8;
+  --color-border-dark: rgba(50, 200, 217, 0.18);
+  --color-border-focus: var(--brand-200);
+
+  /* ── Status ── */
+  --color-success: #2ECC9A;
+  --color-success-light: #5EDDB5;
+  --color-danger: #E85D6C;
+  --color-danger-light: #F0808C;
+  --color-warning: #F0B429;
+  --color-info: var(--brand-200);
+
+  /* ── Service accent colors (harmonious tech palette) ── */
+  --color-service-cyan: #32C8D9;
+  --color-service-cyan-light: #6EE0F0;
+  --color-service-teal: #2EC4B6;
+  --color-service-teal-light: #5DD9CE;
+  --color-service-blue: #45B7D1;
+  --color-service-blue-light: #7ACCE3;
+  --color-service-steel: #5B9BD5;
+  --color-service-steel-light: #8BB8E3;
+  --color-service-mint: #3DBEA7;
+  --color-service-mint-light: #6ED4C2;
+  --color-service-indigo: #4A6FA5;
+  --color-service-indigo-light: #7A9BC8;
+  --color-service-ocean: #28B4C8;
+  --color-service-ocean-light: #5CCADB;
+  --color-service-aqua: #4ECDC4;
+  --color-service-aqua-light: #7EDDD6;
+
+  /* Legacy service aliases */
+  --color-service-purple: var(--color-service-indigo);
+  --color-service-purple-light: var(--color-service-indigo-light);
+  --color-service-orange: var(--color-service-teal);
+  --color-service-orange-light: var(--color-service-teal-light);
+  --color-service-green: var(--color-service-mint);
+  --color-service-green-light: var(--color-service-mint-light);
+  --color-service-red: var(--color-service-ocean);
+  --color-service-red-light: var(--color-service-ocean-light);
+  --color-service-deep-orange: var(--color-service-steel);
+
+  /* ── Floating buttons ── */
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #128C7E;
+  --color-scroll-top-start: var(--brand-400);
+  --color-scroll-top-end: var(--brand-200);
+
+  /* ── Founding Day overlay ── */
+  --color-founding-gold: var(--brand-200);
+  --color-founding-teal: var(--brand-800);
+  --color-founding-teal-light: var(--brand-600);
+
+  /* ── Social media ── */
+  --color-social-facebook: #1877F2;
+  --color-social-linkedin: #0A66C2;
+  --color-social-snapchat: #FFFC00;
+  --color-social-instagram: #E4405F;
+  --color-social-twitter: #000000;
+  --color-social-telegram: #0088cc;
+
+  /* ── RGB values (for rgba usage) ── */
+  --color-primary-rgb: 50, 200, 217;
+  --color-primary-dark-rgb: 18, 62, 89;
+  --color-tech-rgb: 33, 128, 166;
+  --color-dark-rgb: 13, 26, 38;
+  --color-darker-rgb: 10, 20, 30;
+  --color-navy-rgb: 18, 62, 89;
+  --color-burgundy-rgb: 33, 128, 166;
+  --color-white-rgb: 255, 255, 255;
+  --color-black-rgb: 0, 0, 0;
+  --color-text-light-rgb: 234, 243, 248;
+  --color-success-rgb: 46, 204, 154;
+  --color-danger-rgb: 232, 93, 108;
+  --color-founding-gold-rgb: 50, 200, 217;
+
+  /* ── Shadows & gradients ── */
+  --shadow-sm: 0 1px 12px rgba(var(--color-dark-rgb), 0.06);
+  --shadow-md: 0 8px 24px rgba(var(--color-dark-rgb), 0.12);
+  --shadow-lg: 0 20px 60px rgba(var(--color-black-rgb), 0.15);
+  --shadow-glow: 0 0 30px rgba(var(--color-primary-rgb), 0.25);
+  --gradient-brand: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-400) 50%, var(--brand-200) 100%);
+  --gradient-dark: linear-gradient(180deg, var(--brand-800) 0%, var(--brand-900) 100%);
+  --site-bg-gradient:
+    radial-gradient(ellipse 80% 55% at 50% 18%, rgba(18, 62, 89, 0.42) 0%, transparent 68%),
+    radial-gradient(ellipse 60% 45% at 85% 75%, rgba(33, 128, 166, 0.12) 0%, transparent 55%),
+    var(--gradient-dark);
+  --site-bg-overlay: linear-gradient(
+    180deg,
+    rgba(var(--color-darker-rgb), 0.35) 0%,
+    rgba(var(--color-dark-rgb), 0.2) 45%,
+    rgba(var(--color-darker-rgb), 0.45) 100%
+  );
+  --gradient-shimmer: linear-gradient(135deg, var(--brand-200) 0%, var(--brand-100) 50%, var(--brand-200) 100%);
+
+  /* ── Semantic aliases ── */
+  --color-accent: var(--color-primary);
+  --color-surface: var(--color-bg-card);
+  --color-surface-elevated: var(--color-bg-elevated);
+}

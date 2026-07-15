@@ -1,57 +1,35 @@
-import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactHero.module.css'
-import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
+import { useSettings } from '../../../hooks/useSettings'
+import { useLocale } from '../../../hooks/useLocale'
+import { getLocalizedOrRaw } from '../../../utils/i18nHelpers'
+import Icon from '../../Common/Icon.jsx'
+import HeadingAccent from '../../Common/HeadingAccent/HeadingAccent.jsx'
 
 export default function ContactHero() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-  const [isVisible, setIsVisible] = useState(false)
-
-  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
-  const settings = settingsResponse?.data
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const { t } = useTranslation()
+  const { lang } = useLocale()
+  const { settings } = useSettings()
 
   return (
     <section className={styles.heroSection}>
       <div className={styles.backgroundImage}>
-        <img 
-          src="/assets/slide1.jpg" 
-          alt="Background" 
-          className={`${styles.bgImg} ${isRTL ? styles.flipped : ''}`}
-        />
         <div className={styles.overlay}></div>
       </div>
-
-      {/* Animated particles */}
-      <div className={styles.particles}>
-        {[...Array(15)].map((_, i) => (
-          <div key={i} className={styles.particle} style={{
-            '--delay': `${Math.random() * 5}s`,
-            '--x': `${Math.random() * 100}%`,
-            '--duration': `${15 + Math.random() * 10}s`
-          }}></div>
-        ))}
-      </div>
-
       <div className={`container ${styles.content}`}>
         <div className="row justify-content-center">
-          <div className={`col-lg-10 text-center`}>
-            <div className={`${styles.heroContent} ${isVisible ? styles.visible : ''}`}>
+          <div className={`col-lg-12 text-center`}>
+            <div className={`${styles.heroContent} ${styles.visible}`}>
               <span className={styles.badge}>{t('contactPage.hero.badge')}</span>
               <h1 className={styles.title}>{t('contactPage.hero.title')}</h1>
+              <HeadingAccent size="lg" />
               <p className={styles.subtitle}>{t('contactPage.hero.subtitle')}</p>
-              
-              {/* Quick Contact Cards */}
+
               <div className={styles.quickContact}>
                 {settings?.site_phone && (
                   <div className={styles.contactCard}>
                     <div className={styles.cardIcon}>
-                      {iconMap.phone && React.createElement(iconMap.phone)}
+                      <Icon name="phone" />
                     </div>
                     <div className={styles.cardContent}>
                       <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
@@ -61,11 +39,11 @@ export default function ContactHero() {
                     </div>
                   </div>
                 )}
-                
+
                 {settings?.site_email && (
                   <div className={styles.contactCard}>
                     <div className={styles.cardIcon}>
-                      {iconMap.envelope && React.createElement(iconMap.envelope)}
+                      <Icon name="envelope" />
                     </div>
                     <div className={styles.cardContent}>
                       <span className={styles.cardLabel}>{t('contactPage.hero.emailUs')}</span>
@@ -75,20 +53,20 @@ export default function ContactHero() {
                     </div>
                   </div>
                 )}
-                
+
                 <div className={styles.contactCard}>
                   <div className={styles.cardIcon}>
-                    {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
+                    <Icon name="mapMarker" />
                   </div>
                   <div className={styles.cardContent}>
                     <span className={styles.cardLabel}>{t('contactPage.hero.visitUs')}</span>
-                    <a 
-                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={styles.cardValue}
                     >
-                      {settings?.site_address?.[i18n.language] || t('contactPage.hero.location')}
+                      {getLocalizedOrRaw(settings?.site_address, lang) || t('contactPage.hero.location')}
                     </a>
                   </div>
                 </div>

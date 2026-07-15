@@ -1,108 +1,82 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { iconMap } from '../../../utils/iconMap'
 import styles from './AboutValues.module.css'
-import { useGetAboutQuery } from '../../../redux/api/aboutApi'
+import AboutSectionHeader from '../shared/AboutSectionHeader'
+import { useAboutData } from '../../../hooks/useAboutData'
+import { useIntersectionReveal } from '../../../hooks/useIntersectionReveal'
+import { getLocalizedOrRaw } from '../../../utils/i18nHelpers'
+import Icon from '../../Common/Icon.jsx'
+
+const valueIcons = ['lightbulb', 'handshake', 'shieldAlt', 'rocket', 'heart', 'gem']
+
+const fallbackValues = [
+  { icon: 'lightbulb', titleKey: 'innovation', descKey: 'innovationDesc' },
+  { icon: 'handshake', titleKey: 'trust', descKey: 'trustDesc' },
+  { icon: 'shieldAlt', titleKey: 'quality', descKey: 'qualityDesc' },
+  { icon: 'rocket', titleKey: 'growth', descKey: 'growthDesc' },
+  { icon: 'heart', titleKey: 'passion', descKey: 'passionDesc' },
+  { icon: 'gem', titleKey: 'excellence', descKey: 'excellenceDesc' },
+]
+
+function ValueCard({ icon, title, description, delay, isVisible }) {
+  return (
+    <article
+      className={`${styles.valueCard} ${isVisible ? styles.visible : ''}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <div className={styles.iconWrap} aria-hidden="true">
+        <span className={styles.iconRing} />
+        <span className={styles.iconPlate} />
+        <Icon name={icon} fallback="gem" className={styles.iconGlyph} />
+      </div>
+
+      <div className={styles.cardContent}>
+        <h3 className={styles.valueTitle}>{title}</h3>
+        <span className={styles.valueAccent} aria-hidden="true" />
+        <p className={styles.valueDesc}>{description}</p>
+      </div>
+    </article>
+  )
+}
 
 export default function AboutValues() {
-  const { t, i18n } = useTranslation()
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
-
-  const { data: aboutResponse, isLoading } = useGetAboutQuery(i18n.language)
-  const coreValues = aboutResponse?.data?.core_values || []
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [isLoading, i18n.language])
-
-  // Value colors mapping
-  const valueColors = ['#E7B742', '#4CAF50', '#2196F3', '#FF9800', '#F44336', '#9C27B0']
-  const valueIcons = ['lightbulb', 'handshake', 'shieldAlt', 'rocket', 'heart', 'gem']
+  const { t } = useTranslation()
+  const { lang, isLoading, aboutData } = useAboutData()
+  const coreValues = aboutData?.core_values || []
+  const { isVisible, sectionRef } = useIntersectionReveal({ deps: [isLoading, lang] })
 
   return (
     <section ref={sectionRef} className={styles.valuesSection}>
-      <div className={styles.backgroundPattern}></div>
-      
       <div className="container">
-        <div className={`${styles.header} ${isVisible ? styles.visible : ''}`}>
-          <h2 className={styles.title}>{t('aboutPage.values.title')}</h2>
-          <p className={styles.subtitle}>{t('aboutPage.values.subtitle')}</p>
-        </div>
+        <AboutSectionHeader
+          className={styles.valuesHeader}
+          title={t('aboutPage.values.title')}
+          subtitle={t('aboutPage.values.subtitle')}
+          isVisible={isVisible}
+        />
 
         <div className={styles.valuesGrid}>
           {coreValues.length > 0 ? (
-            coreValues.map((value, index) => {
-              const iconKey = value.icon || valueIcons[index % valueIcons.length]
-              const Icon = iconMap[iconKey] || iconMap.gem
-              return (
-                <div 
-                  key={value.id}
-                  className={`${styles.valueCard} ${isVisible ? styles.visible : ''}`}
-                  style={{ 
-                    animationDelay: `${index * 0.1}s`,
-                    '--value-color': valueColors[index % valueColors.length] 
-                  }}
-                >
-                  <div className={styles.iconContainer}>
-                    {Icon && React.createElement(Icon, { className: styles.icon })}
-                  </div>
-                  <h3 className={styles.valueTitle}>
-                    {value.title?.[i18n.language] || value.title}
-                  </h3>
-                  <p className={styles.valueDesc}>
-                    {value.description?.[i18n.language] || value.description}
-                  </p>
-                  <div className={styles.cardGlow}></div>
-                </div>
-              )
-            })
+            coreValues.map((value, index) => (
+              <ValueCard
+                key={value.id}
+                icon={value.icon || valueIcons[index % valueIcons.length]}
+                title={getLocalizedOrRaw(value.title, lang)}
+                description={getLocalizedOrRaw(value.description, lang)}
+                delay={index * 0.1}
+                isVisible={isVisible}
+              />
+            ))
           ) : (
-            // Fallback
-            [
-              { icon: 'lightbulb', titleKey: 'innovation', descKey: 'innovationDesc', color: '#E7B742' },
-              { icon: 'handshake', titleKey: 'trust', descKey: 'trustDesc', color: '#4CAF50' },
-              { icon: 'shieldAlt', titleKey: 'quality', descKey: 'qualityDesc', color: '#2196F3' },
-              { icon: 'rocket', titleKey: 'growth', descKey: 'growthDesc', color: '#FF9800' },
-              { icon: 'heart', titleKey: 'passion', descKey: 'passionDesc', color: '#F44336' },
-              { icon: 'gem', titleKey: 'excellence', descKey: 'excellenceDesc', color: '#9C27B0' }
-            ].map((value, index) => {
-              const Icon = iconMap[value.icon]
-              return (
-                <div 
-                  key={index}
-                  className={`${styles.valueCard} ${isVisible ? styles.visible : ''}`}
-                  style={{ 
-                    animationDelay: `${index * 0.1}s`,
-                    '--value-color': value.color 
-                  }}
-                >
-                  <div className={styles.iconContainer}>
-                    {Icon && React.createElement(Icon, { className: styles.icon })}
-                  </div>
-                  <h3 className={styles.valueTitle}>
-                    {t(`aboutPage.values.${value.titleKey}`)}
-                  </h3>
-                  <p className={styles.valueDesc}>
-                    {t(`aboutPage.values.${value.descKey}`)}
-                  </p>
-                  <div className={styles.cardGlow}></div>
-                </div>
-              )
-            })
+            fallbackValues.map((value, index) => (
+              <ValueCard
+                key={index}
+                icon={value.icon}
+                title={t(`aboutPage.values.${value.titleKey}`)}
+                description={t(`aboutPage.values.${value.descKey}`)}
+                delay={index * 0.1}
+                isVisible={isVisible}
+              />
+            ))
           )}
         </div>
       </div>

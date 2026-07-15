@@ -1,0 +1,34 @@
+.siteBackground {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--site-bg-gradient);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--site-bg-overlay);
+}
+
+.mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(var(--color-primary-rgb), 0.06) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      rgba(var(--color-primary-rgb), 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+}
+
+@media (max-width: 576px) {
+  .mesh {
+    background-size: 32px 32px;
+    opacity: 0.3;
+  }
+}

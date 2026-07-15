@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Lighthouse audit artifacts
+lh*.json
+lh2-*.json
+lh3-*.json
+final-*.json
+lighthouse-*.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

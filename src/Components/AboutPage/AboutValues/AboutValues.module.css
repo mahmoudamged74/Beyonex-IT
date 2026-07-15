@@ -1,239 +1,345 @@
 .valuesSection {
   position: relative;
-  padding: 6rem 0;
-  background: linear-gradient(180deg, #181d27 0%, #1a1f2e 100%);
+  padding: 0.85rem 0 3.25rem;
   overflow: hidden;
 }
 
-.backgroundPattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(231, 183, 66, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(231, 183, 66, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  z-index: 0;
+.valuesHeader {
+  margin-bottom: 2.35rem !important;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 4rem;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
-}
-
-.header.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #E7B742 0%, #FFD700 50%, #E7B742 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.subtitle {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
+.valuesHeader > div {
+  margin: 0.75rem auto 1.15rem !important;
 }
 
 .valuesGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
   position: relative;
   z-index: 1;
 }
 
 .valueCard {
   position: relative;
-  padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(231, 183, 66, 0.15);
-  border-radius: 20px;
-  text-align: center;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 168px;
+  padding: 1.45rem 1.35rem;
+  background: linear-gradient(
+    165deg,
+    rgba(18, 36, 52, 0.72) 0%,
+    rgba(12, 24, 36, 0.55) 100%
+  );
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(50, 200, 217, 0.14);
+  border-radius: 22px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   overflow: hidden;
   opacity: 0;
-  transform: translateY(40px) scale(0.95);
+  transform: translateY(28px);
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    background 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.valueCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: 16%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(50, 200, 217, 0.5) 50%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.valueCard::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: -14%;
+  bottom: -24%;
+  width: 58%;
+  height: 80%;
+  background: radial-gradient(
+    circle at center,
+    rgba(50, 200, 217, 0.08) 0%,
+    rgba(50, 200, 217, 0.02) 45%,
+    transparent 74%
+  );
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.45s ease;
 }
 
 .valueCard.visible {
-  animation: cardReveal 0.6s ease forwards;
+  animation: cardReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes cardReveal {
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .valueCard:hover {
-  transform: translateY(-15px) scale(1.02);
-  border-color: var(--value-color);
-  box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.4),
-    0 0 30px color-mix(in srgb, var(--value-color) 30%, transparent);
+  transform: translateY(-6px);
+  border-color: rgba(50, 200, 217, 0.32);
+  background: linear-gradient(
+    165deg,
+    rgba(22, 42, 58, 0.78) 0%,
+    rgba(14, 28, 40, 0.62) 100%
+  );
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.22),
+    0 0 32px rgba(50, 200, 217, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.cardGlow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 0%, var(--value-color), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: -1;
+.valueCard:hover::before,
+.valueCard:hover::after {
+  opacity: 1;
 }
 
-.valueCard:hover .cardGlow {
-  opacity: 0.1;
-}
-
-.iconContainer {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 1.5rem;
+.iconWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 4.25rem;
+  height: 4.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, 
-    color-mix(in srgb, var(--value-color) 20%, transparent),
-    color-mix(in srgb, var(--value-color) 10%, transparent)
+  z-index: 1;
+  transition: transform 0.45s ease;
+}
+
+.iconRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1px solid rgba(50, 200, 217, 0.18);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(50, 200, 217, 0.12) 0%,
+    rgba(50, 200, 217, 0.03) 55%,
+    transparent 78%
   );
-  border: 2px solid color-mix(in srgb, var(--value-color) 30%, transparent);
-  border-radius: 50%;
-  transition: all 0.5s ease;
+  transition: border-color 0.45s ease, background 0.45s ease;
 }
 
-.valueCard:hover .iconContainer {
-  transform: scale(1.15) rotate(10deg);
-  background: linear-gradient(135deg, 
-    color-mix(in srgb, var(--value-color) 30%, transparent),
-    color-mix(in srgb, var(--value-color) 15%, transparent)
+.iconPlate {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    rgba(50, 200, 217, 0.18),
+    rgba(50, 200, 217, 0.06)
   );
-  border-color: var(--value-color);
-  box-shadow: 0 0 40px color-mix(in srgb, var(--value-color) 40%, transparent);
+  border: 1px solid rgba(50, 200, 217, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 20px rgba(0, 0, 0, 0.14);
+  transition:
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    transform 0.45s ease;
 }
 
-.icon {
-  font-size: 2.5rem;
-  color: var(--value-color);
-  transition: all 0.5s ease;
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--value-color) 50%, transparent));
+.iconGlyph {
+  position: relative;
+  z-index: 1;
+  font-size: 1.55rem;
+  color: var(--color-primary);
+  filter: drop-shadow(0 0 10px rgba(50, 200, 217, 0.25));
+  transition: filter 0.45s ease, transform 0.45s ease;
 }
 
-.valueCard:hover .icon {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 20px var(--value-color));
+.valueCard:hover .iconWrap {
+  transform: translateY(-2px);
+}
+
+.valueCard:hover .iconRing {
+  border-color: rgba(50, 200, 217, 0.32);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(50, 200, 217, 0.16) 0%,
+    rgba(50, 200, 217, 0.05) 55%,
+    transparent 78%
+  );
+}
+
+.valueCard:hover .iconPlate {
+  border-color: rgba(50, 200, 217, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 24px rgba(50, 200, 217, 0.12);
+  transform: scale(1.05);
+}
+
+.valueCard:hover .iconGlyph {
+  filter: drop-shadow(0 0 14px rgba(50, 200, 217, 0.4));
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 0;
+  text-align: start;
 }
 
 .valueTitle {
-  font-size: 1.4rem;
+  margin: 0;
+  font-size: 1.12rem;
   font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  transition: color 0.3s ease;
+  color: var(--color-primary);
+  line-height: 1.35;
+  transition: color 0.35s ease;
 }
 
 .valueCard:hover .valueTitle {
-  color: var(--value-color);
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.valueAccent {
+  display: block;
+  width: 40px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to inline-end,
+    var(--color-primary),
+    rgba(50, 200, 217, 0.1)
+  );
+  opacity: 0.65;
+  transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+.valueCard:hover .valueAccent {
+  width: 56px;
+  opacity: 0.9;
 }
 
 .valueDesc {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.7;
   margin: 0;
-  transition: color 0.3s ease;
+  font-size: 0.94rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.75;
+  transition: color 0.35s ease;
 }
 
 .valueCard:hover .valueDesc {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* Responsive */
 @media (max-width: 992px) {
   .valuesSection {
-    padding: 4rem 0;
+    padding: 0.75rem 0 2.75rem;
   }
-  
-  .title {
-    font-size: 2.5rem;
+
+  .valuesHeader {
+    margin-bottom: 2rem !important;
   }
-  
+
+  .valuesHeader > div {
+    margin: 0.65rem auto 1rem !important;
+  }
+
   .valuesGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .valueCard {
+    min-height: 156px;
   }
 }
 
 @media (max-width: 768px) {
-  .title {
-    font-size: 2rem;
-  }
-  
-  .subtitle {
-    font-size: 1.1rem;
-  }
-  
   .valueCard {
-    padding: 2rem;
+    padding: 1.3rem 1.15rem;
+    min-height: 148px;
+    gap: 0.85rem;
   }
-  
-  .iconContainer {
-    width: 75px;
-    height: 75px;
+
+  .iconWrap {
+    width: 3.85rem;
+    height: 3.85rem;
   }
-  
-  .icon {
-    font-size: 2rem;
+
+  .iconPlate {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 12px;
   }
-  
+
+  .iconGlyph {
+    font-size: 1.35rem;
+  }
+
   .valueTitle {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
   }
-  
+
   .valueDesc {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 576px) {
   .valuesGrid {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
   }
-  
+
   .valueCard {
-    padding: 1.75rem;
+    min-height: 140px;
+    border-radius: 18px;
+    gap: 0.7rem;
   }
-  
-  .iconContainer {
-    width: 65px;
-    height: 65px;
+
+  .iconWrap {
+    width: 3.5rem;
+    height: 3.5rem;
   }
-  
-  .icon {
-    font-size: 1.75rem;
+
+  .iconPlate {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 11px;
+  }
+
+  .iconGlyph {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .valueCard.visible {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

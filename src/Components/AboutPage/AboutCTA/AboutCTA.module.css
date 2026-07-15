@@ -1,272 +1,351 @@
 .ctaSection {
   position: relative;
-  padding: 8rem 0;
+  padding: 0.85rem 0 3.75rem;
   overflow: hidden;
 }
 
-.backgroundImage {
+.glowTop {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  width: 480px;
+  height: 240px;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  filter: blur(90px);
+  background: rgba(50, 200, 217, 0.09);
+  pointer-events: none;
   z-index: 0;
 }
 
-.bgImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.ctaPanel {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: clamp(2.1rem, 4vw, 2.65rem) clamp(1.5rem, 3.5vw, 2.35rem)
+    clamp(1.9rem, 3.5vw, 2.25rem);
+  text-align: center;
+  background: linear-gradient(
+    165deg,
+    rgba(18, 36, 52, 0.72) 0%,
+    rgba(12, 24, 36, 0.55) 100%
+  );
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(50, 200, 217, 0.14);
+  border-radius: 26px;
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s ease;
+  overflow: hidden;
 }
 
-.overlay {
+.ctaPanel::before {
+  content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset-inline: 16%;
+  height: 1px;
   background: linear-gradient(
-    135deg,
-    rgba(24, 29, 39, 0.95) 0%,
-    rgba(24, 29, 39, 0.9) 50%,
-    rgba(24, 29, 39, 0.95) 100%
+    90deg,
+    transparent,
+    rgba(50, 200, 217, 0.5) 50%,
+    transparent
   );
-  z-index: 1;
+  opacity: 0.7;
+  pointer-events: none;
 }
 
-.ctaContent {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
+.ctaPanel::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: -16%;
+  bottom: -30%;
+  width: 55%;
+  height: 70%;
+  background: radial-gradient(
+    circle at center,
+    rgba(50, 200, 217, 0.07) 0%,
+    transparent 72%
+  );
+  pointer-events: none;
 }
 
-.ctaContent.visible {
+.ctaPanel.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #E7B742 0%, #FFD700 50%, #E7B742 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
+.ctaHeader {
+  margin-bottom: 1.65rem;
 }
 
-@keyframes shimmer {
-  to {
-    background-position: 200% center;
-  }
+.title {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+}
+
+.ctaHeader > div {
+  margin: 0.7rem auto 0.95rem !important;
 }
 
 .description {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
+  margin: 0 auto;
+  max-width: 580px;
+  font-size: clamp(0.96rem, 1.7vw, 1.08rem);
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.78;
 }
 
-.contactInfo {
-  display: flex;
+.contactDivider {
+  width: min(420px, 72%);
+  height: 1px;
+  margin: 0 auto 1.35rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(50, 200, 217, 0.22) 50%,
+    transparent
+  );
+}
+
+.contactGrid {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.contactGridDouble {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.contactGridSingle {
+  grid-template-columns: minmax(0, 340px);
   justify-content: center;
-  gap: 2.5rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
 }
 
-.contactItem {
+.contactCard {
+  position: relative;
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
-  gap: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.1rem;
+  justify-content: space-between;
+  gap: 0.85rem;
+  min-height: 88px;
+  padding: 1rem 1.1rem;
   text-decoration: none;
-  padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(231, 183, 66, 0.2);
-  border-radius: 50px;
-  transition: all 0.3s ease;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.035),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(50, 200, 217, 0.12);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.contactItem:hover {
-  background: rgba(231, 183, 66, 0.15);
-  border-color: rgba(231, 183, 66, 0.5);
-  color: #E7B742;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(231, 183, 66, 0.2);
-}
-
-.contactIcon {
-  font-size: 1.25rem;
-  color: #E7B742;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.primaryBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #E7B742, #FFD700);
-  color: #181d27;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 50px;
-  transition: all 0.4s ease;
-  box-shadow: 0 5px 20px rgba(231, 183, 66, 0.3);
-}
-
-.primaryBtn:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(231, 183, 66, 0.4);
-  color: #181d27;
-}
-
-.primaryBtn:hover .btnIcon {
-  transform: translateX(5px);
-}
-
-.btnIcon {
-  font-size: 0.9rem;
-  transition: transform 0.3s ease;
-}
-
-[dir="rtl"] .primaryBtn:hover .btnIcon {
-  transform: translateX(-5px);
-}
-
-.secondaryBtn {
-  display: inline-flex;
-  align-items: center;
-  padding: 1rem 2.5rem;
-  background: transparent;
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-decoration: none;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50px;
-  transition: all 0.4s ease;
-}
-
-.secondaryBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #ffffff;
-  transform: translateY(-3px);
-}
-
-/* Decorative elements */
-.decorLeft,
-.decorRight {
+.contactCard::before {
+  content: '';
   position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(231, 183, 66, 0.15) 0%, transparent 70%);
-  z-index: 1;
+  top: 0;
+  inset-inline: 20%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(50, 200, 217, 0.35) 50%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
   pointer-events: none;
 }
 
-.decorLeft {
-  top: 20%;
-  left: -100px;
+.contactCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(50, 200, 217, 0.28);
+  background: linear-gradient(
+    145deg,
+    rgba(50, 200, 217, 0.08),
+    rgba(50, 200, 217, 0.02)
+  );
+  box-shadow:
+    0 8px 24px rgba(50, 200, 217, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.decorRight {
-  bottom: 20%;
-  right: -100px;
+.contactCard:hover::before {
+  opacity: 1;
 }
 
-/* Responsive */
+.contactIconWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactIconRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 13px;
+  border: 1px solid rgba(50, 200, 217, 0.16);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(50, 200, 217, 0.1) 0%,
+    transparent 72%
+  );
+  transition: border-color 0.35s ease;
+}
+
+.contactIconPlate {
+  position: absolute;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  background: linear-gradient(
+    145deg,
+    rgba(50, 200, 217, 0.16),
+    rgba(50, 200, 217, 0.05)
+  );
+  border: 1px solid rgba(50, 200, 217, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.35s ease;
+}
+
+.contactIconGlyph {
+  position: relative;
+  z-index: 1;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+}
+
+.contactCard:hover .contactIconPlate {
+  transform: scale(1.05);
+}
+
+.contactCard:hover .contactIconRing {
+  border-color: rgba(50, 200, 217, 0.3);
+}
+
+.contactText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+  text-align: start;
+}
+
+.contactLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(50, 200, 217, 0.85);
+  line-height: 1.2;
+}
+
+.contactAccent {
+  display: block;
+  width: 32px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to inline-end,
+    var(--color-primary),
+    rgba(50, 200, 217, 0.08)
+  );
+  opacity: 0.65;
+  transition: width 0.35s ease, opacity 0.35s ease;
+}
+
+.contactCard:hover .contactAccent {
+  width: 44px;
+  opacity: 0.9;
+}
+
+.contactValue {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.45;
+  word-break: break-word;
+  transition: color 0.35s ease;
+}
+
+.contactCard:hover .contactValue {
+  color: rgba(255, 255, 255, 0.98);
+}
+
 @media (max-width: 992px) {
   .ctaSection {
-    padding: 6rem 0;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-  }
-  
-  .description {
-    font-size: 1.15rem;
+    padding: 0.75rem 0 3.25rem;
   }
 }
 
 @media (max-width: 768px) {
-  .ctaSection {
-    padding: 5rem 0;
+  .ctaPanel {
+    border-radius: 22px;
   }
-  
-  .title {
-    font-size: 2rem;
-  }
-  
-  .description {
-    font-size: 1.05rem;
-    padding: 0 1rem;
-  }
-  
-  .contactInfo {
-    gap: 1rem;
-  }
-  
-  .contactItem {
-    padding: 0.75rem 1.25rem;
-    font-size: 1rem;
-  }
-  
-  .buttons {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  .primaryBtn,
-  .secondaryBtn {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
+
+  .contactGridDouble {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 576px) {
-  .title {
-    font-size: 1.75rem;
+  .glowTop {
+    width: min(320px, 90vw);
+    height: 180px;
   }
-  
-  .contactInfo {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: center;
+
+  .contactCard {
+    min-height: 82px;
+    padding: 0.9rem 0.95rem;
+    gap: 0.7rem;
   }
-  
-  .contactItem {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
+
+  .contactIconWrap {
+    width: 2.75rem;
+    height: 2.75rem;
   }
-  
-  .decorLeft,
-  .decorRight {
-    width: 200px;
-    height: 200px;
+
+  .contactIconPlate {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .contactValue {
+    font-size: 0.88rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaPanel {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .contactCard {
+    transition: none;
   }
 }

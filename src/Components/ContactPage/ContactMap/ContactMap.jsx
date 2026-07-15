@@ -1,36 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactMap.module.css'
-import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
+import { useSettings } from '../../../hooks/useSettings'
+import { useLocale } from '../../../hooks/useLocale'
+import { useIntersectionReveal } from '../../../hooks/useIntersectionReveal'
+import { getLocalizedOrRaw } from '../../../utils/i18nHelpers'
+import Icon from '../../Common/Icon.jsx'
+import HeadingAccent from '../../Common/HeadingAccent/HeadingAccent.jsx'
 
 export default function ContactMap() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
+  const { t } = useTranslation()
+  const { lang } = useLocale()
+  const { settings } = useSettings()
+  const { isVisible, sectionRef } = useIntersectionReveal()
 
-  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
-  const settings = settingsResponse?.data
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  // Riyadh, Saudi Arabia coordinates - Default
   const defaultMapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463876.9931636556!2d46.5423!3d24.7136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1680000000000!5m2!1sen!2s"
 
   return (
@@ -39,14 +21,13 @@ export default function ContactMap() {
         <div className="row justify-content-center">
           <div className="col-lg-10">
             <div className={`${styles.mapWrapper} ${isVisible ? styles.visible : ''}`}>
-              {/* Section Header */}
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionBadge}>{t('contactPage.map.badge')}</span>
                 <h2 className={styles.sectionTitle}>{t('contactPage.map.title')}</h2>
+                <HeadingAccent size="md" />
                 <p className={styles.sectionSubtitle}>{t('contactPage.map.subtitle')}</p>
               </div>
 
-              {/* Map Container */}
               <div className={styles.mapContainer}>
                 <div className={styles.mapFrame}>
                   <iframe
@@ -60,24 +41,23 @@ export default function ContactMap() {
                     title="BEYONEX IT Location"
                   ></iframe>
                 </div>
-                
-                {/* Location Card Overlay */}
+
                 <div className={styles.locationCard}>
                   <div className={styles.cardIcon}>
-                    {iconMap.mapMarker && React.createElement(iconMap.mapMarker)}
+                    <Icon name="mapMarker" />
                   </div>
                   <div className={styles.cardContent}>
                     <h4 className={styles.cardTitle}>{t('contactPage.map.cardTitle')}</h4>
                     <p className={styles.cardAddress}>
-                      {settings?.site_address?.[i18n.language] || t('contactPage.map.address')}
+                      {getLocalizedOrRaw(settings?.site_address, lang) || t('contactPage.map.address')}
                     </p>
-                    <a 
-                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"} 
-                      target="_blank" 
+                    <a
+                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className={styles.directionsBtn}
                     >
-                      {iconMap.directions && React.createElement(iconMap.directions)}
+                      <Icon name="directions" />
                       {t('contactPage.map.getDirections')}
                     </a>
                   </div>

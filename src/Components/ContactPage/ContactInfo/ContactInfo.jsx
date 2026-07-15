@@ -1,38 +1,24 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { iconMap } from '../../../utils/iconMap'
 import styles from './ContactInfo.module.css'
-import { useGetSettingsQuery } from '../../../redux/api/settingsApi'
+import { useSettings } from '../../../hooks/useSettings'
+import { useLocale } from '../../../hooks/useLocale'
+import { useIntersectionReveal } from '../../../hooks/useIntersectionReveal'
+import { buildContactSocialLinks } from '../../../utils/socialLinks'
+import { normalizeWhatsAppHref } from '../../../utils/whatsapp'
+import { getLocalizedOrRaw } from '../../../utils/i18nHelpers'
+import Icon from '../../Common/Icon.jsx'
+import HeadingAccent from '../../Common/HeadingAccent/HeadingAccent.jsx'
 
-export default function ContactInfo() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === 'ar'
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
-
-  const { data: settingsResponse } = useGetSettingsQuery(i18n.language)
-  const settings = settingsResponse?.data
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+export default function ContactInfo({ compact = false }) {
+  const { t } = useTranslation()
+  const { lang } = useLocale()
+  const { settings } = useSettings()
+  const { isVisible, sectionRef } = useIntersectionReveal()
 
   const contactItems = useMemo(() => {
     const items = []
-    
+
     if (settings?.site_phone) {
       items.push({
         icon: "phone",
@@ -44,13 +30,12 @@ export default function ContactInfo() {
     }
 
     if (settings?.whatsapp) {
-      // Extract number if it's a URL or just use it as is if it's already a link
       const whatsappVal = settings.site_phone || settings.whatsapp.split('/').pop()
       items.push({
         icon: "whatsapp",
         title: t('contactPage.info.whatsapp'),
         value: whatsappVal,
-        link: settings.whatsapp.startsWith('http') ? settings.whatsapp : `https://wa.me/${settings.whatsapp.replace(/\+/g, '')}`,
+        link: settings.whatsapp.startsWith('http') ? settings.whatsapp : normalizeWhatsAppHref(settings.whatsapp),
         isLTR: true
       })
     } else if (settings?.site_phone) {
@@ -58,7 +43,7 @@ export default function ContactInfo() {
         icon: "whatsapp",
         title: t('contactPage.info.whatsapp'),
         value: settings.site_phone,
-        link: `https://wa.me/${settings.site_phone.replace(/\+/g, '')}`,
+        link: normalizeWhatsAppHref(settings.site_phone),
         isLTR: true
       })
     }
@@ -73,122 +58,110 @@ export default function ContactInfo() {
       })
     }
 
-    if (settings?.site_address?.[i18n.language]) {
+    if (settings?.site_address?.[lang]) {
       items.push({
         icon: "mapMarker",
         title: t('contactPage.info.address'),
-        value: settings.site_address[i18n.language],
+        value: settings.site_address[lang],
         link: settings.location_url || '#',
         isLTR: false
       })
     }
 
     return items
-  }, [settings, t, i18n.language])
+  }, [settings, t, lang])
 
-  const socialLinks = useMemo(() => {
-    if (!settings) return []
-    
-    const platforms = [
-      { key: "facebook", icon: "facebook", label: "Facebook" },
-      { key: "linkedin", icon: "linkedin", label: "LinkedIn" },
-      { key: "snapchat", icon: "snapchat", label: "SnapChat" },
-      { key: "instagram", icon: "instagram", label: "Instagram" },
-      { key: "twitter", icon: "twitter", label: "X" },
-      { key: "telegram", icon: "paperPlane", label: "Telegram" },
-      { key: "tiktok", icon: "tiktok", label: "TikTok" }
-    ]
+  const socialLinks = useMemo(() => buildContactSocialLinks(settings), [settings])
 
-    return platforms
-      .filter(p => settings[p.key])
-      .map(p => ({
-        ...p,
-        link: settings[p.key]
-      }))
-  }, [settings])
+  const infoContent = (
+    <>
+      <div className={styles.sectionHeader}>
+        <span className={styles.sectionBadge}>{t('contactPage.info.badge')}</span>
+        <h2 className={styles.sectionTitle}>{t('contactPage.info.title')}</h2>
+        <HeadingAccent size="md" align="start" />
+        <p className={styles.sectionSubtitle}>{t('contactPage.info.subtitle')}</p>
+      </div>
 
-  return (
-    <section ref={sectionRef} className={styles.infoSection}>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-10">
-            <div className={`${styles.infoWrapper} ${isVisible ? styles.visible : ''}`}>
-              {/* Section Header */}
-              <div className={styles.sectionHeader}>
-                <span className={styles.sectionBadge}>{t('contactPage.info.badge')}</span>
-                <h2 className={styles.sectionTitle}>{t('contactPage.info.title')}</h2>
-                <p className={styles.sectionSubtitle}>{t('contactPage.info.subtitle')}</p>
-              </div>
+      <div className={styles.contactList}>
+        {contactItems.map((item, index) => (
+          <div key={index} className={styles.contactItem} style={{ '--delay': `${index * 0.1}s` }}>
+            <div className={styles.itemIcon}>
+              <Icon name={item.icon} />
+            </div>
+            <div className={styles.itemContent}>
+              <span className={styles.itemTitle}>{item.title}</span>
+              {item.link ? (
+                <a
+                  href={item.link}
+                  className={styles.itemValue}
+                  dir={item.isLTR ? 'ltr' : undefined}
+                  target={item.link.startsWith('http') ? '_blank' : undefined}
+                  rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  {item.value}
+                </a>
+              ) : (
+                <span className={styles.itemValue}>{item.value}</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
 
-              {/* Contact Cards */}
-              <div className={`row ${styles.contactGrid}`}>
-                {contactItems.map((item, index) => (
-                   <div className="col-md-6" key={index}>
-                    <div className={styles.contactItem} style={{ '--delay': `${index * 0.1}s` }}>
-                      <div className={styles.itemIcon}>
-                        {iconMap[item.icon] && React.createElement(iconMap[item.icon])}
-                      </div>
-                      <div className={styles.itemContent}>
-                        <span className={styles.itemTitle}>{item.title}</span>
-                        {item.link ? (
-                          <a 
-                            href={item.link} 
-                            className={styles.itemValue}
-                            dir={item.isLTR ? 'ltr' : undefined}
-                            target={item.link.startsWith('http') ? '_blank' : undefined}
-                            rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          >
-                            {item.value}
-                          </a>
-                        ) : (
-                          <span className={styles.itemValue}>{item.value}</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Working Hours */}
-              <div className={styles.workingHours}>
-                <div className={styles.hoursIcon}>
-                  {iconMap.clock && React.createElement(iconMap.clock)}
-                </div>
-                <div className={styles.hoursContent}>
-                  <h4 className={styles.hoursTitle}>{t('contactPage.info.workingHours')}</h4>
-                  <div className={styles.hoursGrid}>
-                    <div className={styles.hoursItem}>
-                      <span className={styles.hoursDay}>{t('contactPage.info.weekdays')}</span>
-                      <span className={styles.hoursTime}>
-                        {settings?.working_hours?.[i18n.language] || '8:00 - 16:00'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className={styles.socialSection}>
-                <h4 className={styles.socialTitle}>{t('contactPage.info.followUs')}</h4>
-                <div className={styles.socialLinks}>
-                  {socialLinks.map((social, index) => (
-                    <a 
-                      key={index}
-                      href={social.link}
-                      className={styles.socialLink}
-                      aria-label={social.label}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {iconMap[social.icon] && React.createElement(iconMap[social.icon])}
-                    </a>
-                  ))}
-                </div>
-              </div>
+      <div className={styles.workingHours}>
+        <div className={styles.hoursIcon}>
+          <Icon name="clock" />
+        </div>
+        <div className={styles.hoursContent}>
+          <h4 className={styles.hoursTitle}>{t('contactPage.info.workingHours')}</h4>
+          <div className={styles.hoursGrid}>
+            <div className={styles.hoursItem}>
+              <span className={styles.hoursDay}>{t('contactPage.info.weekdays')}</span>
+              <span className={styles.hoursTime}>
+                {getLocalizedOrRaw(settings?.working_hours, lang) || '8:00 - 16:00'}
+              </span>
             </div>
           </div>
         </div>
       </div>
+
+      <div className={styles.socialSection}>
+        <h4 className={styles.socialTitle}>{t('contactPage.info.followUs')}</h4>
+        <div className={styles.socialLinks}>
+          {socialLinks.map((social, index) => (
+            <a
+              key={index}
+              href={social.link}
+              className={styles.socialLink}
+              aria-label={social.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name={social.icon} />
+            </a>
+          ))}
+        </div>
+      </div>
+    </>
+  )
+
+  return (
+    <section ref={sectionRef} className={`${styles.infoSection} ${compact ? styles.compact : ''}`}>
+      {compact ? (
+        <div className={`${styles.infoWrapper} ${isVisible ? styles.visible : ''}`}>
+          {infoContent}
+        </div>
+      ) : (
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-10">
+              <div className={`${styles.infoWrapper} ${isVisible ? styles.visible : ''}`}>
+                {infoContent}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

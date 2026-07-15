@@ -1,0 +1,111 @@
+@import "./_variables.css";
+@import "./_scrollbar.css";
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--brand-800);
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+.container {
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: max(0.875rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.875rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+/* Arabic & English — Montserrat */
+[dir="rtl"],
+[dir="rtl"] *,
+[dir="ltr"],
+[dir="ltr"] * {
+  font-family: "Montserrat", sans-serif !important;
+  font-optical-sizing: auto;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] a,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select,
+[dir="rtl"] label,
+[dir="ltr"] h1,
+[dir="ltr"] h2,
+[dir="ltr"] h3,
+[dir="ltr"] h4,
+[dir="ltr"] h5,
+[dir="ltr"] h6,
+[dir="ltr"] p,
+[dir="ltr"] span,
+[dir="ltr"] a,
+[dir="ltr"] button,
+[dir="ltr"] input,
+[dir="ltr"] textarea,
+[dir="ltr"] select,
+[dir="ltr"] label {
+  font-family: "Montserrat", sans-serif !important;
+  font-optical-sizing: auto;
+}
+
+/* Navbar Links Styles - Override Bootstrap */
+.navbar-nav .nav-link {
+  color: var(--color-bg-darker) !important;
+  font-size: 1.0625rem;
+  font-weight: 600 !important;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--color-primary) !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--color-bg-body) !important;
+  font-weight: 700 !important;
+}

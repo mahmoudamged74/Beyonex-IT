@@ -1,3 +1,32 @@
 .contactPage {
   overflow-x: hidden;
 }
+
+.contactMain {
+  padding: 0 0 clamp(3rem, 5vw, 4rem);
+}
+
+.contactGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .contactGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+@media (max-width: 576px) {
+  .contactMain {
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .contactGrid {
+    gap: 1rem;
+  }
+}

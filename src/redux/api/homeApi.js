@@ -6,6 +6,7 @@ export const homeApi = baseApi.injectEndpoints({
       query: (lang = 'ar') => ({
         url: 'home',
         headers: {
+          Accept: 'application/json',
           'Accept-Language': lang,
         },
       }),

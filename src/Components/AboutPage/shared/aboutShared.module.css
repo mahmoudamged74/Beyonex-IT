@@ -1,0 +1,29 @@
+/* Shared decorative layers for About page sections */
+
+.meshBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(rgba(var(--color-primary-rgb), 0.06) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      rgba(var(--color-primary-rgb), 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+  mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    black 20%,
+    transparent 75%
+  );
+}
+
+@media (max-width: 576px) {
+  .meshBg {
+    background-size: 32px 32px;
+    opacity: 0.35;
+  }
+}

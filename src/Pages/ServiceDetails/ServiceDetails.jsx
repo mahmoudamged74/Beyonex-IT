@@ -1,21 +1,25 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react'
+import { colors } from "../../Styles/colors";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { iconMap } from "../../utils/iconMap";
+import { iconMap } from '../../Components/Common/iconMap';
 import styles from "./ServiceDetails.module.css";
 import { useGetServiceDetailsQuery } from "../../redux/api/servicesApi";
+import { STATIC_QUERY_OPTIONS } from "../../redux/liveQueryOptions";
+import { useLocale } from "../../hooks/useLocale";
+import { getLocalizedOrRaw } from "../../utils/i18nHelpers";
+import Icon from '../../Components/Common/Icon.jsx';
+import HeadingAccent from '../../Components/Common/HeadingAccent/HeadingAccent.jsx';
 
 export default function ServiceDetails() {
   const { serviceKey } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { i18n, t } = useTranslation();
-  const isRTL = i18n.language === "ar";
+  const { lang, isRTL } = useLocale();
 
-  const { data: serviceResponse, isLoading, isError } = useGetServiceDetailsQuery({ 
-    slug: serviceKey, 
-    lang: i18n.language 
-  });
+  const { data: serviceResponse, isLoading, isError } = useGetServiceDetailsQuery({
+    slug: serviceKey,
+    lang,
+  }, STATIC_QUERY_OPTIONS);
 
   const service = serviceResponse?.data;
 
@@ -33,22 +37,20 @@ export default function ServiceDetails() {
 
   if (isError || !service) {
     return (
-      <div className="container py-5">
+      <div className={`container ${styles.notFoundWrap}`}>
         <div className={styles.notFoundCard}>
-          <h2 className="mb-2">
-            {isRTL ? "الخدمة غير موجودة" : "Service not found"}
-          </h2>
-          <p className="mb-4">
+          <h2>{isRTL ? "الخدمة غير موجودة" : "Service not found"}</h2>
+          <p>
             {isRTL
               ? "الرابط غير صحيح أو الخدمة اتغيّرت."
               : "This link is invalid or the service has changed."}
           </p>
-          <div className="d-flex gap-2 flex-wrap">
-            <button className="btn btn-primary" onClick={() => navigate(-1)}>
+          <div className={styles.notFoundActions}>
+            <button type="button" className={styles.primaryButton} onClick={() => navigate(-1)}>
               {isRTL ? "رجوع" : "Go back"}
             </button>
-            <Link className="btn btn-outline-secondary" to="/">
-              {isRTL ? "الصفحة الرئيسية" : "Home"}
+            <Link className={styles.secondaryButton} to="/services">
+              {isRTL ? "كل الخدمات" : "All services"}
             </Link>
           </div>
         </div>
@@ -56,70 +58,94 @@ export default function ServiceDetails() {
     );
   }
 
-  const Icon = iconMap[service.icon] || iconMap.code;
-  const accentColor = location.state?.color || service.color || "#E7B742";
+  const IconComponent = iconMap[service.icon] || iconMap.code;
+  const accentColor = location.state?.color || service.color || colors.primary;
+  const title = getLocalizedOrRaw(service.title, lang);
+  const shortDescription = getLocalizedOrRaw(service.short_description, lang);
+  const longDescription = getLocalizedOrRaw(service.long_description, lang);
+  const features = service.features?.[lang] || (Array.isArray(service.features) ? service.features : []);
+  const technologies = service.technologies || [];
+  const hasOverview = Boolean(longDescription);
+  const hasFeatures = features.length > 0;
+  const hasTechnologies = technologies.length > 0;
 
   return (
     <main
       className={styles.page}
       dir={isRTL ? "rtl" : "ltr"}
-      style={{
-        "--accent": accentColor,
-      }}
+      style={{ "--accent": accentColor }}
     >
+      {/* ── Hero ── */}
       <section className={styles.hero}>
         <div className="container">
+          <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+            <Link to="/" className={styles.breadcrumbLink}>
+              {isRTL ? "الرئيسية" : "Home"}
+            </Link>
+            <span className={styles.breadcrumbSep}>/</span>
+            <Link to="/services" className={styles.breadcrumbLink}>
+              {isRTL ? "الخدمات" : "Services"}
+            </Link>
+            <span className={styles.breadcrumbSep}>/</span>
+            <span className={styles.breadcrumbCurrent}>{title}</span>
+          </nav>
+
           <div className={styles.heroGrid}>
             <div className={styles.heroCopy}>
-              <div className={styles.breadcrumbs}>
-                <Link to="/" className={styles.breadcrumbLink}>
-                  {isRTL ? "الرئيسية" : "Home"}
-                </Link>
-                <span className={styles.breadcrumbSep}>/</span>
-                <span className={styles.breadcrumbCurrent}>
-                  {service.title?.[i18n.language] || service.title}
-                </span>
-              </div>
+              <span className={styles.heroBadge}>
+                {isRTL ? "تفاصيل الخدمة" : "Service Details"}
+              </span>
+              <h1 className={styles.title}>{title}</h1>
+              <HeadingAccent size="lg" align="start" />
+              {shortDescription && (
+                <p className={styles.overview}>{shortDescription}</p>
+              )}
 
-              <h1 className={styles.title}>
-                {service.title?.[i18n.language] || service.title}
-              </h1>
-              
-              <div className={styles.overview}>
-                {service.short_description?.[i18n.language] || service.short_description}
-              </div>
-
-              <div className={styles.richDescription} 
-                   dangerouslySetInnerHTML={{ 
-                     __html: service.long_description?.[i18n.language] || service.long_description 
-                   }} 
-              />
+              {(hasFeatures || hasTechnologies) && (
+                <ul className={styles.heroMeta}>
+                  {hasFeatures && (
+                    <li className={styles.metaItem}>
+                      <Icon name="checkCircle" className={styles.metaIcon} />
+                      <span>
+                        {features.length} {isRTL ? "ميزة" : "benefits"}
+                      </span>
+                    </li>
+                  )}
+                  {hasTechnologies && (
+                    <li className={styles.metaItem}>
+                      <Icon name="code" className={styles.metaIcon} />
+                      <span>
+                        {technologies.length} {isRTL ? "تقنية" : "technologies"}
+                      </span>
+                    </li>
+                  )}
+                </ul>
+              )}
 
               <div className={styles.heroActions}>
                 <Link to="/contact" className={styles.primaryButton}>
                   {isRTL ? "اطلب عرض سعر" : "Request a quote"}
                 </Link>
-                <button
-                  className="btn btn-outline-light"
-                  onClick={() => navigate(-1)}
-                >
-                  {isRTL ? "رجوع" : "Back"}
-                </button>
+                <Link to="/services" className={styles.secondaryButton}>
+                  {isRTL ? "كل الخدمات" : "All services"}
+                </Link>
               </div>
             </div>
 
             <div className={styles.heroVisual}>
               <div className={styles.visualCard}>
-                <div className={styles.visualBg} />
-                <img
-                  src={service.image || "/assets/software.webp"}
-                  alt={service.title?.[i18n.language] || service.title}
-                  className={styles.heroImage}
-                  loading="lazy"
-                  decoding="async"
-                />
+                {service.image && (
+                  <img
+                    src={service.image}
+                    alt={title}
+                    className={styles.heroImage}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <div className={styles.imageOverlay} />
                 <div className={styles.visualBadge}>
-                  {Icon && <Icon className={styles.visualIcon} />}
+                  <IconComponent className={styles.visualIcon} />
                 </div>
               </div>
             </div>
@@ -127,84 +153,99 @@ export default function ServiceDetails() {
         </div>
       </section>
 
-      {/* Technologies Section */}
-      {service.technologies && service.technologies.length > 0 && (
-        <section className="container py-5">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              {isRTL ? "التقنيات المستخدمة" : "Technologies We Use"}
-            </h2>
-          </div>
+      {/* ── Main Layout ── */}
+      <section className={styles.mainLayout}>
+        <div className="container">
+          <div className={styles.layoutGrid}>
 
-          <div className={styles.stackGrid}>
-            {service.technologies.map((item, index) => (
-              <span key={index} className={styles.stackChip}>
-                {item}
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
+            {/* Main Column */}
+            <div className={styles.mainColumn}>
+              {hasOverview && (
+                <article id="overview" className={styles.contentBlock}>
+                  <header className={styles.blockHeader}>
+                    <span className={styles.sectionEyebrow}>
+                      {isRTL ? "01 — نبذة" : "01 — Overview"}
+                    </span>
+                    <h2 className={styles.sectionTitle}>
+                      {isRTL ? "عن هذه الخدمة" : "About this service"}
+                    </h2>
+                    <HeadingAccent size="sm" align="start" />
+                  </header>
+                  <div
+                    className={styles.richDescription}
+                    dangerouslySetInnerHTML={{ __html: longDescription }}
+                  />
+                </article>
+              )}
 
-      {/* Features Section */}
-      {(() => {
-        const features = service.features?.[i18n.language] || (Array.isArray(service.features) ? service.features : []);
-        if (!features || features.length === 0) return null;
+              {hasFeatures && (
+                <article id="benefits" className={styles.contentBlock}>
+                  <header className={styles.blockHeader}>
+                    <span className={styles.sectionEyebrow}>
+                      {isRTL ? "02 — الفوائد" : "02 — Benefits"}
+                    </span>
+                    <h2 className={styles.sectionTitle}>
+                      {isRTL ? "ما الذي ستحصل عليه؟" : "What you'll get"}
+                    </h2>
+                    <HeadingAccent size="sm" align="start" />
+                    <p className={styles.sectionSubtitle}>
+                      {isRTL
+                        ? "مخرجات واضحة وتسليم منظم يحقق أهدافك."
+                        : "Clear deliverables and structured execution that meets your goals."}
+                    </p>
+                  </header>
 
-        return (
-          <section className={styles.altSection}>
-            <div className="container py-5">
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>
-                  {isRTL ? "وش تستفيد من الخدمة؟" : "How do you benefit from the service?"}
-                </h2>
-                <p className={styles.sectionSubtitle}>
-                  {isRTL ? "مخرجات واضحة وتسليم منظم وتجربة استخدام فورية." : "Clear outputs, organized delivery and immediate user experience."}
-                </p>
-              </div>
-
-              <div className={styles.cardsGrid}>
-                {features.map((feature, index) => (
-                  <div key={index} className={styles.infoCard}>
-                    <div className={styles.cardTop}>
-                      <Icon className={styles.cardIcon} />
-                      <div className={styles.cardLine} />
-                    </div>
-                    <div className={styles.cardBody}>
-                      {typeof feature === 'string' ? feature : (feature?.[i18n.language] || feature)}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  <ol className={styles.featuresList}>
+                    {features.map((feature, index) => (
+                      <li key={index} className={styles.featureItem}>
+                        <span className={styles.featureNumber}>
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <div className={styles.featureContent}>
+                          <IconComponent className={styles.featureIcon} />
+                          <p className={styles.featureText}>
+                            {typeof feature === "string" ? feature : feature?.[lang] || feature}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </article>
+              )}
             </div>
-          </section>
-        );
-      })()}
 
-      <section className="container py-5">
-        <div className={styles.cta}>
-          <div>
-            <h3 className={styles.ctaTitle}>
-              {isRTL
-                ? "تبغى نفس الخدمة بمواصفات خاصة؟"
-                : "Need this service tailored to you?"}
-            </h3>
-            <p className={styles.ctaText}>
-              {isRTL
-                ? "أرسل تفاصيل مشروعك ونرجع لك بخطة تنفيذ واضحة."
-                : "Send your project details and we’ll get back with a clear delivery plan."}
-            </p>
-          </div>
-          <div className={styles.ctaActions}>
-            <Link to="/contact" className="btn btn-dark">
-              {isRTL ? "تواصل معنا" : "Contact us"}
-            </Link>
-            <Link to="/" className="btn btn-outline-secondary">
-              {isRTL ? "استكشف خدماتنا" : "Explore services"}
-            </Link>
+            {/* Sidebar */}
+            <aside className={styles.sidebar}>
+              <div className={styles.sidebarSticky}>
+
+                {hasTechnologies && (
+                  <div className={`${styles.sidebarBlock} ${styles.techBlock}`}>
+                    <div className={styles.sidebarBlockHeader}>
+                      <span className={styles.sidebarBlockIcon}>
+                        <Icon name="code" />
+                      </span>
+                      <h3 className={styles.sidebarTitle}>
+                        {isRTL ? "التقنيات المستخدمة" : "Technologies"}
+                      </h3>
+                    </div>
+                    <ul className={styles.techList}>
+                      {technologies.map((item, index) => (
+                        <li key={index} className={styles.techItem}>
+                          <span className={styles.techBullet} aria-hidden="true" />
+                          <span className={styles.techLabel}>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+              </div>
+            </aside>
+
           </div>
         </div>
       </section>
+
     </main>
   );
 }
