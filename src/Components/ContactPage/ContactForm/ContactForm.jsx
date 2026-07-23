@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import styles from './ContactForm.module.css'
 import { useSubmitContactFormMutation } from '../../../redux/api/contactApi'
 import Icon from '../../Common/Icon.jsx'
-import HeadingAccent from '../../Common/HeadingAccent/HeadingAccent.jsx'
 
 export default function ContactForm({ compact = false }) {
   const { t } = useTranslation()
@@ -15,7 +14,7 @@ export default function ContactForm({ compact = false }) {
     phone: '',
     company_name: '',
     subject: '',
-    message: ''
+    message: '',
   })
 
   const [submitContact, { isLoading: isSubmitting }] = useSubmitContactFormMutation()
@@ -37,9 +36,9 @@ export default function ContactForm({ compact = false }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }))
   }
 
@@ -61,7 +60,7 @@ export default function ContactForm({ compact = false }) {
         phone: '',
         company_name: '',
         subject: '',
-        message: ''
+        message: '',
       })
     } catch (err) {
       console.error('Submission error:', err)
@@ -76,7 +75,7 @@ export default function ContactForm({ compact = false }) {
     { value: 'mobile_applications', label: t('contactPage.form.subjects.mobile_applications') },
     { value: 'erp_systems', label: t('contactPage.form.subjects.erp_systems') },
     { value: 'technical_support', label: t('contactPage.form.subjects.technical_support') },
-    { value: 'other', label: t('contactPage.form.subjects.other') }
+    { value: 'other', label: t('contactPage.form.subjects.other') },
   ]
 
   const selectedSubject = subjects.find((s) => s.value === formData.subject) || subjects[0]
@@ -89,12 +88,10 @@ export default function ContactForm({ compact = false }) {
 
   const formBody = (
     <div className={styles.formWrapper}>
-      <div className={styles.sectionHeader}>
-        <span className={styles.sectionBadge}>{t('contactPage.form.badge')}</span>
+      <header className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>{t('contactPage.form.title')}</h2>
-        <HeadingAccent size="md" align="start" />
         <p className={styles.sectionSubtitle}>{t('contactPage.form.subtitle')}</p>
-      </div>
+      </header>
 
       {isSubmitted ? (
         <div className={styles.successMessage}>
@@ -112,53 +109,53 @@ export default function ContactForm({ compact = false }) {
           </button>
         </div>
       ) : (
-        <form ref={formRef} onSubmit={handleSubmit} className={styles.contactForm}>
+        <form ref={formRef} onSubmit={handleSubmit} className={styles.contactForm} noValidate>
           {error && (
-            <div className={`alert alert-danger ${styles.errorAlert}`}>
+            <div className={styles.errorAlert} role="alert">
               {error}
             </div>
           )}
 
-          <div className={styles.formFields}>
+          <div className={styles.formGrid}>
             <div className={styles.formGroup}>
+              <label className={styles.fieldLabel} htmlFor="contact-full-name">
+                {t('contactPage.form.namePlaceholder')}
+              </label>
               <div className={styles.inputWrapper}>
-                <span className={styles.inputIcon}><Icon name="user" /></span>
+                <span className={styles.inputIcon} aria-hidden="true">
+                  <Icon name="user" />
+                </span>
                 <input
+                  id="contact-full-name"
                   type="text"
                   name="full_name"
                   value={formData.full_name}
                   onChange={handleChange}
                   placeholder={t('contactPage.form.namePlaceholder')}
                   required
+                  autoComplete="name"
                   className={styles.formInput}
                 />
               </div>
             </div>
 
             <div className={styles.formGroup}>
+              <label className={styles.fieldLabel} htmlFor="contact-email">
+                {t('contactPage.form.emailPlaceholder')}
+              </label>
               <div className={styles.inputWrapper}>
-                <span className={styles.inputIcon}><Icon name="envelope" /></span>
+                <span className={styles.inputIcon} aria-hidden="true">
+                  <Icon name="envelope" />
+                </span>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder={t('contactPage.form.emailPlaceholder')}
                   required
-                  className={styles.formInput}
-                />
-              </div>
-            </div>
-
-            <div className={styles.formGroup}>
-              <div className={styles.inputWrapper}>
-                <span className={styles.inputIcon}><Icon name="phone" /></span>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder={t('contactPage.form.phonePlaceholder')}
+                  autoComplete="email"
                   className={styles.formInput}
                   dir="ltr"
                 />
@@ -166,30 +163,67 @@ export default function ContactForm({ compact = false }) {
             </div>
 
             <div className={styles.formGroup}>
+              <label className={styles.fieldLabel} htmlFor="contact-phone">
+                {t('contactPage.form.phonePlaceholder')}
+              </label>
               <div className={styles.inputWrapper}>
-                <span className={styles.inputIcon}><Icon name="building" /></span>
+                <span className={styles.inputIcon} aria-hidden="true">
+                  <Icon name="phone" />
+                </span>
                 <input
-                  type="text"
-                  name="company_name"
-                  value={formData.company_name}
+                  id="contact-phone"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleChange}
-                  placeholder={t('contactPage.form.companyPlaceholder')}
+                  placeholder={t('contactPage.form.phonePlaceholder')}
+                  autoComplete="tel"
                   className={styles.formInput}
+                  dir="ltr"
                 />
               </div>
             </div>
 
             <div className={styles.formGroup}>
+              <label className={styles.fieldLabel} htmlFor="contact-company">
+                {t('contactPage.form.companyPlaceholder')}
+              </label>
+              <div className={styles.inputWrapper}>
+                <span className={styles.inputIcon} aria-hidden="true">
+                  <Icon name="building" />
+                </span>
+                <input
+                  id="contact-company"
+                  type="text"
+                  name="company_name"
+                  value={formData.company_name}
+                  onChange={handleChange}
+                  placeholder={t('contactPage.form.companyPlaceholder')}
+                  autoComplete="organization"
+                  className={styles.formInput}
+                />
+              </div>
+            </div>
+
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label className={styles.fieldLabel} id="contact-subject-label">
+                {t('contactPage.form.selectSubject')}
+              </label>
               <div className={`${styles.inputWrapper} ${styles.selectWrapper}`} ref={selectRef}>
-                <span className={styles.inputIcon}><Icon name="commentAlt" /></span>
+                <span className={styles.inputIcon} aria-hidden="true">
+                  <Icon name="commentAlt" />
+                </span>
                 <button
                   type="button"
                   className={`${styles.formInput} ${styles.customSelect} ${selectOpen ? styles.selectOpen : ''}`}
                   onClick={() => setSelectOpen((open) => !open)}
                   aria-haspopup="listbox"
                   aria-expanded={selectOpen}
+                  aria-labelledby="contact-subject-label"
                 >
-                  <span className={`${styles.selectValue} ${!formData.subject ? styles.selectPlaceholder : ''}`}>
+                  <span
+                    className={`${styles.selectValue} ${!formData.subject ? styles.selectPlaceholder : ''}`}
+                  >
                     {selectedSubject.label}
                   </span>
                   <Icon name="chevronDown" className={styles.selectChevron} />
@@ -197,7 +231,11 @@ export default function ContactForm({ compact = false }) {
                 {selectOpen && (
                   <ul className={styles.selectMenu} role="listbox">
                     {subjectOptions.map((subject) => (
-                      <li key={subject.value} role="option" aria-selected={formData.subject === subject.value}>
+                      <li
+                        key={subject.value}
+                        role="option"
+                        aria-selected={formData.subject === subject.value}
+                      >
                         <button
                           type="button"
                           className={`${styles.selectOption} ${formData.subject === subject.value ? styles.selectOptionActive : ''}`}
@@ -212,9 +250,13 @@ export default function ContactForm({ compact = false }) {
               </div>
             </div>
 
-            <div className={styles.formGroup}>
+            <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
+              <label className={styles.fieldLabel} htmlFor="contact-message">
+                {t('contactPage.form.messagePlaceholder')}
+              </label>
               <div className={styles.inputWrapper}>
                 <textarea
+                  id="contact-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -225,25 +267,21 @@ export default function ContactForm({ compact = false }) {
                 />
               </div>
             </div>
-
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <span className={styles.spinner}></span>
-                  {t('contactPage.form.sending')}
-                </>
-              ) : (
-                <>
-                  <Icon name="paperPlane" className={styles.btnIcon} />
-                  {t('contactPage.form.submit')}
-                </>
-              )}
-            </button>
           </div>
+
+          <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <span className={styles.spinner} />
+                {t('contactPage.form.sending')}
+              </>
+            ) : (
+              <>
+                <Icon name="paperPlane" className={styles.btnIcon} />
+                {t('contactPage.form.submit')}
+              </>
+            )}
+          </button>
         </form>
       )}
     </div>
@@ -251,12 +289,12 @@ export default function ContactForm({ compact = false }) {
 
   return (
     <section className={`${styles.formSection} ${compact ? styles.compact : ''}`}>
-      {compact ? formBody : (
+      {compact ? (
+        formBody
+      ) : (
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-10 col-xl-9">
-              {formBody}
-            </div>
+            <div className="col-lg-10 col-xl-9">{formBody}</div>
           </div>
         </div>
       )}

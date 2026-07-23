@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import styles from './AboutValues.module.css'
-import AboutSectionHeader from '../shared/AboutSectionHeader'
+import SectionHeader from '../../Common/SectionHeader/SectionHeader'
 import { useAboutData } from '../../../hooks/useAboutData'
 import { useIntersectionReveal } from '../../../hooks/useIntersectionReveal'
 import { getLocalizedOrRaw } from '../../../utils/i18nHelpers'
@@ -23,17 +23,15 @@ function ValueCard({ icon, title, description, delay, isVisible }) {
       className={`${styles.valueCard} ${isVisible ? styles.visible : ''}`}
       style={{ animationDelay: `${delay}s` }}
     >
-      <div className={styles.iconWrap} aria-hidden="true">
-        <span className={styles.iconRing} />
-        <span className={styles.iconPlate} />
-        <Icon name={icon} fallback="gem" className={styles.iconGlyph} />
+      <div className={styles.cardHead}>
+        <div className={styles.iconWrap} aria-hidden="true">
+          <Icon name={icon} fallback="gem" className={styles.iconGlyph} />
+        </div>
+        <h3 className={styles.valueTitle}>{title}</h3>
       </div>
 
-      <div className={styles.cardContent}>
-        <h3 className={styles.valueTitle}>{title}</h3>
-        <span className={styles.valueAccent} aria-hidden="true" />
-        <p className={styles.valueDesc}>{description}</p>
-      </div>
+      <span className={styles.valueAccent} aria-hidden="true" />
+      <p className={styles.valueDesc}>{description}</p>
     </article>
   )
 }
@@ -47,7 +45,8 @@ export default function AboutValues() {
   return (
     <section ref={sectionRef} className={styles.valuesSection}>
       <div className="container">
-        <AboutSectionHeader
+        <SectionHeader
+          variant="about"
           className={styles.valuesHeader}
           title={t('aboutPage.values.title')}
           subtitle={t('aboutPage.values.subtitle')}

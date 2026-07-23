@@ -2,12 +2,36 @@
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
 }
 
 .main {
   flex: 1;
   position: relative;
   z-index: 1;
+  padding-top: var(--navbar-height);
+  min-width: 0;
+}
+
+.main[data-theme="light"] {
+  color-scheme: light;
+}
+
+.main[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (max-width: 991px) {
+  .main {
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 380px) {
+  .main {
+    padding-top: 64px;
+  }
 }

@@ -6,6 +6,7 @@ import './api/servicesApi';
 import './api/settingsApi';
 import './api/aboutApi';
 import './api/contactApi';
+import './api/partnersApi';
 
 export const store = configureStore({
   reducer: {

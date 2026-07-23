@@ -18,7 +18,7 @@
     var(--color-primary) 45%,
     var(--brand-100) 100%
   );
-  box-shadow: 0 0 12px rgba(50, 200, 217, 0.45);
+  box-shadow: 0 0 12px rgba(var(--color-primary-rgb), 0.45);
 }
 
 .bar.active {

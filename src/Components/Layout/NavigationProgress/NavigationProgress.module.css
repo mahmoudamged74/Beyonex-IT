@@ -1,0 +1,89 @@
+.progress {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 2000;
+  height: 3px;
+  pointer-events: none;
+  overflow: hidden;
+  background: transparent;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, var(--brand-400), var(--brand-200), var(--brand-100));
+  box-shadow: 0 0 12px rgba(var(--color-primary-rgb), 0.65);
+  transform-origin: inline-start;
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--color-brand-100-rgb), 0.85)
+  );
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.start .bar {
+  width: 12%;
+  transition: none;
+}
+
+.loading .bar {
+  width: 78%;
+  transition: width 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.loading .glow {
+  opacity: 1;
+  inset-inline-end: 22%;
+  transition:
+    inset-inline-end 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+}
+
+.done .bar {
+  width: 100%;
+  transition: width 0.22s ease-out;
+}
+
+.done .glow {
+  opacity: 0;
+  inset-inline-end: 0;
+  transition: opacity 0.2s ease;
+}
+
+.done {
+  animation: progressFade 0.28s ease 0.18s forwards;
+}
+
+@keyframes progressFade {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading .bar,
+  .done .bar,
+  .loading .glow,
+  .done {
+    transition: none;
+    animation: none;
+  }
+
+  .loading .bar,
+  .done .bar {
+    width: 100%;
+  }
+}

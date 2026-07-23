@@ -7,9 +7,10 @@ import { useLocale } from "../../../hooks/useLocale";
 import { getLocalizedOrRaw } from "../../../utils/i18nHelpers";
 import { useIntersectionReveal } from "../../../hooks/useIntersectionReveal";
 import Icon from "../../Common/Icon.jsx";
-import HeadingAccent from "../../Common/HeadingAccent/HeadingAccent.jsx";
+import SectionHeader from "../../Common/SectionHeader/SectionHeader.jsx";
 
-export default function AboutUS() {
+export default function AboutUS({ variant }) {
+  const isHome = variant === "home";
   const { t } = useTranslation();
   const { lang } = useLocale();
   const { about } = useHomeData();
@@ -43,7 +44,11 @@ export default function AboutUS() {
   );
 
   return (
-    <section ref={sectionRef} className={styles.aboutSection} id="about">
+    <section
+      ref={sectionRef}
+      className={`${styles.aboutSection} ${isHome ? styles.homeLayout : ""}`}
+      id="about"
+    >
       <div className={styles.backgroundImage}>
         <div className={styles.overlay} />
         <div className={styles.colorGrade} aria-hidden="true" />
@@ -54,12 +59,20 @@ export default function AboutUS() {
       <div className={styles.topGlow} aria-hidden="true" />
 
       <div className="container">
-        <header className={`${styles.header} ${isVisible ? styles.visible : ""}`}>
-          <h2 className={styles.title}>{t("about.title")}</h2>
-          <HeadingAccent size="md" />
-          <h3 className={styles.subtitle}>{t("about.subtitle")}</h3>
-          <p className={styles.description}>{description}</p>
-        </header>
+        <SectionHeader
+          isHome={isHome}
+          showEyebrow={!isHome}
+          showAccent={!isHome}
+          eyebrow={t("nav.about")}
+          title={t("about.title")}
+          accentSize="md"
+          subtitle={t("about.subtitle")}
+          subtitleAs="h3"
+          description={description}
+          isVisible={isVisible}
+          moduleStyles={styles}
+          className={isHome ? styles.homeHeader : ""}
+        />
 
         <div
           className={`${styles.pillarsPanel} ${isVisible ? styles.visible : ""}`}
@@ -96,11 +109,8 @@ export default function AboutUS() {
           <Link to="/about" className={styles.aboutBtn}>
             <span className={styles.aboutBtnInner}>
               <span>{t("about.readMore")}</span>
-              <span className={styles.aboutBtnIconWrap}>
-                <Icon name="arrowRight" className={styles.aboutBtnIcon} />
-              </span>
+              <Icon name="arrowRight" className={styles.aboutBtnIcon} />
             </span>
-            <span className={styles.aboutBtnShine} aria-hidden="true" />
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-/** Optional background sync — set VITE_API_POLLING_MS to enable (e.g. 120000). */
+/** Optional background sync — set VITE_API_POLLING_MS to enable (e.g. 60000). */
 const DEFAULT_POLLING_MS = 0;
 
 const sharedQueryOptions = {
@@ -7,7 +7,7 @@ const sharedQueryOptions = {
   skipPollingIfUnfocused: true,
 };
 
-/** Used by LiveDataSync for CMS content that may change in the dashboard. */
+/** Shared query options — fetch once, refetch on reconnect or tab return. */
 export const LIVE_QUERY_OPTIONS = {
   ...sharedQueryOptions,
   pollingInterval: Number(import.meta.env.VITE_API_POLLING_MS) || DEFAULT_POLLING_MS,

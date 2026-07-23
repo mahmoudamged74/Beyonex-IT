@@ -9,6 +9,339 @@
   z-index: 1;
 }
 
-.homeAdvantages :global(section) {
-  background-color: transparent;
+/* ══════════════════════════════════════════════════════════
+   Home section rhythm
+   ══════════════════════════════════════════════════════════ */
+.homeServices,
+.homeAbout,
+.homeProcess,
+.homeAdvantages,
+.homePartnersCta {
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 5rem;
+}
+
+/* Solid base — hides global grid, unique per section */
+.homeServices::before,
+.homeAbout::before,
+.homeProcess::before,
+.homeAdvantages::before,
+.homePartnersCta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Accent glow + section transitions */
+.homeServices::after,
+.homeAbout::after,
+.homeProcess::after,
+.homeAdvantages::after,
+.homePartnersCta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.homeServices > *,
+.homeAbout > *,
+.homeProcess > *,
+.homeAdvantages > *,
+.homePartnersCta > * {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Inner sections — spacing lives on wrappers only */
+.homeServices :global(#services),
+.homeAbout :global(#about),
+.homeProcess :global(#process),
+.homeAdvantages :global(#advantages),
+.homePartnersCta :global(#partners) {
+  padding-block: 0 !important;
+  background: transparent !important;
+}
+
+.homeServices :global(.container),
+.homeAbout :global(.container),
+.homeProcess :global(.container),
+.homeAdvantages :global(.container),
+.homePartnersCta :global(.container) {
+  padding-block: 0;
+}
+
+.homeServices :global(#services) header,
+.homeAbout :global(#about) header,
+.homeProcess :global(#process) header,
+.homeAdvantages :global(#advantages) header,
+.homePartnersCta :global(#partners) header {
+  margin-bottom: clamp(2.5rem, 5vw, 3.75rem) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Home light sections — white & gray rhythm
+   ══════════════════════════════════════════════════════════ */
+.homeServices,
+.homeAbout,
+.homeProcess,
+.homeAdvantages {
+  --home-surface: var(--color-surface);
+  --home-surface-muted: var(--color-surface-muted);
+  --home-surface-card: var(--color-content-card);
+  --home-surface-card-alt: var(--color-surface-muted);
+  --home-text-title: var(--color-section-title);
+  --home-text-subtitle: var(--color-text-subtitle);
+  --home-text-body: var(--color-text-muted);
+  --home-border: var(--color-border);
+  --home-shadow: 0 4px 20px rgba(var(--color-dark-rgb), 0.06);
+}
+
+.homeServices :global(#services) h2,
+.homeAbout :global(#about) h2,
+.homeProcess :global(#process) h2,
+.homeAdvantages :global(#advantages) h2 {
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  font-size: clamp(2rem, 5vw, 3.15rem);
+  font-weight: 800;
+  color: var(--home-text-title, var(--color-section-title));
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+}
+
+.homePartnersCta :global(#partners) h2,
+.homePartnersCta :global(h2) {
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  font-size: clamp(2rem, 5vw, 3.15rem);
+  font-weight: 800;
+  color: var(--color-white) !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: var(--color-white) !important;
+  background-clip: unset !important;
+}
+
+.homeServices :global(#services) h3,
+.homeAbout :global(#about) h3,
+.homeProcess :global(#process) h3,
+.homeAdvantages :global(#advantages) h3 {
+  color: var(--home-text-subtitle, var(--brand-600)) !important;
+}
+
+.homeServices :global(#services) p,
+.homeAbout :global(#about) p,
+.homeProcess :global(#process) p,
+.homeAdvantages :global(#advantages) p {
+  color: var(--home-text-body, var(--color-text-muted)) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   1 · Services — seamless continuation from hero
+   ══════════════════════════════════════════════════════════ */
+.homeServices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  margin-top: 0;
+}
+
+.homeServices::before {
+  background-color: var(--home-surface-muted, var(--color-surface-muted));
+  box-shadow: inset 0 1px 0 rgba(var(--color-dark-rgb), 0.04);
+}
+
+.homeServices::after {
+  background: transparent;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════
+   2 · About — teal editorial band
+   ══════════════════════════════════════════════════════════ */
+.homeAbout {
+  padding-block: clamp(5.5rem, 11vw, 8.5rem);
+}
+
+.homeAbout::before {
+  background-color: var(--home-surface, var(--color-surface));
+  box-shadow:
+    inset 0 1px 0 rgba(var(--color-dark-rgb), 0.04),
+    inset 0 -1px 0 rgba(var(--color-dark-rgb), 0.04);
+}
+
+.homeAbout::after {
+  background: transparent;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════
+   2.5 · Process — workflow clarity band
+   ══════════════════════════════════════════════════════════ */
+.homeProcess {
+  padding-block: clamp(5.5rem, 11vw, 8.5rem);
+  overflow: hidden;
+}
+
+.homeProcess::before {
+  background-color: var(--color-surface-muted);
+  background-image: url("/bg-sections/5.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(1.05) saturate(0.98);
+}
+
+/* Arabic: flip so idea (bulb) is on the right, launch (rocket) on the left */
+[dir="rtl"] .homeProcess::before {
+  transform: scaleX(-1);
+}
+
+.homeProcess::after {
+  background: rgba(var(--color-band-wash-soft-rgb), 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(var(--color-band-wash-rgb), 0.5),
+    inset 0 -1px 0 rgba(var(--color-dark-rgb), 0.04);
+  pointer-events: none;
+}
+
+:global([data-theme="dark"]) .homeProcess::before {
+  filter: brightness(0.42) saturate(0.92) contrast(1.05);
+}
+
+:global([data-theme="dark"]) .homeProcess::after {
+  background: rgba(var(--color-band-wash-rgb), 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(var(--color-primary-rgb), 0.06),
+    inset 0 -1px 0 rgba(var(--color-black-rgb), 0.2);
+}
+
+/* ══════════════════════════════════════════════════════════
+   3 · Advantages — deep slate with soft lift
+   ══════════════════════════════════════════════════════════ */
+.homeAdvantages {
+  padding-block: clamp(5.5rem, 11vw, 8.5rem);
+}
+
+.homeAdvantages::before {
+  background-color: var(--home-surface-muted, var(--color-surface-muted));
+  box-shadow:
+    inset 0 1px 0 rgba(var(--color-dark-rgb), 0.04),
+    inset 0 -1px 0 rgba(var(--color-dark-rgb), 0.04);
+}
+
+.homeAdvantages::after {
+  background: transparent;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════
+   4 · Partners + CTA — unified spotlight with background
+   ══════════════════════════════════════════════════════════ */
+.homePartnersCta {
+  padding-block: clamp(4.5rem, 9vw, 7rem) clamp(6rem, 12vw, 9rem);
+}
+
+.homePartnersCta::before {
+  background-color: var(--brand-800);
+  background-image: url("/bg-sections/4.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow:
+    inset 0 1px 0 rgba(var(--color-primary-rgb), 0.08),
+    inset 0 -1px 0 rgba(var(--color-black-rgb), 0.2);
+}
+
+.homePartnersCta::after {
+  background: linear-gradient(
+    105deg,
+    rgba(var(--color-ink-alt-rgb), 0.88) 0%,
+    rgba(var(--color-ink-alt-rgb), 0.72) 42%,
+    rgba(var(--color-ink-alt-rgb), 0.48) 100%
+  );
+  pointer-events: none;
+}
+
+.homePartnersCta :global(#partners) {
+  margin-top: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Section dividers — subtle brand lines
+   ══════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════
+   Responsive
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .homeServices :global(#services) h2,
+  .homeAbout :global(#about) h2,
+  .homeAdvantages :global(#advantages) h2 {
+    font-size: clamp(1.55rem, 6.5vw, 2rem);
+  }
+
+  .homeProcess :global(#process) h2 {
+    font-size: clamp(1.2rem, 5.8vw, 1.65rem);
+    white-space: nowrap;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .homePartnersCta :global(#partners) h2,
+  .homePartnersCta :global(h2) {
+    font-size: clamp(0.92rem, 4.5vw, 1.3rem);
+    white-space: nowrap;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .homeServices,
+  .homeAbout,
+  .homeProcess,
+  .homeAdvantages {
+    padding-block: clamp(4rem, 10vw, 5.5rem);
+  }
+
+  .homePartnersCta {
+    padding-block: clamp(3.5rem, 9vw, 5rem) clamp(4.5rem, 10vw, 6.5rem);
+  }
+
+  .homeServices :global(#services) header,
+  .homeAbout :global(#about) header,
+  .homeProcess :global(#process) header,
+  .homeAdvantages :global(#advantages) header,
+  .homePartnersCta :global(#partners) header {
+    margin-bottom: clamp(2rem, 5vw, 2.5rem) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .homeProcess :global(#process) h2 {
+    font-size: clamp(1.05rem, 5.4vw, 1.25rem);
+  }
+
+  .homePartnersCta :global(#partners) h2,
+  .homePartnersCta :global(h2) {
+    font-size: clamp(0.82rem, 4.2vw, 1.05rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeServices::after,
+  .homeAbout::after,
+  .homeProcess::after,
+  .homeAdvantages::after,
+  .homePartnersCta::after {
+    opacity: 0.85;
+  }
 }

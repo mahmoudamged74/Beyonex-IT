@@ -1,13 +1,14 @@
 .mapSection {
-  padding: clamp(3rem, 5vw, 4.5rem) 0 clamp(4rem, 6vw, 5rem);
+  padding: clamp(3.25rem, 6.5vw, 5rem) 0 clamp(4rem, 7vw, 5.5rem);
   background: transparent;
-  border-top: 1px solid rgba(var(--color-white-rgb), 0.05);
 }
 
 .mapWrapper {
   opacity: 0;
-  transform: translateY(24px);
-  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(18px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mapWrapper.visible {
@@ -17,167 +18,448 @@
 
 .sectionHeader {
   text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-.sectionBadge {
-  display: inline-block;
-  background: rgba(var(--color-primary-rgb), 0.12);
-  color: var(--color-primary);
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.35rem);
+  max-width: 36rem;
+  margin-inline: auto;
 }
 
 .sectionTitle {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.65rem, 3vw, 2.2rem);
   font-weight: 800;
-  color: var(--color-bg-white);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  color: var(--color-section-title);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
 .sectionSubtitle {
-  font-size: 0.975rem;
-  color: rgba(var(--color-text-light-rgb), 0.6);
-  max-width: 480px;
-  margin: 0 auto;
-  line-height: 1.65;
+  font-size: 0.96rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.7;
 }
 
-.mapContainer {
-  position: relative;
+/* ── Split shell: map + panel ── */
+.mapShell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.9fr);
+  min-height: clamp(380px, 48vh, 500px);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(var(--color-white-rgb), 0.08);
-  box-shadow: 0 20px 50px rgba(var(--color-black-rgb), 0.25);
+  border: 1px solid var(--color-border);
+  background: var(--brand-800);
+  box-shadow: 0 16px 48px rgba(var(--color-dark-rgb), 0.1);
 }
 
 .mapFrame {
+  position: relative;
   width: 100%;
-  height: 420px;
-  background: var(--brand-700);
+  min-width: 0;
+  min-height: 380px;
+  height: 100%;
+  align-self: stretch;
+  background: var(--color-surface-muted);
+  overflow: hidden;
 }
 
 .mapFrame iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
-  filter: grayscale(30%) contrast(1.05) brightness(0.85);
-  transition: filter 0.35s ease;
+  min-width: 115%;
+  min-height: 115%;
+  border: 0;
+  display: block;
+  transform: translate(-50%, -52%) scale(1.28);
+  transform-origin: center center;
+  filter:
+    grayscale(0.12)
+    saturate(0.85)
+    contrast(0.98)
+    brightness(1.08);
+  pointer-events: none;
 }
 
-.mapContainer:hover .mapFrame iframe {
-  filter: grayscale(10%) contrast(1) brightness(0.92);
-}
-
-.locationCard {
+.mapVeil {
   position: absolute;
-  bottom: 20px;
-  background: rgba(var(--brand-800-rgb, 13, 26, 38), 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(var(--color-white-rgb), 0.1);
-  border-radius: 16px;
-  padding: 1.25rem;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    /* Soft blend into the contact panel (LTR: panel on the right) */
+    linear-gradient(
+      to left,
+      rgba(42, 69, 96, 0.2) 0%,
+      transparent 16%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(var(--color-white-rgb), 0.22) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(var(--color-white-rgb), 0.16) 100%
+    ),
+    radial-gradient(
+      ellipse 80% 70% at 50% 45%,
+      transparent 40%,
+      rgba(var(--color-dark-rgb), 0.06) 100%
+    );
+}
+
+[dir="rtl"] .mapVeil {
+  background:
+    /* Soft blend into the contact panel (RTL: panel on the left) */
+    linear-gradient(
+      to right,
+      rgba(42, 69, 96, 0.2) 0%,
+      transparent 16%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(var(--color-white-rgb), 0.22) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(var(--color-white-rgb), 0.16) 100%
+    ),
+    radial-gradient(
+      ellipse 80% 70% at 50% 45%,
+      transparent 40%,
+      rgba(var(--color-dark-rgb), 0.06) 100%
+    );
+}
+
+.mapHitArea {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  cursor: pointer;
+  background: transparent;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+/* ── Branded map marker + name ── */
+.mapMarker {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 2;
   display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
-  max-width: 340px;
-  z-index: 10;
-  transition: transform 0.25s ease;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.55rem;
+  transform: translate(-20%, -90%);
+  pointer-events: none;
 }
 
-[dir="ltr"] .locationCard {
-  left: 20px;
+[dir="rtl"] .mapMarker {
+  flex-direction: row-reverse;
+  transform: translate(-80%, -90%);
 }
 
-[dir="rtl"] .locationCard {
-  right: 20px;
+.markerLabel {
+  display: inline-flex;
+  align-items: center;
+  max-width: min(14rem, 58vw);
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(var(--color-white-rgb), 0.97);
+  border: 1px solid rgba(var(--color-dark-rgb), 0.08);
+  box-shadow:
+    0 2px 8px rgba(var(--color-dark-rgb), 0.12),
+    0 10px 28px rgba(var(--color-dark-rgb), 0.1);
+  backdrop-filter: blur(8px);
+  animation: markerFloat 3.2s ease-in-out infinite;
 }
 
-.locationCard:hover {
-  transform: translateY(-4px);
+.markerName {
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--brand-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.cardIcon {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, var(--brand-400), var(--brand-200));
-  border-radius: 12px;
-  display: flex;
+.markerPin {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.05rem;
-  color: var(--brand-900);
   flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--brand-800);
+  border: 2px solid rgba(var(--color-primary-rgb), 0.55);
+  box-shadow:
+    0 2px 6px rgba(var(--color-dark-rgb), 0.22),
+    0 10px 22px rgba(var(--color-dark-rgb), 0.2);
 }
 
-.cardContent {
-  flex: 1;
+.markerPinCore {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--brand-200);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.2);
 }
 
-.cardTitle {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-bg-white);
-  margin-bottom: 0.35rem;
+.markerPulse {
+  position: absolute;
+  bottom: -0.12rem;
+  left: 0.95rem;
+  width: 1rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: rgba(var(--color-dark-rgb), 0.22);
+  transform: translateX(-50%);
+  filter: blur(1.5px);
 }
 
-.cardAddress {
-  font-size: 0.875rem;
-  color: rgba(var(--color-text-light-rgb), 0.65);
-  margin-bottom: 0.85rem;
-  line-height: 1.55;
+[dir="rtl"] .markerPulse {
+  left: auto;
+  right: 0.95rem;
+  transform: translateX(50%);
+}
+
+@keyframes markerFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markerLabel {
+    animation: none;
+  }
+}
+
+.locationPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--brand-800);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.panelAccent {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 3px;
+  background: var(--brand-200);
+  z-index: 2;
+}
+
+.panelGlow {
+  position: absolute;
+  top: -20%;
+  inset-inline-end: -18%;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-primary-rgb), 0.18) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.panelBody {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+  padding: clamp(1.6rem, 3vw, 2.15rem);
+}
+
+.panelIcon {
+  width: 3.15rem;
+  height: 3.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(var(--color-white-rgb), 0.1);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.28);
+  color: var(--brand-100);
+  font-size: 1.2rem;
+  box-shadow: inset 0 1px 0 rgba(var(--color-white-rgb), 0.08);
+}
+
+.panelCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.panelAddress {
+  margin: 0;
+  font-size: 0.94rem;
+  color: rgba(var(--color-white-rgb), 0.72);
+  line-height: 1.7;
+}
+
+.panelMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.1rem;
+}
+
+.metaLink {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+  width: fit-content;
+  max-width: 100%;
+  color: rgba(var(--color-white-rgb), 0.92);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.metaText {
+  unicode-bidi: isolate;
+}
+
+.metaIcon {
+  width: 2.05rem;
+  height: 2.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(var(--color-primary-rgb), 0.14);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.32);
+  color: var(--brand-200);
+  font-size: 0.82rem;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Phone handset faces correctly per language direction */
+.metaIconPhone svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .metaIconPhone svg {
+  transform: scaleX(1);
+}
+
+.metaLink:hover {
+  color: var(--color-white);
+}
+
+.metaLink:hover .metaIcon {
+  background: rgba(var(--color-primary-rgb), 0.24);
+  border-color: rgba(var(--color-primary-rgb), 0.55);
+  color: var(--brand-100);
 }
 
 .directionsBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  background: linear-gradient(135deg, var(--brand-400), var(--brand-200));
-  color: var(--brand-900);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  margin-top: auto;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  background: var(--color-white);
+  color: var(--brand-800);
+  font-size: 0.92rem;
+  font-weight: 700;
   text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(var(--color-black-rgb), 0.16);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.directionsIcon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
 }
 
 .directionsBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--color-primary-rgb), 0.25);
+  background: var(--brand-50);
   color: var(--brand-900);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(var(--color-black-rgb), 0.2);
 }
 
-@media (max-width: 768px) {
+.directionsBtn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(var(--color-primary-rgb), 0.35),
+    0 10px 22px rgba(var(--color-black-rgb), 0.18);
+}
+
+@media (max-width: 992px) {
+  .mapShell {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
   .mapFrame {
+    min-height: 320px;
     height: 320px;
   }
 
-  .locationCard {
-    position: relative;
-    bottom: auto;
-    left: auto !important;
-    right: auto !important;
-    max-width: 100%;
-    margin: -2rem 1rem 0;
+  .locationPanel {
+    min-height: auto;
+  }
+
+  .sectionTitle {
+    white-space: normal;
   }
 }
 
 @media (max-width: 576px) {
   .mapFrame {
     height: 280px;
+    min-height: 280px;
   }
 
-  .locationCard {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: -1.5rem 0.75rem 0;
+  .panelBody {
+    padding: 1.25rem;
+    gap: 1rem;
   }
 }

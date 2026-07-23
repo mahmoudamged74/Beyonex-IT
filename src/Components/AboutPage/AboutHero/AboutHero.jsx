@@ -3,8 +3,6 @@ import styles from "./AboutHero.module.css";
 import { useAboutData } from "../../../hooks/useAboutData";
 import { useResolvedMediaUrl } from "../../../hooks/useResolvedMediaUrl";
 import { getLocalizedOrRaw } from "../../../utils/i18nHelpers";
-import HeadingAccent from "../../Common/HeadingAccent/HeadingAccent.jsx";
-
 export default function AboutHero() {
   const { t } = useTranslation();
   const { lang, aboutPage } = useAboutData();
@@ -34,7 +32,6 @@ export default function AboutHero() {
               {getLocalizedOrRaw(aboutPage?.hero_title, lang) ||
                 t("aboutPage.hero.title")}
             </h1>
-            <HeadingAccent size="lg" />
             <p className={styles.description}>
               {getLocalizedOrRaw(aboutPage?.hero_description, lang) ||
                 t("aboutPage.hero.description")}

@@ -1,78 +1,85 @@
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ContactHero.module.css'
 import { useSettings } from '../../../hooks/useSettings'
 import { useLocale } from '../../../hooks/useLocale'
 import { getLocalizedOrRaw } from '../../../utils/i18nHelpers'
 import Icon from '../../Common/Icon.jsx'
-import HeadingAccent from '../../Common/HeadingAccent/HeadingAccent.jsx'
 
 export default function ContactHero() {
   const { t } = useTranslation()
   const { lang } = useLocale()
   const { settings } = useSettings()
 
+  const address =
+    getLocalizedOrRaw(settings?.site_address, lang) || t('contactPage.hero.location')
+  const mapsUrl =
+    settings?.location_url || 'https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw'
+
+  const contactItems = useMemo(() => {
+    const items = []
+
+    if (settings?.site_phone) {
+      items.push({
+        key: 'phone',
+        icon: 'phone',
+        label: t('contactPage.hero.callUs'),
+        value: settings.site_phone,
+        href: `tel:${settings.site_phone}`,
+        ltr: true,
+      })
+    }
+
+    if (settings?.site_email) {
+      items.push({
+        key: 'email',
+        icon: 'envelope',
+        label: t('contactPage.hero.emailUs'),
+        value: settings.site_email,
+        href: `mailto:${settings.site_email}`,
+      })
+    }
+
+    items.push({
+      key: 'location',
+      icon: 'mapMarker',
+      label: t('contactPage.hero.visitUs'),
+      value: address,
+      href: mapsUrl,
+      external: true,
+    })
+
+    return items
+  }, [settings, t, address, mapsUrl])
+
   return (
     <section className={styles.heroSection}>
-      <div className={styles.backgroundImage}>
-        <div className={styles.overlay}></div>
-      </div>
       <div className={`container ${styles.content}`}>
-        <div className="row justify-content-center">
-          <div className={`col-lg-12 text-center`}>
-            <div className={`${styles.heroContent} ${styles.visible}`}>
-              <span className={styles.badge}>{t('contactPage.hero.badge')}</span>
-              <h1 className={styles.title}>{t('contactPage.hero.title')}</h1>
-              <HeadingAccent size="lg" />
-              <p className={styles.subtitle}>{t('contactPage.hero.subtitle')}</p>
+        <div className={styles.heroContent}>
+          <header className={styles.textBlock}>
+            <h1 className={styles.title}>{t('contactPage.hero.title')}</h1>
+            <p className={styles.subtitle}>{t('contactPage.hero.subtitle')}</p>
+          </header>
 
-              <div className={styles.quickContact}>
-                {settings?.site_phone && (
-                  <div className={styles.contactCard}>
-                    <div className={styles.cardIcon}>
-                      <Icon name="phone" />
-                    </div>
-                    <div className={styles.cardContent}>
-                      <span className={styles.cardLabel}>{t('contactPage.hero.callUs')}</span>
-                      <a href={`tel:${settings.site_phone}`} className={styles.cardValue} dir="ltr">
-                        {settings.site_phone}
-                      </a>
-                    </div>
-                  </div>
-                )}
-
-                {settings?.site_email && (
-                  <div className={styles.contactCard}>
-                    <div className={styles.cardIcon}>
-                      <Icon name="envelope" />
-                    </div>
-                    <div className={styles.cardContent}>
-                      <span className={styles.cardLabel}>{t('contactPage.hero.emailUs')}</span>
-                      <a href={`mailto:${settings.site_email}`} className={styles.cardValue}>
-                        {settings.site_email}
-                      </a>
-                    </div>
-                  </div>
-                )}
-
-                <div className={styles.contactCard}>
-                  <div className={styles.cardIcon}>
-                    <Icon name="mapMarker" />
-                  </div>
-                  <div className={styles.cardContent}>
-                    <span className={styles.cardLabel}>{t('contactPage.hero.visitUs')}</span>
-                    <a
-                      href={settings?.location_url || "https://maps.app.goo.gl/hnZvB37xCRWyb1Bw8?g_st=aw"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.cardValue}
-                    >
-                      {getLocalizedOrRaw(settings?.site_address, lang) || t('contactPage.hero.location')}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <nav className={styles.channels} aria-label={t('nav.contact')}>
+            {contactItems.map((item, index) => (
+              <a
+                key={item.key}
+                href={item.href}
+                className={styles.channel}
+                style={{ '--i': index }}
+                dir={item.ltr ? 'ltr' : undefined}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                aria-label={item.label}
+              >
+                <span className={styles.channelIcon} aria-hidden="true">
+                  <Icon name={item.icon} />
+                </span>
+                <span className={styles.channelValue}>{item.value}</span>
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
     </section>

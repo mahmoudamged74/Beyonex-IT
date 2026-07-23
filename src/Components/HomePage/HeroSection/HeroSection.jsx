@@ -62,10 +62,6 @@ export default function HeroSection() {
     }
   }, [heroImage])
 
-  const scrollToServices = () => {
-    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
   return (
     <section className={styles.heroSection}>
       <div className={styles.bgLayer} aria-hidden="true">
@@ -141,18 +137,6 @@ export default function HeroSection() {
             </Link>
           </div>
         </div>
-
-        <button
-          type="button"
-          className={styles.scrollHint}
-          onClick={scrollToServices}
-          aria-label={t('hero.exploreServices')}
-        >
-          <span className={styles.scrollLine} aria-hidden="true">
-            <span className={styles.scrollDot} />
-          </span>
-          <span className={styles.scrollLabel}>{t('hero.exploreServices')}</span>
-        </button>
       </div>
 
       <div className={styles.bottomFade} aria-hidden="true" />

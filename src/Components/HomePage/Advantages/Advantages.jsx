@@ -6,12 +6,13 @@ import { useLocale } from "../../../hooks/useLocale";
 import { useIntersectionReveal } from "../../../hooks/useIntersectionReveal";
 import { getLocalized } from "../../../utils/i18nHelpers";
 import { iconMap } from "../../Common/iconMap";
-import HeadingAccent from "../../Common/HeadingAccent/HeadingAccent.jsx";
+import SectionHeader from "../../Common/SectionHeader/SectionHeader.jsx";
 
 const fallbackIcons = ["rocket", "code", "headset", "cogs", "lightbulb", "shieldAlt"];
 const fallbackKeys = ["innovation", "quality", "support", "experience", "customization", "security"];
 
-export default function Advantages() {
+export default function Advantages({ variant }) {
+  const isHome = variant === "home";
   const { t } = useTranslation();
   const { lang } = useLocale();
   const { whyUs } = useHomeData();
@@ -37,18 +38,27 @@ export default function Advantages() {
   const items = whyUs.length > 0 ? whyUs : fallbackItems;
 
   return (
-    <section ref={sectionRef} className={styles.advantagesSection} id="advantages">
+    <section
+      ref={sectionRef}
+      className={`${styles.advantagesSection} ${isHome ? styles.homeLayout : ""}`}
+      id="advantages"
+    >
       <div className={styles.backgroundImage}>
         <div className={styles.overlay} />
         <div className={styles.gridPattern} aria-hidden="true" />
       </div>
 
       <div className="container">
-        <header className={`${styles.header} ${isVisible ? styles.visible : ""}`}>
-          <h2 className={styles.title}>{t("advantages.title")}</h2>
-          <HeadingAccent size="md" />
-          <p className={styles.subtitle}>{t("advantages.subtitle")}</p>
-        </header>
+        <SectionHeader
+          isHome={isHome}
+          showEyebrow={!isHome}
+          eyebrow={t("advantages.label")}
+          title={t("advantages.title")}
+          accentSize="md"
+          subtitle={t("advantages.subtitle")}
+          isVisible={isVisible}
+          moduleStyles={styles}
+        />
 
         <div className={`${styles.grid} ${isVisible ? styles.visible : ""}`}>
           {items.map((item, index) => {
@@ -63,14 +73,30 @@ export default function Advantages() {
                 className={styles.card}
                 style={{ "--delay": `${index * 0.08}s` }}
               >
-                <div className={styles.iconWrap}>
-                  <Icon className={styles.icon} />
-                </div>
-
-                <div className={styles.cardContent}>
-                  <h3 className={styles.cardTitle}>{title}</h3>
-                  <p className={styles.cardDescription}>{description}</p>
-                </div>
+                {isHome ? (
+                  <>
+                    <span className={styles.cardWatermark} aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className={styles.cardHead}>
+                      <div className={styles.iconWrap}>
+                        <Icon className={styles.icon} />
+                      </div>
+                      <h3 className={styles.cardTitle}>{title}</h3>
+                    </div>
+                    <p className={styles.cardDescription}>{description}</p>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.iconWrap}>
+                      <Icon className={styles.icon} />
+                    </div>
+                    <div className={styles.cardContent}>
+                      <h3 className={styles.cardTitle}>{title}</h3>
+                      <p className={styles.cardDescription}>{description}</p>
+                    </div>
+                  </>
+                )}
               </article>
             );
           })}

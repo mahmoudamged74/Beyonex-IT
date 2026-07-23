@@ -1,26 +1,29 @@
 import { useSelector } from "react-redux";
+import {
+  fingerprint,
+  hashString,
+  normalizePayloadForCompare,
+} from "../redux/utils/responseFingerprint";
 
-function getLatestFulfilledTimestamp(queries) {
-  if (!queries) return 0;
+function getContentVersion(queries) {
+  if (!queries) return "";
 
-  let latest = 0;
+  const payloads = Object.values(queries)
+    .filter((query) => query?.status === "fulfilled" && query.data !== undefined)
+    .map((query) => normalizePayloadForCompare(query.data));
 
-  for (const query of Object.values(queries)) {
-    if (query?.status === "fulfilled" && query.fulfilledTimeStamp > latest) {
-      latest = query.fulfilledTimeStamp;
-    }
-  }
+  if (payloads.length === 0) return "";
 
-  return latest;
+  return hashString(fingerprint(payloads));
 }
 
 export function useMediaCacheVersion() {
   const apiVersion = useSelector((state) =>
-    getLatestFulfilledTimestamp(state.api?.queries),
+    getContentVersion(state.api?.queries),
   );
   const projectApiVersion = useSelector((state) =>
-    getLatestFulfilledTimestamp(state.projectApi?.queries),
+    getContentVersion(state.projectApi?.queries),
   );
 
-  return Math.max(apiVersion, projectApiVersion);
+  return apiVersion || projectApiVersion;
 }

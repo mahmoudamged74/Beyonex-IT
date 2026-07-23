@@ -2,11 +2,17 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { iconMap } from "../../Common/iconMap";
 import styles from "./AboutStory.module.css";
-import AboutSectionHeader from "../shared/AboutSectionHeader";
+import SectionHeader from "../../Common/SectionHeader/SectionHeader";
 import { useAboutData } from "../../../hooks/useAboutData";
 import { useIntersectionReveal } from "../../../hooks/useIntersectionReveal";
 import { getLocalizedOrRaw } from "../../../utils/i18nHelpers";
 import Icon from "../../Common/Icon.jsx";
+import {
+  getProfessionalJourneyDescription,
+  getProfessionalMilestone,
+  getProfessionalPillarContent,
+  professionalMilestonesByYear,
+} from "../../../content/aboutStoryContent";
 
 export default function AboutStory() {
   const { t } = useTranslation();
@@ -17,65 +23,22 @@ export default function AboutStory() {
   });
   const milestoneIcons = ["launch", "users", "globe", "trophy", "rocket"];
 
-  const fallbackMilestones = [
-    {
-      id: "f1",
-      year: 2022,
-      icon: "rocket",
-      title: { ar: "البداية", en: "The Beginning" },
-      description: {
-        ar: "تأسست بيونكس IT برؤية لإحداث ثورة في الحلول الرقمية.",
-        en: "Beyonex IT was founded with a vision to revolutionize digital solutions.",
-      },
-      display_order: 0,
-    },
-    {
-      id: "f2",
-      year: 2023,
-      icon: "users",
-      title: { ar: "توسع الفريق", en: "Team Expansion" },
-      description: {
-        ar: "وسعنا فريقنا بمطورين ومصممين وخبراء تقنية موهوبين.",
-        en: "We expanded our team with talented developers, designers, and technical experts.",
-      },
-      display_order: 1,
-    },
-    {
-      id: "f3",
-      year: 2024,
-      icon: "globe",
-      title: { ar: "الانتشار العالمي", en: "Global Expansion" },
-      description: {
-        ar: "وسعنا خدماتنا دولياً، لخدمة العملاء في عدة دول.",
-        en: "We expanded our services internationally to serve clients in several countries.",
-      },
-      display_order: 2,
-    },
-    {
-      id: "f4",
-      year: 2025,
-      icon: "trophy",
-      title: { ar: "ريادة الصناعة", en: "Industry Leadership" },
-      description: {
-        ar: "معترف بنا كمزود رائد لحلول التكنولوجيا.",
-        en: "Recognized as a leading provider of technology solutions.",
-      },
-      display_order: 3,
-    },
-    {
-      id: "f5",
-      year: 2026,
-      icon: "rocket",
-      title: { ar: "نحو المستقبل", en: "Future Forward" },
-      description: {
-        ar: "نستثمر في الذكاء الاصطناعي والحلول السحابية المتقدمة.",
-        en: "Investing in AI and next-generation cloud solutions.",
-      },
-      display_order: 4,
-    },
-  ];
-  const displayedMilestones =
-    milestones.length > 0 ? milestones : fallbackMilestones;
+  const fallbackMilestones = Object.entries(professionalMilestonesByYear).map(
+    ([year, content], index) => ({
+      id: `f${index + 1}`,
+      year: Number(year),
+      icon: milestoneIcons[index % milestoneIcons.length],
+      title: content.title,
+      description: content.description,
+      display_order: index,
+    }),
+  );
+  const displayedMilestones = (
+    milestones.length > 0 ? milestones : fallbackMilestones
+  ).map(getProfessionalMilestone);
+  const sortedMilestones = [...displayedMilestones].sort(
+    (a, b) => a.display_order - b.display_order,
+  );
 
   const pillars = [
     {
@@ -86,9 +49,7 @@ export default function AboutStory() {
           : "rocket",
       title:
         getLocalizedOrRaw(aboutPage?.mission_title, lang) || t("about.mission"),
-      text:
-        getLocalizedOrRaw(aboutPage?.mission_content, lang) ||
-        t("about.missionText"),
+      text: getProfessionalPillarContent("mission", lang, t),
     },
     {
       id: "vision",
@@ -98,24 +59,22 @@ export default function AboutStory() {
           : "eye",
       title:
         getLocalizedOrRaw(aboutPage?.vision_title, lang) || t("about.vision"),
-      text:
-        getLocalizedOrRaw(aboutPage?.vision_content, lang) ||
-        t("about.visionText"),
+      text: getProfessionalPillarContent("vision", lang, t),
     },
   ];
 
   return (
     <section ref={sectionRef} className={styles.storySection}>
       <div className="container">
-        <AboutSectionHeader
+        <SectionHeader
+          variant="about"
           className={styles.storyHeader}
           title={
             getLocalizedOrRaw(aboutPage?.journey_title, lang) ||
             t("aboutPage.story.title")
           }
           subtitle={
-            getLocalizedOrRaw(aboutPage?.journey_description, lang) ||
-            t("aboutPage.story.subtitle")
+            getProfessionalJourneyDescription(lang, t)
           }
           isVisible={isVisible}
         />
@@ -155,40 +114,91 @@ export default function AboutStory() {
           </div>
 
           {displayedMilestones.length > 0 && (
-            <div className={styles.timeline}>
-              <div className={styles.timelineLine} />
+            <div
+              className={`${styles.evolutionGraph} ${isVisible ? styles.visible : ""}`}
+            >
+              <div className={styles.evolutionHeader}>
+                <div className={styles.evolutionHeaderCopy}>
+                  <span className={styles.evolutionEyebrow}>
+                    {lang?.startsWith("ar") ? "مسار النمو" : "Growth Path"}
+                  </span>
+                  <p className={styles.evolutionHint}>
+                    {lang?.startsWith("ar")
+                      ? "رحلة تصاعدية من التأسيس إلى منظومة تقنية متكاملة"
+                      : "An ascending journey from founding to an integrated technology ecosystem"}
+                  </p>
+                </div>
+                <div className={styles.evolutionMeta}>
+                  <span className={styles.evolutionMetaValue}>
+                    {sortedMilestones[0]?.year}
+                    <span aria-hidden="true">–</span>
+                    {sortedMilestones[sortedMilestones.length - 1]?.year}
+                  </span>
+                  <span className={styles.evolutionMetaLabel}>
+                    {lang?.startsWith("ar") ? "مراحل التطور" : "Evolution stages"}
+                  </span>
+                </div>
+              </div>
 
-              {[...displayedMilestones]
-                .sort((a, b) => a.display_order - b.display_order)
-                .map((milestone, index) => {
+              <ol className={styles.evolutionSteps}>
+                {sortedMilestones.map((milestone, index) => {
                   const iconKey =
                     milestone.icon ||
                     milestoneIcons[index % milestoneIcons.length];
+                  const side =
+                    index % 2 === 0
+                      ? styles.evolutionStepStart
+                      : styles.evolutionStepEnd;
+                  const total = sortedMilestones.length;
+
                   return (
-                    <div
+                    <li
                       key={milestone.id}
-                      className={`${styles.timelineItem} ${isVisible ? styles.visible : ""}`}
-                      style={{ animationDelay: `${0.2 + index * 0.12}s` }}
+                      className={`${styles.evolutionStep} ${side} ${isVisible ? styles.visible : ""}`}
+                      style={{
+                        "--step-index": index,
+                        animationDelay: `${0.2 + index * 0.1}s`,
+                      }}
                     >
-                      <div className={styles.timelineYear}>
-                        {milestone.year}
+                      <div className={styles.evolutionNode} aria-hidden="true">
+                        <span className={styles.evolutionNodeRing} />
+                        <span className={styles.evolutionNodeCore} />
+                        <span className={styles.evolutionNodeIndex}>
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
                       </div>
-                      <article className={styles.timelineContent}>
-                        <div className={styles.timelineIconWrap}>
-                          <Icon name={iconKey} className={styles.nodeIcon} />
-                        </div>
-                        <div className={styles.timelineBody}>
-                          <h4 className={styles.timelineTitle}>
+
+                      <article className={styles.evolutionCard}>
+                        <header className={styles.evolutionCardHead}>
+                          <span className={styles.evolutionYear}>{milestone.year}</span>
+                          <div className={styles.evolutionCardIcon}>
+                            <Icon
+                              name={iconKey}
+                              className={styles.evolutionCardIconGlyph}
+                            />
+                          </div>
+                        </header>
+                        <div className={styles.evolutionCardBody}>
+                          <h4 className={styles.evolutionCardTitle}>
                             {getLocalizedOrRaw(milestone.title, lang)}
                           </h4>
-                          <p className={styles.timelineDesc}>
+                          <p className={styles.evolutionCardDesc}>
                             {getLocalizedOrRaw(milestone.description, lang)}
                           </p>
                         </div>
+                        <div className={styles.evolutionLevel} aria-hidden="true">
+                          <span
+                            className={styles.evolutionLevelFill}
+                            style={{
+                              width: `${((index + 1) / total) * 100}%`,
+                            }}
+                          />
+                        </div>
                       </article>
-                    </div>
+                    </li>
                   );
                 })}
+              </ol>
             </div>
           )}
         </div>

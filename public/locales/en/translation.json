@@ -11,7 +11,9 @@
     "services": "Services",
     "contact": "Contact Us",
     "bookAppointment": "Book Appointment",
-    "startProject": "Start Your Project"
+    "startProject": "Start Your Project",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode"
   },
   "hero": {
     "title": "BEYONEX IT",
@@ -22,7 +24,47 @@
     "contactUs": "Contact Us",
     "badge": "Integrated Tech Solutions",
     "scrollDown": "Discover More",
-    "exploreServices": "Explore our services"
+    "exploreServices": "Explore our services",
+    "trustLabel": "Why clients trust us"
+  },
+  "homePage": {
+    "stats": {
+      "title": "Our achievements in numbers"
+    },
+    "process": {
+      "label": "How We Work",
+      "title": "From Idea to Launch",
+      "subtitle": "A clear methodology that ensures your project's success at every stage",
+      "steps": {
+        "1": {
+          "title": "Discovery & Planning",
+          "description": "We understand your needs, define goals, and create a clear roadmap for your project"
+        },
+        "2": {
+          "title": "Design & Development",
+          "description": "We craft engaging interfaces and build robust, scalable technology solutions"
+        },
+        "3": {
+          "title": "Testing & Optimization",
+          "description": "We rigorously test and optimize performance to ensure an exceptional user experience"
+        },
+        "4": {
+          "title": "Launch & Support",
+          "description": "We launch your project with confidence and provide ongoing technical support"
+        }
+      }
+    },
+    "cta": {
+      "label": "Get Started",
+      "title": "Ready to Turn Your Idea into Reality?",
+      "description": "Join our successful clients and start your digital journey with a team that understands your ambitions and transforms them into outstanding tech solutions.",
+      "startProject": "Start Your Project",
+      "contact": "Contact Us",
+      "trustLabel": "Our guarantees",
+      "trust1": "Free consultation",
+      "trust2": "Response within 24 hours",
+      "trust3": "Custom solutions for your needs"
+    }
   },
   "advantages": {
     "label": "Our Edge",
@@ -60,10 +102,15 @@
     "subtitle": "Your Partner in Digital Transformation",
     "description": "BEYONEX IT is a leading company in software and technology solutions. We believe that technology should serve businesses, which is why we develop innovative solutions that help companies grow and thrive in the digital age.",
     "mission": "Our Mission",
-    "missionText": "We aim to empower businesses to maximize the benefits of technology by delivering advanced software solutions that meet their unique needs and help them achieve their strategic goals.",
+    "missionText": "We help organizations turn technology into a competitive advantage through scalable software solutions tailored to their strategic goals.",
     "vision": "Our Vision",
-    "visionText": "To be the preferred technology partner for companies in the region, by delivering innovative solutions and exceptional services that create real value for our clients.",
+    "visionText": "To be the region's leading technology partner—trusted for expertise, innovation, and measurable, lasting impact.",
     "readMore": "Learn More About Us"
+  },
+  "partners": {
+    "label": "Success Partners",
+    "title": "Partners",
+    "subtitle": "Our clients are our success partners, and we take pride in their trust in us."
   },
   "services": {
     "title": "Our Services",
@@ -100,6 +147,7 @@
       }
     },
     "learnMore": "Learn More",
+    "serviceDetails": "Service Details",
     "showMore": "View More"
   },
   "common": {
@@ -122,7 +170,7 @@
     "story": {
       "badge": "Our Journey",
       "title": "Our Journey",
-      "subtitle": "From a small startup to a leading tech company, our journey has been defined by innovation and excellence.",
+      "subtitle": "A steady growth journey from launch to an integrated technology ecosystem—built on innovation, quality, and trusted partnerships.",
       "milestone1Title": "The Beginning",
       "milestone1Desc": "BEYONEX IT was founded with a vision to revolutionize digital solutions in the region.",
       "milestone2Title": "Team Expansion",
@@ -137,7 +185,7 @@
       "title": "Our Achievements",
       "subtitle": "Numbers that reflect our commitment to excellence and client satisfaction.",
       "projects": "Projects Completed",
-      "clients": "Success Partners",
+      "clients": "Partners",
       "years": "Years Experience",
       "satisfaction": "Excellence Rate"
     },
@@ -246,22 +294,144 @@
     "workingHours": "Working Hours",
     "workingDays": "Sun - Thu: 8:00 - 16:00",
     "followUs": "Follow Us",
+    "social": {
+      "facebook": "Facebook",
+      "linkedin": "LinkedIn",
+      "snapchat": "Snapchat",
+      "instagram": "Instagram",
+      "twitter": "X",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "tiktok": "TikTok"
+    },
+    "rightsReserved": "All rights reserved.",
+    "startProjectCta": "Start Your Project",
     "copyright": "© 2026 BEYONEX IT. All Rights Reserved.",
     "links": {
       "home": "Home",
       "about": "About Us",
       "services": "Services",
       "contact": "Contact Us",
-      "startProject": "Start Project"
+      "startProject": "Start Project",
+      "privacy": "Privacy Policy"
     }
+  },
+  "privacyPage": {
+    "hero": {
+      "badge": "Privacy & Security",
+      "title": "Privacy Policy",
+      "subtitle": "We are committed to protecting your data and privacy when you use the Beyonex IT website and our digital services.",
+      "lastUpdated": "Last updated: July 19, 2026"
+    },
+    "highlights": [
+      {
+        "title": "Advanced Protection",
+        "text": "We apply technical and organizational controls to protect your data from unauthorized access."
+      },
+      {
+        "title": "Full Transparency",
+        "text": "We clearly explain what we collect and how we use it without unnecessary complexity."
+      },
+      {
+        "title": "Control Over Your Data",
+        "text": "We provide clear rights to access, correct, or request deletion of your personal data."
+      }
+    ],
+    "tocTitle": "Policy Contents",
+    "ctaTitle": "Have a question?",
+    "sections": [
+      {
+        "title": "Introduction",
+        "paragraphs": [
+          "This policy explains how Beyonex IT collects, uses, and protects information you provide through our website, contact forms, and project requests.",
+          "By using this website, you agree to the privacy practices described here. If you do not agree with any part of this policy, please stop using the website."
+        ]
+      },
+      {
+        "title": "Data We Collect",
+        "paragraphs": [
+          "We may collect the following types of data when you interact with us:"
+        ],
+        "items": [
+          "Identity data: name, email address, phone number, and company name.",
+          "Project data: request details, service type, and notes submitted through our forms.",
+          "Technical data: IP address, browser type, device information, and visited pages to improve performance and security.",
+          "Communication data: messages you send us through contact forms or email."
+        ]
+      },
+      {
+        "title": "How We Use Your Data",
+        "paragraphs": [
+          "We use your data for the following legitimate purposes:"
+        ],
+        "items": [
+          "Responding to your inquiries and project requests.",
+          "Delivering agreed services and technical support.",
+          "Improving user experience and website performance.",
+          "Complying with applicable legal and regulatory requirements."
+        ]
+      },
+      {
+        "title": "Data Sharing",
+        "paragraphs": [
+          "We do not sell your personal data to third parties. We may share limited information only with trusted service providers that help us operate the website or manage communications, under confidentiality and secure processing obligations.",
+          "We may disclose data when required by law or upon an official request from a competent authority."
+        ]
+      },
+      {
+        "title": "Cookies",
+        "paragraphs": [
+          "The website may use cookies or similar technologies to remember preferences such as language, analyze usage, and improve performance.",
+          "You can control cookies through your browser settings. Disabling some cookies may affect certain website features."
+        ]
+      },
+      {
+        "title": "Data Security",
+        "paragraphs": [
+          "We apply appropriate technical and organizational measures to protect your data from unauthorized access, alteration, disclosure, or destruction.",
+          "Despite our efforts, internet security cannot be guaranteed 100%. We encourage you to share sensitive information only through our official channels."
+        ]
+      },
+      {
+        "title": "Your Rights",
+        "paragraphs": [
+          "Under applicable regulations, you may have the right to:"
+        ],
+        "items": [
+          "Request access to or correction of your personal data.",
+          "Request deletion or restriction of processing where legally permitted.",
+          "Object to certain processing activities or withdraw consent where applicable."
+        ]
+      },
+      {
+        "title": "Policy Updates",
+        "paragraphs": [
+          "We may update this policy from time to time to reflect changes in our services or legal requirements. Any update will be published on this page with a revised last updated date.",
+          "We recommend reviewing this page periodically to stay informed of any changes."
+        ]
+      }
+    ],
+    "contactNote": "If you have any questions about this privacy policy or how we handle your data, please contact us.",
+    "contactLink": "Contact Us"
   },
   "startProjectPage": {
     "title": "Start Your Project",
-    "subtitle": "Fill out the form below and we'll get back to you to discuss your project and turn your ideas into reality.",
+    "subtitle": "Share your idea and let our team turn it into a complete digital solution built around your goals.",
+    "asideTitle": "From idea to launch — with you",
+    "asideText": "Submit once, and we’ll guide every step with clarity, speed, and craft.",
     "hero": {
-      "badge": "New Project Request"
+      "badge": "New Project Request",
+      "cta": "Start Your Request"
     },
     "trustNote": "Your data is safe and secure. We never share your information with third parties.",
+    "highlights": {
+      "responseTitle": "Reply within 24 hours",
+      "responseDesc": "We review your request and get back to you promptly.",
+      "secureTitle": "Privacy guaranteed",
+      "secureDesc": "Your information is handled confidentially to the highest standards.",
+      "consultTitle": "Expert consultation",
+      "consultDesc": "A session with our team to understand your needs and recommend the best path."
+    },
     "steps": {
       "title": "How It Works",
       "step1Title": "Fill the Form",
@@ -274,7 +444,7 @@
     "form": {
       "badge": "Request Form",
       "title": "Project Details",
-      "subtitle": "Please fill in all required fields accurately so we can serve you better.",
+      "subtitle": "Complete the fields below accurately so we can serve you better and faster.",
       "sectionClient": "Client Information",
       "sectionContact": "Contact Details",
       "sectionDetails": "Additional Details",

@@ -5,8 +5,9 @@ import styles from "./Navbar.module.css";
 import { useLocale } from "../../../hooks/useLocale";
 import { useSettings } from "../../../hooks/useSettings";
 import { useResolvedMediaUrl } from "../../../hooks/useResolvedMediaUrl";
+import { useTheme } from "../../../hooks/useTheme";
 import { getLocalizedOrRaw } from "../../../utils/i18nHelpers";
-import Icon from '../../Common/Icon.jsx';
+import Icon from "../../Common/Icon.jsx";
 
 const LANGUAGES = [
   {
@@ -29,9 +30,11 @@ function Navbar() {
   const { t, i18n } = useTranslation();
   const { isRTL } = useLocale();
   const { settings } = useSettings();
+  const { theme, isDark, toggleTheme } = useTheme();
   const faviconSrc = useResolvedMediaUrl(settings?.favicon);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
 
   const currentLanguage =
@@ -41,6 +44,26 @@ function Navbar() {
     i18n.changeLanguage(lng);
     setDropdownOpen(false);
   };
+
+  const closeNav = () => {
+    setNavOpen(false);
+    setDropdownOpen(false);
+  };
+
+  const themeToggleButton = (className = "") => (
+    <button
+      type="button"
+      className={`${styles.themeToggle} ${className}`.trim()}
+      onClick={toggleTheme}
+      aria-label={isDark ? t("nav.themeLight") : t("nav.themeDark")}
+      title={isDark ? t("nav.themeLight") : t("nav.themeDark")}
+    >
+      <Icon
+        name={isDark ? "sunFill" : "moonFill"}
+        className={styles.themeToggleIcon}
+      />
+    </button>
+  );
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,10 +75,11 @@ function Navbar() {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setDropdownOpen(false);
+        setNavOpen(false);
       }
     };
 
-    if (dropdownOpen) {
+    if (dropdownOpen || navOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscape);
     }
@@ -64,13 +88,54 @@ function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [dropdownOpen]);
+  }, [dropdownOpen, navOpen]);
+
+  useEffect(() => {
+    if (!navOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [navOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 12);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const renderNavLink = (to, label, options = {}) => (
+    <NavLink
+      className={({ isActive }) =>
+        `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
+      }
+      to={to}
+      end={options.end}
+      onClick={() => {
+        options.onClick?.();
+        closeNav();
+      }}
+    >
+      {label}
+    </NavLink>
+  );
 
   return (
     <nav
       className={`navbar navbar-expand-lg ${styles.navbar} ${
-        navOpen ? styles.navbarMenuOpen : ""
-      }`}
+        scrolled ? styles.navbarScrolled : ""
+      } ${navOpen ? styles.navbarMenuOpen : ""}`}
+      data-theme={theme}
     >
       <div className="container">
         <Link
@@ -82,7 +147,10 @@ function Navbar() {
           {faviconSrc && (
             <img
               src={faviconSrc}
-              alt={getLocalizedOrRaw(settings?.site_name, i18n.language) || "Beyonex IT"}
+              alt={
+                getLocalizedOrRaw(settings?.site_name, i18n.language) ||
+                "Beyonex IT"
+              }
               className={styles.siteIcon}
               height={46}
               loading="eager"
@@ -91,77 +159,82 @@ function Navbar() {
           )}
         </Link>
 
-        <button
-          className={`navbar-toggler ${styles.navbarToggler}`}
-          type="button"
-          onClick={() => {
-            setNavOpen((open) => {
-              if (open) setDropdownOpen(false);
-              return !open;
-            });
-          }}
-          aria-controls="navbarNav"
-          aria-expanded={navOpen}
-          aria-label="Toggle navigation"
-        >
-          <span className={`navbar-toggler-icon ${styles.togglerIcon}`}></span>
-        </button>
+        <div className={styles.mobileControls}>
+          {themeToggleButton(styles.themeToggleBar)}
+          <button
+            className={`navbar-toggler ${styles.navbarToggler}`}
+            type="button"
+            onClick={() => {
+              setNavOpen((open) => {
+                if (open) setDropdownOpen(false);
+                return !open;
+              });
+            }}
+            aria-controls="navbarNav"
+            aria-expanded={navOpen}
+            aria-label="Toggle navigation"
+          >
+            <span className={`navbar-toggler-icon ${styles.togglerIcon}`}></span>
+          </button>
+        </div>
 
         <div
-          className={`collapse navbar-collapse ${styles.navCollapse} ${
-            navOpen ? styles.navCollapseOpen : styles.navCollapseClosed
+          className={`${styles.navOverlay} ${
+            navOpen ? styles.navOverlayVisible : ""
           }`}
+          onClick={closeNav}
+          aria-hidden="true"
+        />
+
+        <div
+          className={`navbar-collapse ${styles.navCollapse} ${
+            isRTL ? styles.navSidebarRtl : styles.navSidebarLtr
+          } ${navOpen ? styles.navCollapseOpen : styles.navCollapseClosed}`}
           id="navbarNav"
         >
+          <div className={styles.sidebarHeader}>
+            {faviconSrc ? (
+              <img
+                src={faviconSrc}
+                alt={
+                  getLocalizedOrRaw(settings?.site_name, i18n.language) ||
+                  "Beyonex IT"
+                }
+                className={styles.sidebarLogo}
+                loading="eager"
+                decoding="async"
+              />
+            ) : (
+              <span className={styles.sidebarTitle}>
+                {getLocalizedOrRaw(settings?.site_name, i18n.language) ||
+                  "Beyonex IT"}
+              </span>
+            )}
+            <button
+              type="button"
+              className={styles.sidebarClose}
+              onClick={closeNav}
+              aria-label={isRTL ? "إغلاق القائمة" : "Close menu"}
+            >
+              <Icon name="times" className={styles.sidebarCloseIcon} />
+            </button>
+          </div>
+
           {/* Navigation Links - Center */}
           <ul className={`navbar-nav ${styles.navLinks}`}>
             <li className="nav-item">
-              <NavLink
-                className={({ isActive }) =>
-                  `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-                }
-                to="/"
-                end
-                onClick={() => setNavOpen(false)}
-              >
-                {t("nav.home")}
-              </NavLink>
+              {renderNavLink("/", t("nav.home"), { end: true })}
             </li>
             <li className="nav-item">
-              <NavLink
-                className={({ isActive }) =>
-                  `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-                }
-                to="/about"
-                onClick={() => setNavOpen(false)}
-              >
-                {t("nav.about")}
-              </NavLink>
+              {renderNavLink("/about", t("nav.about"))}
             </li>
             <li className="nav-item">
-              <NavLink
-                className={({ isActive }) =>
-                  `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-                }
-                to="/services"
-                onClick={() => {
-                  window.scrollTo(0, 0)
-                  setNavOpen(false)
-                }}
-              >
-                {t("nav.services")}
-              </NavLink>
+              {renderNavLink("/services", t("nav.services"), {
+                onClick: () => window.scrollTo(0, 0),
+              })}
             </li>
             <li className="nav-item">
-              <NavLink
-                className={({ isActive }) =>
-                  `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-                }
-                to="/contact"
-                onClick={() => setNavOpen(false)}
-              >
-                {t("nav.contact")}
-              </NavLink>
+              {renderNavLink("/contact", t("nav.contact"))}
             </li>
           </ul>
 
@@ -171,6 +244,7 @@ function Navbar() {
               isRTL ? styles.actionsLeft : styles.actionsRight
             }`}
           >
+            {themeToggleButton(styles.themeToggleDesktop)}
             <div className={styles.langSelect} ref={dropdownRef}>
               <button
                 type="button"
@@ -188,7 +262,12 @@ function Navbar() {
                     alt={currentLanguage.alt}
                     className={styles.flagIcon}
                   />
-                  <span>{currentLanguage.short}</span>
+                  <span className={styles.langLabel}>
+                    {currentLanguage.label}
+                  </span>
+                  <span className={styles.langShort}>
+                    {currentLanguage.short}
+                  </span>
                 </span>
                 <Icon name="chevronDown" className={styles.langChevron} />
               </button>
@@ -229,7 +308,11 @@ function Navbar() {
                 </ul>
               )}
             </div>
-            <Link to="/start-project" className={styles.bookBtn}>
+            <Link
+              to="/start-project"
+              className={styles.bookBtn}
+              onClick={closeNav}
+            >
               {t("nav.startProject")}
             </Link>
           </div>

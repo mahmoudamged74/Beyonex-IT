@@ -19,7 +19,9 @@ export const resolveMediaUrl = (value, cacheVersion) => {
   }
 
   if (!cacheVersion) return url;
+  if (url.startsWith('blob:')) return url;
 
+  const bust = encodeURIComponent(String(cacheVersion));
   const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}_v=${cacheVersion}`;
+  return `${url}${separator}_v=${bust}`;
 };

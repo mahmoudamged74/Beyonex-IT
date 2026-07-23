@@ -35,19 +35,19 @@
 }
 
 .title {
-  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-size: var(--text-title);
   font-weight: 800;
   margin-bottom: 0;
-  color: var(--color-primary);
+  color: var(--color-section-title);
   letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
-  color: rgba(var(--color-white-rgb), 0.62);
-  max-width: 580px;
-  line-height: 1.8;
-  margin: 0;
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  max-width: var(--content-prose);
+  line-height: var(--line-height-body);
+  margin: 0.75rem auto 0;
 }
 
 @media (max-width: 576px) {

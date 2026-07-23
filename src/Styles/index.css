@@ -1,4 +1,5 @@
 @import "./_variables.css";
+@import "./_layout.css";
 @import "./_scrollbar.css";
 
 /* Base styles */
@@ -6,22 +7,44 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 html {
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  color-scheme: light;
+  font-size: 100%;
+}
+
+html[data-theme="dark"] {
   color-scheme: dark;
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-family-base);
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--brand-800);
   overflow-x: hidden;
   min-width: 0;
+  line-height: var(--line-height-body);
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 576px) {
+  [dir="rtl"] html {
+    font-size: 15.5px;
+  }
+
+  [dir="ltr"] html {
+    font-size: 15px;
+  }
 }
 
 img,
@@ -31,31 +54,12 @@ svg {
   max-width: 100%;
 }
 
-.container {
-  padding-left: max(1rem, env(safe-area-inset-left, 0px));
-  padding-right: max(1rem, env(safe-area-inset-right, 0px));
-}
-
-@media (max-width: 576px) {
-  .container {
-    padding-left: max(0.875rem, env(safe-area-inset-left, 0px));
-    padding-right: max(0.875rem, env(safe-area-inset-right, 0px));
-  }
-}
-
-@media (max-width: 380px) {
-  .container {
-    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
-    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
-  }
-}
-
-/* Arabic & English — Montserrat */
+/* Arabic & English typography */
 [dir="rtl"],
 [dir="rtl"] *,
 [dir="ltr"],
 [dir="ltr"] * {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: var(--font-family-base) !important;
   font-optical-sizing: auto;
 }
 
@@ -65,30 +69,18 @@ svg {
 [dir="rtl"] h4,
 [dir="rtl"] h5,
 [dir="rtl"] h6,
-[dir="rtl"] p,
-[dir="rtl"] span,
-[dir="rtl"] a,
-[dir="rtl"] button,
-[dir="rtl"] input,
-[dir="rtl"] textarea,
-[dir="rtl"] select,
-[dir="rtl"] label,
 [dir="ltr"] h1,
 [dir="ltr"] h2,
 [dir="ltr"] h3,
 [dir="ltr"] h4,
 [dir="ltr"] h5,
-[dir="ltr"] h6,
-[dir="ltr"] p,
-[dir="ltr"] span,
-[dir="ltr"] a,
-[dir="ltr"] button,
-[dir="ltr"] input,
-[dir="ltr"] textarea,
-[dir="ltr"] select,
-[dir="ltr"] label {
-  font-family: "Montserrat", sans-serif !important;
-  font-optical-sizing: auto;
+[dir="ltr"] h6 {
+  line-height: var(--line-height-heading);
+}
+
+[dir="rtl"] p,
+[dir="ltr"] p {
+  line-height: var(--line-height-body);
 }
 
 /* Navbar Links Styles - Override Bootstrap */
@@ -108,4 +100,13 @@ svg {
 .navbar-nav .nav-link.active {
   color: var(--color-bg-body) !important;
   font-weight: 700 !important;
+}
+
+.navbar[data-theme="dark"] .navbar-nav .nav-link {
+  color: var(--brand-50) !important;
+}
+
+.navbar[data-theme="dark"] .navbar-nav .nav-link:hover,
+.navbar[data-theme="dark"] .navbar-nav .nav-link.active {
+  color: var(--color-white) !important;
 }

@@ -14,7 +14,6 @@ const SEOManager = () => {
   useEffect(() => {
     if (settingsData) {
       const siteName = getLocalizedOrRaw(settings?.site_name, normalizedLang) || 'Beyonex IT';
-      document.title = siteName;
 
       const metaDesc = getLocalizedOrRaw(settings?.meta_desc, normalizedLang)
         || getLocalizedOrRaw(settings?.site_desc, normalizedLang);

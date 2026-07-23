@@ -8,6 +8,7 @@ import { settingsApi } from "./redux/api/settingsApi";
 import { homeApi } from "./redux/api/homeApi";
 import { aboutApi } from "./redux/api/aboutApi";
 import { servicesApi } from "./redux/api/servicesApi";
+import { partnersApi } from "./redux/api/partnersApi";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./i18n";
 import i18n from "./i18n";
@@ -25,7 +26,11 @@ store.dispatch(aboutApi.endpoints.getAbout.initiate(initialLang));
 if (typeof window !== "undefined" && "requestIdleCallback" in window) {
   window.requestIdleCallback(() => {
     store.dispatch(servicesApi.endpoints.getServices.initiate(initialLang));
+    store.dispatch(partnersApi.endpoints.getPartners.initiate(initialLang));
   });
+} else {
+  store.dispatch(servicesApi.endpoints.getServices.initiate(initialLang));
+  store.dispatch(partnersApi.endpoints.getPartners.initiate(initialLang));
 }
 
 setupListeners(store.dispatch);

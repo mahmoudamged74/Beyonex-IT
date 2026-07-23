@@ -1,46 +1,38 @@
-/* ── Professional scrollbar (global) ── */
+/* ── Professional scrollbar — light / dark via theme tokens ──
+   Note: do NOT set scrollbar-width/color on Chromium — those
+   standard props override ::-webkit-scrollbar and fall back to
+   a plain system grey bar (especially bad in light mode).
+──────────────────────────────────────────────────────────── */
+
 html {
   scrollbar-gutter: stable;
-  scrollbar-color: rgba(var(--color-primary-rgb), 0.55) rgba(13, 26, 38, 0.88);
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(var(--color-primary-rgb), 0.5) rgba(13, 26, 38, 0.82);
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(13, 26, 38, 0.72);
+  background: var(--scrollbar-track);
   border-radius: 100px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    rgba(var(--color-primary-rgb), 0.72) 0%,
-    rgba(33, 128, 166, 0.82) 100%
-  );
+  background: var(--scrollbar-thumb);
   border-radius: 100px;
-  border: 2px solid rgba(13, 26, 38, 0.35);
+  border: 2px solid var(--scrollbar-thumb-border);
   background-clip: padding-box;
-  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    rgba(125, 217, 230, 0.92) 0%,
-    rgba(var(--color-primary-rgb), 0.95) 100%
-  );
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: var(--color-primary);
+  background: var(--scrollbar-thumb-active);
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-corner {
@@ -53,8 +45,11 @@ html {
   height: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  ::-webkit-scrollbar-thumb {
-    transition: none;
+/* Firefox only */
+@supports not selector(::-webkit-scrollbar) {
+  html,
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-firefox-thumb) var(--scrollbar-firefox-track);
   }
 }

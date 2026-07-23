@@ -15,7 +15,7 @@ export default function FloatingButtons() {
       setShowScrollTop(window.scrollY > 300)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -47,7 +47,11 @@ export default function FloatingButtons() {
         className={`${styles.whatsappButton} ${isRTL ? styles.whatsappLeft : styles.whatsappRight}`}
         aria-label={isRTL ? 'تواصل معنا على واتساب' : 'Contact us on WhatsApp'}
       >
-        <Icon name="whatsapp" />
+        <span className={`${styles.whatsappPulse} ${styles.whatsappPulseOne}`} aria-hidden="true" />
+        <span className={`${styles.whatsappPulse} ${styles.whatsappPulseTwo}`} aria-hidden="true" />
+        <span className={styles.whatsappIcon}>
+          <Icon name="whatsapp" />
+        </span>
       </a>
 
       {showScrollTop && (

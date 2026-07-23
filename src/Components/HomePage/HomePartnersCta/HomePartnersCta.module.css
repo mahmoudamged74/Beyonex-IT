@@ -1,0 +1,23 @@
+.section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.divider {
+  width: min(120px, 30%);
+  height: 1px;
+  margin: clamp(2.5rem, 5vw, 3.75rem) auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--color-primary-rgb), 0.45),
+    transparent
+  );
+}
+
+@media (max-width: 768px) {
+  .divider {
+    margin: clamp(2rem, 5vw, 2.75rem) auto;
+  }
+}
