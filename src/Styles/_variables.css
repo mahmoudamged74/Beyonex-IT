@@ -141,25 +141,25 @@
   --line-height-heading: 1.25;
   --font-family-base: "Montserrat", sans-serif;
 
-  /* ── Scrollbar (light) — solid brand tones on white UI ── */
+  /* ── Scrollbar — navy track (site is dark even in light theme) ── */
   --scrollbar-size: 10px;
-  --scrollbar-track: #e8eef4;
+  --scrollbar-track: var(--brand-800);
   --scrollbar-thumb: linear-gradient(
     180deg,
-    var(--brand-700) 0%,
-    var(--brand-600) 55%,
-    var(--brand-400) 100%
+    var(--brand-600) 0%,
+    var(--brand-400) 55%,
+    var(--brand-200) 100%
   );
   --scrollbar-thumb-hover: linear-gradient(
     180deg,
-    var(--brand-600) 0%,
-    var(--brand-400) 50%,
-    var(--brand-200) 100%
+    var(--brand-400) 0%,
+    var(--brand-200) 50%,
+    var(--brand-100) 100%
   );
-  --scrollbar-thumb-active: var(--brand-400);
-  --scrollbar-thumb-border: #f3f6f9;
-  --scrollbar-firefox-thumb: var(--brand-600);
-  --scrollbar-firefox-track: #e8eef4;
+  --scrollbar-thumb-active: var(--brand-200);
+  --scrollbar-thumb-border: var(--brand-800);
+  --scrollbar-firefox-thumb: var(--brand-400);
+  --scrollbar-firefox-track: var(--brand-800);
 }
 
 [dir="rtl"] {

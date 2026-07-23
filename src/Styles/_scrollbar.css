@@ -2,11 +2,11 @@
    Note: do NOT set scrollbar-width/color on Chromium — those
    standard props override ::-webkit-scrollbar and fall back to
    a plain system grey bar (especially bad in light mode).
-──────────────────────────────────────────────────────────── */
 
-html {
-  scrollbar-gutter: stable;
-}
+   Do NOT use scrollbar-gutter: stable — with a fixed navbar it
+   leaves a dark body-bg strip between the white header and the
+   scrollbar track (visible on production Chrome/Windows).
+──────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
   width: var(--scrollbar-size);

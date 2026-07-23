@@ -1,8 +1,32 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+/** Ensure app CSS loads after vendor CSS so our overrides win in production. */
+function cssOrderPlugin() {
+  return {
+    name: 'css-link-order',
+    enforce: 'post',
+    transformIndexHtml(html) {
+      const linkRe = /<link\b[^>]*rel="stylesheet"[^>]*>/gi
+      const links = html.match(linkRe) || []
+      if (links.length < 2) return html
+
+      const vendor = []
+      const app = []
+      for (const link of links) {
+        if (/vendor-/i.test(link)) vendor.push(link)
+        else app.push(link)
+      }
+
+      const ordered = [...vendor, ...app]
+      let i = 0
+      return html.replace(linkRe, () => ordered[i++])
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), cssOrderPlugin()],
   optimizeDeps: {
     include: [
       '@reduxjs/toolkit',
