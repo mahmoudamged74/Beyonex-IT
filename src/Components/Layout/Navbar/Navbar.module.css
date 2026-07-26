@@ -20,7 +20,8 @@
     background 0.3s ease;
 }
 
-.navbarScrolled {
+/* Match :global(nav.navbar).navbar specificity so scrolled/dark chrome win */
+:global(nav.navbar).navbar.navbarScrolled {
   background: rgba(var(--color-white-rgb), 0.98);
   border-bottom-color: var(--color-border);
   box-shadow: 0 8px 28px rgba(var(--color-dark-rgb), 0.1);
@@ -546,31 +547,32 @@
   display: none;
 }
 
-/* ── Dark chrome (navbar + sidebar) ── */
-.navbar[data-theme="dark"] {
+/* ── Dark chrome (navbar + sidebar) ──
+   Use :global(nav.navbar).navbar… so these beat the light chrome rule. */
+:global(nav.navbar).navbar[data-theme="dark"] {
   background: #0c314f;
   border-bottom-color: rgba(234, 243, 248, 0.1);
   box-shadow: 0 2px 16px rgba(var(--color-black-rgb), 0.28);
 }
 
-.navbar[data-theme="dark"].navbarScrolled {
+:global(nav.navbar).navbar[data-theme="dark"].navbarScrolled {
   background: rgba(12, 49, 79, 0.97);
   border-bottom-color: rgba(234, 243, 248, 0.12);
   box-shadow: 0 8px 28px rgba(var(--color-black-rgb), 0.35);
 }
 
-.navbar[data-theme="dark"] .navLink {
+:global(nav.navbar).navbar[data-theme="dark"] .navLink {
   color: var(--brand-50) !important;
 }
 
-.navbar[data-theme="dark"] .navLink:hover {
+:global(nav.navbar).navbar[data-theme="dark"] .navLink:hover {
   color: var(--color-white) !important;
   background: rgba(var(--color-white-rgb), 0.08) !important;
   border-color: rgba(var(--color-white-rgb), 0.14) !important;
   box-shadow: 0 4px 14px rgba(var(--color-black-rgb), 0.2) !important;
 }
 
-.navbar[data-theme="dark"] .navLinkActive {
+:global(nav.navbar).navbar[data-theme="dark"] .navLinkActive {
   color: var(--color-white) !important;
   background: rgba(var(--color-white-rgb), 0.12) !important;
   border-color: rgba(var(--color-primary-rgb), 0.28) !important;
@@ -579,72 +581,81 @@
     0 2px 10px rgba(var(--color-black-rgb), 0.18) !important;
 }
 
-.navbar[data-theme="dark"] .navLinkActive:hover {
+:global(nav.navbar).navbar[data-theme="dark"] .navLinkActive:hover {
   color: var(--color-white) !important;
   background: rgba(var(--color-white-rgb), 0.16) !important;
   border-color: rgba(var(--color-primary-rgb), 0.36) !important;
 }
 
-.navbar[data-theme="dark"] .themeToggle,
-.navbar[data-theme="dark"] .langTrigger,
-.navbar[data-theme="dark"] .navbarToggler,
-.navbar[data-theme="dark"] .sidebarClose {
+:global(nav.navbar).navbar[data-theme="dark"] .themeToggle,
+:global(nav.navbar).navbar[data-theme="dark"] .langTrigger,
+:global(nav.navbar).navbar[data-theme="dark"] .navbarToggler,
+:global(nav.navbar).navbar[data-theme="dark"] .sidebarClose {
   background: rgba(var(--color-white-rgb), 0.06);
   border-color: rgba(var(--color-white-rgb), 0.14);
   color: var(--brand-50);
   box-shadow: none;
 }
 
-.navbar[data-theme="dark"] .themeToggle:hover,
-.navbar[data-theme="dark"] .langTrigger:hover,
-.navbar[data-theme="dark"] .navbarToggler:hover,
-.navbar[data-theme="dark"] .sidebarClose:hover {
+:global(nav.navbar).navbar[data-theme="dark"] .themeToggle:hover,
+:global(nav.navbar).navbar[data-theme="dark"] .langTrigger:hover,
+:global(nav.navbar).navbar[data-theme="dark"] .navbarToggler:hover,
+:global(nav.navbar).navbar[data-theme="dark"] .sidebarClose:hover {
   background: rgba(var(--color-white-rgb), 0.1);
   border-color: rgba(var(--color-white-rgb), 0.22);
   color: var(--color-white);
 }
 
-.navbar[data-theme="dark"] .togglerIcon {
+:global(nav.navbar).navbar[data-theme="dark"] .langOpen {
+  background: rgba(var(--color-white-rgb), 0.1);
+  border-color: rgba(var(--color-white-rgb), 0.22);
+  color: var(--color-white);
+  box-shadow:
+    0 0 0 3px rgba(var(--color-primary-rgb), 0.16),
+    0 4px 14px rgba(var(--color-black-rgb), 0.22);
+}
+
+:global(nav.navbar).navbar[data-theme="dark"] .togglerIcon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(234,243,248, 0.92)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-.navbar[data-theme="dark"] .langMenu {
+:global(nav.navbar).navbar[data-theme="dark"] .langMenu {
   background: #0e3758;
   border-color: rgba(234, 243, 248, 0.12);
   box-shadow: 0 12px 28px rgba(var(--color-black-rgb), 0.35);
 }
 
-.navbar[data-theme="dark"] .langMenuItem {
+:global(nav.navbar).navbar[data-theme="dark"] .langMenuItem {
   color: var(--brand-50);
 }
 
-.navbar[data-theme="dark"] .langMenuItem:not(.langMenuItemActive):hover {
+:global(nav.navbar).navbar[data-theme="dark"] .langMenuItem:not(.langMenuItemActive):hover {
   background: rgba(var(--color-white-rgb), 0.08);
   color: var(--color-white);
 }
 
-.navbar[data-theme="dark"] .langMenuItemActive {
+:global(nav.navbar).navbar[data-theme="dark"] .langMenuItemActive {
   background: rgba(var(--color-primary-rgb), 0.16);
   color: var(--color-white);
 }
 
-.navbar[data-theme="dark"] .sidebarTitle {
+:global(nav.navbar).navbar[data-theme="dark"] .sidebarTitle {
   color: var(--brand-50);
 }
 
-.navbar[data-theme="dark"] .bookBtn {
+:global(nav.navbar).navbar[data-theme="dark"] .bookBtn {
   background: var(--color-white) !important;
   color: var(--brand-900) !important;
   box-shadow: 0 6px 20px rgba(var(--color-black-rgb), 0.28);
 }
 
-.navbar[data-theme="dark"] .bookBtn:hover {
+:global(nav.navbar).navbar[data-theme="dark"] .bookBtn:hover {
   background: var(--brand-50) !important;
   color: var(--brand-900) !important;
   box-shadow: 0 8px 24px rgba(var(--color-black-rgb), 0.34);
 }
 
-.navbar[data-theme="dark"] .bookBtn:focus-visible {
+:global(nav.navbar).navbar[data-theme="dark"] .bookBtn:focus-visible {
   box-shadow:
     0 0 0 3px rgba(var(--color-white-rgb), 0.35),
     0 6px 20px rgba(var(--color-black-rgb), 0.28) !important;
@@ -669,13 +680,13 @@
     display: none !important;
   }
 
-  .navbarMenuOpen {
+  :global(nav.navbar).navbar.navbarMenuOpen {
     background: var(--color-white);
     border-bottom-color: var(--color-border);
     box-shadow: 0 8px 28px rgba(var(--color-dark-rgb), 0.1);
   }
 
-  .navbar[data-theme="dark"].navbarMenuOpen {
+  :global(nav.navbar).navbar[data-theme="dark"].navbarMenuOpen {
     background: #0c314f;
     border-bottom-color: rgba(234, 243, 248, 0.12);
     box-shadow: 0 8px 28px rgba(var(--color-black-rgb), 0.35);
@@ -736,8 +747,8 @@
       visibility 0.34s ease;
   }
 
-  .navbar[data-theme="dark"] .navCollapseClosed,
-  .navbar[data-theme="dark"] .navCollapseOpen {
+  :global(nav.navbar).navbar[data-theme="dark"] .navCollapseClosed,
+  :global(nav.navbar).navbar[data-theme="dark"] .navCollapseOpen {
     background: #0a2d4a;
     box-shadow: 0 18px 48px rgba(var(--color-black-rgb), 0.4);
   }
@@ -783,7 +794,7 @@
     flex-shrink: 0;
   }
 
-  .navbar[data-theme="dark"] .sidebarHeader {
+  :global(nav.navbar).navbar[data-theme="dark"] .sidebarHeader {
     border-bottom-color: rgba(234, 243, 248, 0.1);
   }
 
@@ -872,7 +883,7 @@
     justify-content: flex-start !important;
   }
 
-  .navbar[data-theme="dark"] .navLinkActive {
+  :global(nav.navbar).navbar[data-theme="dark"] .navLinkActive {
     background: rgba(var(--color-white-rgb), 0.12) !important;
     border-color: rgba(var(--color-primary-rgb), 0.28) !important;
   }
@@ -891,7 +902,7 @@
     border-top: 1px solid var(--color-border-soft);
   }
 
-  .navbar[data-theme="dark"] .actionsContainer {
+  :global(nav.navbar).navbar[data-theme="dark"] .actionsContainer {
     border-top-color: rgba(234, 243, 248, 0.1);
   }
 

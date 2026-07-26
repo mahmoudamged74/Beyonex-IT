@@ -102,11 +102,11 @@ svg {
   font-weight: 700 !important;
 }
 
-.navbar[data-theme="dark"] .navbar-nav .nav-link {
+nav.navbar[data-theme="dark"] .navbar-nav .nav-link {
   color: var(--brand-50) !important;
 }
 
-.navbar[data-theme="dark"] .navbar-nav .nav-link:hover,
-.navbar[data-theme="dark"] .navbar-nav .nav-link.active {
+nav.navbar[data-theme="dark"] .navbar-nav .nav-link:hover,
+nav.navbar[data-theme="dark"] .navbar-nav .nav-link.active {
   color: var(--color-white) !important;
 }
