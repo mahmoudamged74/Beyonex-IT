@@ -214,7 +214,6 @@
   flex-grow: 1;
   align-items: center;
   justify-content: space-between;
-  position: relative;
 }
 
 .langSelect {
@@ -629,7 +628,8 @@
   color: var(--brand-50);
 }
 
-:global(nav.navbar).navbar[data-theme="dark"] .langMenuItem:not(.langMenuItemActive):hover {
+:global(nav.navbar).navbar[data-theme="dark"]
+  .langMenuItem:not(.langMenuItemActive):hover {
   background: rgba(var(--color-white-rgb), 0.08);
   color: var(--color-white);
 }

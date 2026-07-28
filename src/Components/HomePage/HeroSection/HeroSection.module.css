@@ -455,13 +455,15 @@
   }
 
   .actions {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.4rem;
   }
 
   .primaryBtn,
   .secondaryBtn {
-    width: 100%;
-    min-width: 0;
+    width: auto;
+    min-width: min(170px, 48%);
   }
 
   .brandLogo {
@@ -483,6 +485,13 @@
 
   .headline {
     font-size: clamp(1.05rem, 5vw, 1.25rem);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 350px) {
+  .btnContent,
+  .btnLabel {
+    white-space: nowrap;
   }
 }
 
