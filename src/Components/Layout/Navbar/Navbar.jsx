@@ -40,6 +40,9 @@ function Navbar() {
   const currentLanguage =
     LANGUAGES.find((lang) => lang.code === i18n.language) || LANGUAGES[0];
 
+  const siteName =
+    getLocalizedOrRaw(settings?.site_name, i18n.language) || "Beyonex IT";
+
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setDropdownOpen(false);
@@ -130,6 +133,85 @@ function Navbar() {
     </NavLink>
   );
 
+  const renderBrand = () => (
+    <Link className={`navbar-brand ${styles.brandLink}`} to="/">
+      {faviconSrc && (
+        <img
+          src={faviconSrc}
+          alt={siteName}
+          className={styles.siteIcon}
+          height={46}
+          loading="eager"
+          decoding="async"
+        />
+      )}
+    </Link>
+  );
+
+  const renderActions = () => (
+    <div className={styles.navActions}>
+      {themeToggleButton(styles.themeToggleDesktop)}
+      <div className={styles.langSelect} ref={dropdownRef}>
+        <button
+          type="button"
+          className={`${styles.langTrigger} ${
+            dropdownOpen ? styles.langOpen : ""
+          }`}
+          onClick={() => setDropdownOpen((open) => !open)}
+          aria-haspopup="listbox"
+          aria-expanded={dropdownOpen}
+          aria-label={i18n.language === "ar" ? "اللغة" : "Language"}
+        >
+          <span className={styles.langTriggerContent}>
+            <img
+              src={currentLanguage.flag}
+              alt={currentLanguage.alt}
+              className={styles.flagIcon}
+            />
+            <span className={styles.langLabel}>{currentLanguage.label}</span>
+            <span className={styles.langShort}>{currentLanguage.short}</span>
+          </span>
+          <Icon name="chevronDown" className={styles.langChevron} />
+        </button>
+
+        {dropdownOpen && (
+          <ul className={styles.langMenu} role="listbox">
+            {LANGUAGES.map((lang) => {
+              const isActive = i18n.language === lang.code;
+
+              return (
+                <li key={lang.code} role="option" aria-selected={isActive}>
+                  <button
+                    type="button"
+                    className={`${styles.langMenuItem} ${
+                      isActive ? styles.langMenuItemActive : ""
+                    }`}
+                    onClick={() => changeLanguage(lang.code)}
+                  >
+                    <span className={styles.langOptionContent}>
+                      <img
+                        src={lang.flag}
+                        alt={lang.alt}
+                        className={styles.flagIcon}
+                      />
+                      <span>{lang.label}</span>
+                    </span>
+                    {isActive && (
+                      <Icon name="check" className={styles.langCheck} />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+      <Link to="/start-project" className={styles.bookBtn} onClick={closeNav}>
+        {t("nav.startProject")}
+      </Link>
+    </div>
+  );
+
   return (
     <nav
       className={`navbar navbar-expand-lg ${styles.navbar} ${
@@ -138,44 +220,28 @@ function Navbar() {
       data-theme={theme}
     >
       <div className="container">
-        <Link
-          className={`navbar-brand ${
-            isRTL ? styles.logoRight : styles.logoLeft
-          } ${styles.brandLink}`}
-          to="/"
-        >
-          {faviconSrc && (
-            <img
-              src={faviconSrc}
-              alt={
-                getLocalizedOrRaw(settings?.site_name, i18n.language) ||
-                "Beyonex IT"
-              }
-              className={styles.siteIcon}
-              height={46}
-              loading="eager"
-              decoding="async"
-            />
-          )}
-        </Link>
-
-        <div className={styles.mobileControls}>
-          {themeToggleButton(styles.themeToggleBar)}
-          <button
-            className={`navbar-toggler ${styles.navbarToggler}`}
-            type="button"
-            onClick={() => {
-              setNavOpen((open) => {
-                if (open) setDropdownOpen(false);
-                return !open;
-              });
-            }}
-            aria-controls="navbarNav"
-            aria-expanded={navOpen}
-            aria-label="Toggle navigation"
-          >
-            <span className={`navbar-toggler-icon ${styles.togglerIcon}`}></span>
-          </button>
+        <div className={styles.mobileBar}>
+          {renderBrand()}
+          <div className={styles.mobileControls}>
+            {themeToggleButton(styles.themeToggleBar)}
+            <button
+              className={`navbar-toggler ${styles.navbarToggler}`}
+              type="button"
+              onClick={() => {
+                setNavOpen((open) => {
+                  if (open) setDropdownOpen(false);
+                  return !open;
+                });
+              }}
+              aria-controls="navbarNav"
+              aria-expanded={navOpen}
+              aria-label="Toggle navigation"
+            >
+              <span
+                className={`navbar-toggler-icon ${styles.togglerIcon}`}
+              ></span>
+            </button>
+          </div>
         </div>
 
         <div
@@ -196,19 +262,13 @@ function Navbar() {
             {faviconSrc ? (
               <img
                 src={faviconSrc}
-                alt={
-                  getLocalizedOrRaw(settings?.site_name, i18n.language) ||
-                  "Beyonex IT"
-                }
+                alt={siteName}
                 className={styles.sidebarLogo}
                 loading="eager"
                 decoding="async"
               />
             ) : (
-              <span className={styles.sidebarTitle}>
-                {getLocalizedOrRaw(settings?.site_name, i18n.language) ||
-                  "Beyonex IT"}
-              </span>
+              <span className={styles.sidebarTitle}>{siteName}</span>
             )}
             <button
               type="button"
@@ -220,101 +280,32 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Navigation Links - Center */}
-          <ul className={`navbar-nav ${styles.navLinks}`}>
-            <li className="nav-item">
-              {renderNavLink("/", t("nav.home"), { end: true })}
-            </li>
-            <li className="nav-item">
-              {renderNavLink("/about", t("nav.about"))}
-            </li>
-            <li className="nav-item">
-              {renderNavLink("/services", t("nav.services"), {
-                onClick: () => window.scrollTo(0, 0),
-              })}
-            </li>
-            <li className="nav-item">
-              {renderNavLink("/contact", t("nav.contact"))}
-            </li>
-          </ul>
+          <div className={styles.navRow}>
+            <div className={styles.navBrand}>{renderBrand()}</div>
 
-          {/* Language & Book Appointment - Left in Arabic, Right in English */}
-          <div
-            className={`${styles.actionsContainer} ${
-              isRTL ? styles.actionsLeft : styles.actionsRight
-            }`}
-          >
-            {themeToggleButton(styles.themeToggleDesktop)}
-            <div className={styles.langSelect} ref={dropdownRef}>
-              <button
-                type="button"
-                className={`${styles.langTrigger} ${
-                  dropdownOpen ? styles.langOpen : ""
-                }`}
-                onClick={() => setDropdownOpen((open) => !open)}
-                aria-haspopup="listbox"
-                aria-expanded={dropdownOpen}
-                aria-label={i18n.language === "ar" ? "اللغة" : "Language"}
-              >
-                <span className={styles.langTriggerContent}>
-                  <img
-                    src={currentLanguage.flag}
-                    alt={currentLanguage.alt}
-                    className={styles.flagIcon}
-                  />
-                  <span className={styles.langLabel}>
-                    {currentLanguage.label}
-                  </span>
-                  <span className={styles.langShort}>
-                    {currentLanguage.short}
-                  </span>
-                </span>
-                <Icon name="chevronDown" className={styles.langChevron} />
-              </button>
-
-              {dropdownOpen && (
-                <ul className={styles.langMenu} role="listbox">
-                  {LANGUAGES.map((lang) => {
-                    const isActive = i18n.language === lang.code;
-
-                    return (
-                      <li
-                        key={lang.code}
-                        role="option"
-                        aria-selected={isActive}
-                      >
-                        <button
-                          type="button"
-                          className={`${styles.langMenuItem} ${
-                            isActive ? styles.langMenuItemActive : ""
-                          }`}
-                          onClick={() => changeLanguage(lang.code)}
-                        >
-                          <span className={styles.langOptionContent}>
-                            <img
-                              src={lang.flag}
-                              alt={lang.alt}
-                              className={styles.flagIcon}
-                            />
-                            <span>{lang.label}</span>
-                          </span>
-                          {isActive && (
-                            <Icon name="check" className={styles.langCheck} />
-                          )}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </div>
-            <Link
-              to="/start-project"
-              className={styles.bookBtn}
-              onClick={closeNav}
+            <nav
+              className={styles.navLinksSection}
+              aria-label={isRTL ? "التنقل الرئيسي" : "Main navigation"}
             >
-              {t("nav.startProject")}
-            </Link>
+              <ul className={`navbar-nav ${styles.navLinks}`}>
+                <li className="nav-item">
+                  {renderNavLink("/", t("nav.home"), { end: true })}
+                </li>
+                <li className="nav-item">
+                  {renderNavLink("/about", t("nav.about"))}
+                </li>
+                <li className="nav-item">
+                  {renderNavLink("/services", t("nav.services"), {
+                    onClick: () => window.scrollTo(0, 0),
+                  })}
+                </li>
+                <li className="nav-item">
+                  {renderNavLink("/contact", t("nav.contact"))}
+                </li>
+              </ul>
+            </nav>
+
+            {renderActions()}
           </div>
         </div>
       </div>
